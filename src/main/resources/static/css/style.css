@@ -1,5 +1,8 @@
-body {
-    background: url("/static/images/background-image.jpg") no-repeat center;
+main {
+    background-image: url("/images/background-image.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+
 }
 
 .bc-background {
