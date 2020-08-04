@@ -1,0 +1,6 @@
+Dear ${mailView.title} ${mailView.name},
+    Your booking for ${mailView.date} at ${mailView.hour} have been confirmed.
+    We will wait for you with ${mailView.carManufacturer} ${mailView.carModel} with
+    plate number ${mailView.carPlateNumber}.
+
+Regards, BooCaRep Team.

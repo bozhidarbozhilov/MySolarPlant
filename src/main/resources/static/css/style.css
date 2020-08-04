@@ -1,0 +1,28 @@
+body {
+    background: url("/static/images/background-image.jpg") no-repeat center;
+}
+
+.bc-background {
+    background-color: #6DB33F;
+    color: white;
+}
+
+#navbarImage {
+    color: white;
+    width: 40px;
+    margin-right: 1em;
+}
+
+.logout-button {
+    background: transparent;
+    border: none;
+    color: white !important;
+}
+
+.logout-button:hover {
+    cursor: pointer;
+}
+
+.logout-button:focus {
+    outline: none;
+}
