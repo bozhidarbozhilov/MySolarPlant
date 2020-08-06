@@ -18,9 +18,9 @@ public class Constants {
 
     public static final String CONNECTOR_NOT_EMPTY = "Panel can not be empty.";
 
-    public static final String CONTROLLER_VOLTAGE_NOT_EMPTY = "Controller must have voltage parameter.";
-    public static final String CONTROLLER_CURRENT_NOT_EMPTY = "Controller must have current parameter.";
-    public static final String CONTROLLER_POWER_NOT_EMPTY = "Controller must have power parameter.";
+    public static final String CONTROLLER_VOLTAGE_NOT_EMPTY = "ChargeController must have voltage parameter.";
+    public static final String CONTROLLER_CURRENT_NOT_EMPTY = "ChargeController must have current parameter.";
+    public static final String CONTROLLER_POWER_NOT_EMPTY = "ChargeController must have power parameter.";
 
     public static final String INVERTER_AC_POWER_NOT_EMPTY = "Inverter must have ac power parameter.";
     public static final String INVERTER_MAX_AC_POWER_NOT_EMPTY = "Inverter must have max ac power parameter.";
@@ -29,4 +29,5 @@ public class Constants {
     public static final String BATTERY_VOLTAGE_NOT_EMPTY = "Battery must have voltage parameter.";
     public static final String BATTERY_CAPACITY_NOT_EMPTY = "Battery must have capacity parameter.";
     public static final String BATTERY_INSTALLED_NON_EMPTY_MESSAGE = "Installed battery can not be empty";
+    public static final String INVALID_BATTERY_CELLS_COUNT = "Battery cells can not be lower than 1.";
 }

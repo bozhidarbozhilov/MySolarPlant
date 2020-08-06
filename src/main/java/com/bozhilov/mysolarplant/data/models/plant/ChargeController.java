@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="controllers")
-public class Controller extends BaseParams {
+public class ChargeController extends BaseParams {
     private Double voltage;
     private Double current;
     private Double power;

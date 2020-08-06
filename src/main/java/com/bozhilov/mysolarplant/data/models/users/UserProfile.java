@@ -2,8 +2,6 @@ package com.bozhilov.mysolarplant.data.models.users;
 
 
 import com.bozhilov.mysolarplant.data.models.BaseEntity;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -11,24 +9,69 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users_profiles")
-@Getter
-@Setter
 public class UserProfile extends BaseEntity {
+    private User user;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String address;
+    private String information;
+
     @OneToOne(optional = false)
     @JoinColumn(name="user_id", referencedColumnName = "id")
-    private User user;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Column(name="first_name")
-    private String firstName;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     @NotNull
     @Column(name="last_name",nullable = false)
-    private String lastName;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     @NotNull
     @Email
     @Column(name="email", nullable=false, unique=true)
-    private String email;
-    @Column(name="address")
-    private String address;
-    @Column(name="information")
-    private String information;
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Column(name="address")
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    @Column(name="information")
+    public String getInformation() {
+        return information;
+    }
+
+    public void setInformation(String information) {
+        this.information = information;
+    }
 }

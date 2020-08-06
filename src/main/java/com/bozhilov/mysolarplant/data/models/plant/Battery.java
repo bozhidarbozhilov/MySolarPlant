@@ -2,6 +2,7 @@ package com.bozhilov.mysolarplant.data.models.plant;
 
 import com.bozhilov.mysolarplant.utils.Constants;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -16,6 +17,7 @@ public class Battery extends BaseParams {
     private String connectionType;
 
     @NotEmpty(message = Constants.BATTERY_CAPACITY_NOT_EMPTY)
+    @Basic
     public Double getCapacity() {
         return capacity;
     }
@@ -25,6 +27,7 @@ public class Battery extends BaseParams {
     }
 
     @NotEmpty(message = Constants.BATTERY_VOLTAGE_NOT_EMPTY)
+    @Basic
     public Double getVoltage() {
         return voltage;
     }
@@ -33,6 +36,7 @@ public class Battery extends BaseParams {
         this.voltage = voltage;
     }
 
+    @Basic
     public Double getTerminals() {
         return terminals;
     }
@@ -41,10 +45,12 @@ public class Battery extends BaseParams {
         this.terminals = terminals;
     }
 
+    @Column(name="connection_type")
+    @Basic
     public String getConnectionType() {
         return connectionType;
     }
-    @Column(name="connection_type")
+
     public void setConnectionType(String connectionType) {
         this.connectionType = connectionType;
     }

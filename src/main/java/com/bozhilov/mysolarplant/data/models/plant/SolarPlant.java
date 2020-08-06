@@ -12,9 +12,8 @@ public class SolarPlant extends BaseEntity {
     private Location location;
     private List<PVPanelsInstalled> panels;
     private List<Inverter> inverters;
-    private List<Controller> controllers;
-
-    private BatteriesInstalled battery;
+    private List<ChargeController> chargeControllers;
+    private BatteryInstalled installedBattery;
     private Integer orientation;
     private Integer inclination;
 
@@ -27,10 +26,11 @@ public class SolarPlant extends BaseEntity {
     public void setLocation(Location location) {
         this.location = location;
     }
-    @ManyToMany
+
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="plants_panels_installed",
-    joinColumns = @JoinColumn(name="plant_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name="panels_installed_id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name="plant_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name="panels_installed_id", referencedColumnName = "id"))
     public List<PVPanelsInstalled> getPanels() {
         return panels;
     }
@@ -39,7 +39,7 @@ public class SolarPlant extends BaseEntity {
         this.panels = panels;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="plants_inverters",
             joinColumns = @JoinColumn(name="plant_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name="inverter_id", referencedColumnName = "id"))
@@ -51,27 +51,26 @@ public class SolarPlant extends BaseEntity {
         this.inverters = inverters;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="plants_controllers",
             joinColumns = @JoinColumn(name="plant_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name="controller_id", referencedColumnName = "id"))
-    public List<Controller> getControllers() {
-        return controllers;
+    public List<ChargeController> getChargeControllers() {
+        return chargeControllers;
     }
 
-    public void setControllers(List<Controller> controllers) {
-        this.controllers = controllers;
+    public void setChargeControllers(List<ChargeController> chargeControllers) {
+        this.chargeControllers = chargeControllers;
     }
-
 
     @ManyToOne
-    @JoinColumn(name="battery_id", referencedColumnName = "id")
-    public BatteriesInstalled getBattery() {
-        return battery;
+    @JoinColumn(name="battery_installed_id", referencedColumnName = "id")
+    public BatteryInstalled getInstalledBattery() {
+        return installedBattery;
     }
 
-    public void setBattery(BatteriesInstalled battery) {
-        this.battery = battery;
+    public void setInstalledBattery(BatteryInstalled installedBattery) {
+        this.installedBattery = installedBattery;
     }
 
     public Integer getOrientation() {
@@ -89,5 +88,7 @@ public class SolarPlant extends BaseEntity {
     public void setInclination(Integer inclination) {
         this.inclination = inclination;
     }
+
+
 
 }

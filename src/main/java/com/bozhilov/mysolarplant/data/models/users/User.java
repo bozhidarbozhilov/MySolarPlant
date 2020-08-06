@@ -2,30 +2,41 @@ package com.bozhilov.mysolarplant.data.models.users;
 
 
 import com.bozhilov.mysolarplant.data.models.BaseEntity;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Set;
 
 import static com.bozhilov.mysolarplant.utils.Constants.*;
 
 
 @Entity
 @Table(name="users")
-@Getter
-@Setter
 public class User extends BaseEntity {
+    private String username;
+    private String password;
+
     @NotNull
     @Size(min = USERNAME_MIN_LENGTH,
             max = USERNAME_MAX_LENGTH)
     @Column(name="username", nullable=false, unique = true)
-    private String username;
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     @Column(name="password", nullable=false)
     @Size(min=PASSWORD_MIN_LENGTH)
-    private String password;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 //    private boolean isAccountNonExpired;
 //    private boolean isAccountNonLocked;
