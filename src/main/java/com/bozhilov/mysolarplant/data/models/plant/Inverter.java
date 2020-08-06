@@ -1,8 +1,6 @@
 package com.bozhilov.mysolarplant.data.models.plant;
 
 import com.bozhilov.mysolarplant.utils.Constants;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,17 +9,38 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="inverters")
-@Getter
-@Setter
 public class Inverter extends BaseParams {
-    @NotEmpty(message= Constants.INVERTER_AC_POWER_NOT_EMPTY)
-    @Column(name="ac_power")
     private Double ACPower;
-    @NotEmpty(message= Constants.INVERTER_MAX_AC_POWER_NOT_EMPTY)
-    @Column(name="max_ac_power")
     private Double maxACPower;
-    @NotEmpty(message= Constants.INVERTER_MAX_PV_POWER_NOT_EMPTY)
-    @Column(name="max_pv_power")
     private Double maxPVPower;
 
+    @NotEmpty(message= Constants.INVERTER_AC_POWER_NOT_EMPTY)
+    @Column(name="ac_power")
+    public Double getACPower() {
+        return ACPower;
+    }
+
+    public void setACPower(Double ACPower) {
+        this.ACPower = ACPower;
+    }
+
+    @NotEmpty(message= Constants.INVERTER_MAX_AC_POWER_NOT_EMPTY)
+    @Column(name="max_ac_power")
+    public Double getMaxACPower() {
+        return maxACPower;
+    }
+
+    public void setMaxACPower(Double maxACPower) {
+        this.maxACPower = maxACPower;
+    }
+
+    @NotEmpty(message= Constants.INVERTER_MAX_PV_POWER_NOT_EMPTY)
+    @Column(name="max_pv_power")
+    public Double getMaxPVPower() {
+        return maxPVPower;
+    }
+
+    public void setMaxPVPower(Double maxPVPower) {
+        this.maxPVPower = maxPVPower;
+    }
 }

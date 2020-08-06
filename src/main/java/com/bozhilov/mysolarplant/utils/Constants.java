@@ -13,6 +13,7 @@ public class Constants {
 
     public static final String MODEL_NOT_EMPTY ="Model can not be empty.";
 
+    public static final String PANELS_NON_EMPTY_MESSAGE = "Panel must be chosen.";
     public static final String INVALID_PANELS_COUNT = "Panels can not be lower than 1.";
 
     public static final String CONNECTOR_NOT_EMPTY = "Panel can not be empty.";
@@ -27,4 +28,5 @@ public class Constants {
 
     public static final String BATTERY_VOLTAGE_NOT_EMPTY = "Battery must have voltage parameter.";
     public static final String BATTERY_CAPACITY_NOT_EMPTY = "Battery must have capacity parameter.";
+    public static final String BATTERY_INSTALLED_NON_EMPTY_MESSAGE = "Installed battery can not be empty";
 }
