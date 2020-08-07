@@ -7,19 +7,9 @@ import javax.validation.constraints.Size;
 import static com.bozhilov.mysolarplant.utils.Constants.USERNAME_MAX_LENGTH;
 import static com.bozhilov.mysolarplant.utils.Constants.USERNAME_MIN_LENGTH;
 
-public class UserServiceModel {
-    private String id;
+public class UserServiceModel extends BaseServiceModel{
     private String username;
     private String password;
-
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     @NotNull
     @Size(min=USERNAME_MIN_LENGTH,

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head}">
+</head>
+<body>
+<div class="container-fluid">
+    <header th:replace="~{fragments/header}">
+    </header>
+    <main class="jumbotron">
+        <h1 class="text-center">Add Charge Controller</h1>
+        <form th:action="@{/controllers/create}" th:method="post" th:object="${controllerCreate}">
+            <div class="form-group mx-auto w-25 text-center"
+                 th:classappend="${#fields.hasErrors('manufacturer')}?'text-danger'">
+                <label for="manufacturer">Manufacturer</label>
+                <input class="form-control" type="text" id="manufacturer" th:field="*{manufacturer}"
+                       placeholder="Manufacturer..."/>
+                <small th:each="error:${#fields.errors('manufacturer')}" th:text="${error}">
+                </small>
+            </div>
+
+            <div class="form-group w-25 text-center mx-auto"
+                 th:classappend="${#fields.hasErrors('model')}?'text-danger'">
+                <label for="model">Model</label>
+                <input class="form-control" type="text" id="model" th:field="*{model}"
+                       placeholder="Model..."/>
+                <small th:each="error:${#fields.errors('model')}" th:text="${error}">
+                </small>
+            </div>
+            <div class="form-group col-md-2 text-center mx-auto"
+                 th:classappend="${#fields.hasErrors('voltage')}?'text-danger'">
+                <label for="voltage">Voltage</label>
+                <input class="form-control" type="number" id="voltage" th:field="*{voltage}"
+                       placeholder="Voltage..."/>
+                <small th:each="error:${#fields.errors('voltage')}" th:text="${error}">
+                </small>
+            </div>
+            <div class="form-group col-md-2 mx-auto text-center"
+                 th:classappend="${#fields.hasErrors('current')}?'text-danger'">
+                <label for="current">Current</label>
+                <input class="form-control" type="number" id="current" th:field="*{current}"
+                       placeholder="Current..."/>
+                <small th:each="error:${#fields.errors('current')}" th:text="${error}">
+                </small>
+            </div>
+            <div class="form-group col-md-2 mx-auto text-center"
+                 th:classappend="${#fields.hasErrors('power')}?'text-danger'">
+                <label for="power">Power</label>
+                <input class="form-control" type="number" id="power" th:field="*{power}"
+                       placeholder="Power..."/>
+                <small th:each="error:${#fields.errors('power')}" th:text="${error}">
+                </small>
+            </div>
+
+
+            <div class="form-group mx-auto w-50 text-center mt-5">
+                <button class="btn bc-background btn-primary w-25">
+                    Add Charge Controller
+                </button>
+            </div>
+
+        </form>
+    </main>
+    <footer th:replace="~{fragments/footer}">
+    </footer>
+</div>
+</body>
+</html>

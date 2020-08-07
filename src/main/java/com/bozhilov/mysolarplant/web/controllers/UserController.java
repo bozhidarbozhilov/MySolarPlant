@@ -3,6 +3,7 @@ package com.bozhilov.mysolarplant.web.controllers;
 import com.bozhilov.mysolarplant.services.models.UserServiceModel;
 import com.bozhilov.mysolarplant.services.services.UserService;
 import com.bozhilov.mysolarplant.web.models.RegisterUserModel;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,11 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.io.InvalidObjectException;
-import java.rmi.registry.Registry;
 
 @Controller
 @RequestMapping("/users")
-public class UserController {
+public class UserController extends BaseController {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
@@ -33,7 +33,7 @@ public class UserController {
     @GetMapping("/register")
     public ModelAndView getRegisterPage(@ModelAttribute(name="registerUser")RegisterUserModel registerUserModel,
                                         ModelAndView modelAndView){
-        modelAndView.setViewName("user-register");
+        modelAndView.setViewName(super.view("users/user-register"));
         return modelAndView;
     }
 
@@ -41,12 +41,12 @@ public class UserController {
     public ModelAndView registerUser(@Valid @ModelAttribute(name="registerUser")RegisterUserModel registerUserModel,
                                      BindingResult bindingResult, ModelAndView modelAndView) throws InvalidObjectException {
         if(bindingResult.hasErrors()){
-            modelAndView.setViewName("user-register");
+            modelAndView.setViewName(super.view("users/user-register"));
 
         }else{
             UserServiceModel userServiceModel = modelMapper.map(registerUserModel, UserServiceModel.class);
             userService.registerUser(userServiceModel);
-            modelAndView.setViewName("redirect:/home");
+            modelAndView.setViewName(super.redirect("home"));
         }
         return modelAndView;
     }

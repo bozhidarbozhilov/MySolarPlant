@@ -1,15 +1,10 @@
-package com.bozhilov.mysolarplant.data.models.plant;
+package com.bozhilov.mysolarplant.services.models;
 
 import com.bozhilov.mysolarplant.utils.Constants;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotEmpty;
 
-@Entity
-@Table(name="controllers")
-public class ChargeController extends BaseParams {
+public class ChargeControllerServiceModel extends BaseParamsServiceModel {
     private Double voltage;
     private Double current;
     private Double power;

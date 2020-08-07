@@ -14,10 +14,17 @@ body:after {
     bottom: 0;
     z-index: -1;
 }
-
+.jumbotron{
+    margin:0;
+    background-color: rgba(233, 236, 239, 0.9);
+}
 .bc-background {
     background-color: #6DB33F;
     color: white;
+}
+
+.navbar .dropdown>.dropdown-menu .nav-link{
+    color: black;
 }
 
 #navbarImage {

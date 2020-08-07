@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head}">
+</head>
+<body>
+<div class="container-fluid">
+    <header th:replace="~{fragments/header}">
+    </header>
+    <main class="jumbotron">
+        <h1 class="text-center">Add PV Panel</h1>
+        <form th:action="@{/pvpanels/create}" th:method="post" th:object="${createPVPanel}">
+            <div class="form-group mx-auto w-25 text-center"
+                 th:classappend="${#fields.hasErrors('manufacturer')}?'text-danger'">
+                <label for="manufacturer">Manufacturer</label>
+                <input class="form-control" type="text" id="manufacturer" th:field="*{manufacturer}"
+                       placeholder="Manufacturer..."/>
+                <small th:each="error:${#fields.errors('manufacturer')}" th:text="${error}">
+                </small>
+            </div>
+
+            <div class="form-group w-25 text-center mx-auto"
+                 th:classappend="${#fields.hasErrors('model')}?'text-danger'">
+                <label for="model">Model</label>
+                <input class="form-control" type="text" id="model" th:field="*{model}"
+                       placeholder="Model..."/>
+                <small th:each="error:${#fields.errors('model')}" th:text="${error}">
+                </small>
+            </div>
+
+            <div class="form-group mx-auto w-25 text-center"
+                 th:classappend="${#fields.hasErrors('connector')}?'text-danger'">
+                <label for="connector">Connector</label>
+                <input class="form-control" type="text" id="connector" th:field="*{connector}"
+                       placeholder="Connector..."/>
+                <small th:each="error:${#fields.errors('connector')}" th:text="${error}">
+                </small>
+            </div>
+            <div class="form-group col-md-2 mx-auto text-center"
+                 th:classappend="${#fields.hasErrors('power')}?'text-danger'">
+                <label for="power">Power</label>
+                <input class="form-control" type="number" id="power" th:field="*{power}"
+                       placeholder="Power..."/>
+                <small th:each="error:${#fields.errors('power')}" th:text="${error}">
+                </small>
+            </div>
+            <div class="form-group col-md-2 text-center mx-auto"
+                 th:classappend="${#fields.hasErrors('voltageAtMaxPower')}?'text-danger'">
+                <label for="voltageAtMaxPower">Voltage At Max Power</label>
+                <input class="form-control" type="number" step="0.01" id="voltageAtMaxPower" th:field="*{voltageAtMaxPower}"
+                       placeholder="Voltage At Max Power..."/>
+                <small th:each="error:${#fields.errors('voltageAtMaxPower')}" th:text="${error}">
+                </small>
+            </div>
+            <div class="form-group col-md-2 mx-auto text-center"
+                 th:classappend="${#fields.hasErrors('currentAtMaxPower')}?'text-danger'">
+                <label for="currentAtMaxPower">Current At Max Power</label>
+                <input class="form-control" type="number" step="0.01" id="currentAtMaxPower" th:field="*{currentAtMaxPower}"
+                       placeholder="Current At Max Power..."/>
+                <small th:each="error:${#fields.errors('currentAtMaxPower')}" th:text="${error}">
+                </small>
+            </div>
+
+            <div class="form-group mx-auto w-50 text-center mt-5">
+                <button class="btn bc-background btn-primary w-25">
+                    Add PV Panel
+                </button>
+            </div>
+
+        </form>
+    </main>
+    <footer th:replace="~{fragments/footer}">
+    </footer>
+</div>
+</body>
+</html>

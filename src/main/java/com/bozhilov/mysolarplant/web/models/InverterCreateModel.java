@@ -1,22 +1,15 @@
-package com.bozhilov.mysolarplant.data.models.plant;
+package com.bozhilov.mysolarplant.web.models;
 
 import com.bozhilov.mysolarplant.utils.Constants;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotEmpty;
 
-@Entity
-@Table(name="inverters")
-public class Inverter extends BaseParams {
+public class InverterCreateModel extends BaseParamsViewModel{
     private Double ACPower;
     private Double maxACPower;
     private Double maxPVPower;
 
-    @DecimalMin(value = "0.01", message= Constants.INVERTER_AC_POWER_INVALID_VALUE)
-    @Column(name="ac_power")
+    @DecimalMin(value="0.01",message= Constants.INVERTER_AC_POWER_INVALID_VALUE)
     public Double getACPower() {
         return ACPower;
     }
@@ -25,8 +18,7 @@ public class Inverter extends BaseParams {
         this.ACPower = ACPower;
     }
 
-    @DecimalMin(value="0.01", message= Constants.INVERTER_MAX_AC_POWER_INVALID_VALUE)
-    @Column(name="max_ac_power")
+    @DecimalMin(value="0.01",message= Constants.INVERTER_MAX_AC_POWER_INVALID_VALUE)
     public Double getMaxACPower() {
         return maxACPower;
     }
@@ -35,8 +27,7 @@ public class Inverter extends BaseParams {
         this.maxACPower = maxACPower;
     }
 
-    @DecimalMin(value="0.01", message= Constants.INVERTER_MAX_PV_POWER_INVALID_VALUE)
-    @Column(name="max_pv_power")
+    @DecimalMin(value="0.01",message= Constants.INVERTER_MAX_PV_POWER_INVALID_VALUE)
     public Double getMaxPVPower() {
         return maxPVPower;
     }

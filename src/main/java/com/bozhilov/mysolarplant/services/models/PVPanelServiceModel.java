@@ -1,21 +1,16 @@
-package com.bozhilov.mysolarplant.data.models.plant;
+package com.bozhilov.mysolarplant.services.models;
 
 import com.bozhilov.mysolarplant.utils.Constants;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 
-@Entity
-@Table(name="pv_panels")
-public class PVPanel extends BaseParams {
+public class PVPanelServiceModel extends BaseParamsServiceModel{
     private String connector;
     private Double power;
     private Double voltageAtMaxPower;
     private Double currentAtMaxPower;
-
 
     @DecimalMin(value = "0.01",message=Constants.INVALID_PANEL_POWER)
     public Double getPower() {
@@ -35,7 +30,6 @@ public class PVPanel extends BaseParams {
         this.connector = connector;
     }
 
-    @Column(name="voltage_at_max_power")
     public Double getVoltageAtMaxPower() {
         return voltageAtMaxPower;
     }
@@ -44,7 +38,6 @@ public class PVPanel extends BaseParams {
         this.voltageAtMaxPower = voltageAtMaxPower;
     }
 
-    @Column(name="current_at_max_power")
     public Double getCurrentAtMaxPower() {
         return currentAtMaxPower;
     }

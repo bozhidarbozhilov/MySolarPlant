@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse"  id="applicationNavbar">
             <ul class="navbar-nav ml-auto mr-4">
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/}" th:text="Home"></a>
+                    <a class="nav-link" th:href="@{/home}" th:text="Home"></a>
                 </li>
                 <li class="nav-item active" >
                     <a class="nav-link" th:href="@{/login}" th:text="|Login|"></a>
@@ -17,6 +17,51 @@
                     <a class="nav-link" th:href="@{/users/register}" th:text="|Register|"></a>
                 </li>
 
+                <!--For logged in user-->
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" id="pvPanelDropdown">
+                        PV Panels
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="pvPanelDropdown">
+                        <a class="nav-link" th:href="@{/pvpanels/create}">Add PV Panel</a>
+                        <!--<a class="nav-link" th:href="@{/pvpanels/all}" th:text="|All PV Panels|"></a>-->
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" id="chargeControllerDropdown">
+                        Charge Controllers
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="chargeControllerDropdown">
+                        <a class="nav-link" th:href="@{/controllers/create}">Add Charge Controller</a>
+                        <!--<a class="nav-link" th:href="@{/pvpanels/all}" th:text="|All Charge Controllers|"></a>-->
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" id="invertersDropdown">
+                        Inverters
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="invertersDropdown">
+                        <a class="nav-link" th:href="@{/inverters/create}">Add Inverter</a>
+                        <!--<a class="nav-link" th:href="@{/pvpanels/all}" th:text="|All Inverter|"></a>-->
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" id="batteriesDropdown">
+                        Batteries
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="batteriesDropdown">
+                        <a class="nav-link" th:href="@{/batteries/create}">Add Battery</a>
+                        <!--<a class="nav-link" th:href="@{/pvpanels/all}" th:text="|All Battery|"></a>-->
+                    </div>
+                </li>
             </ul>
         </div>
 

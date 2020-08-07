@@ -1,24 +1,20 @@
-package com.bozhilov.mysolarplant.data.models.plant;
+package com.bozhilov.mysolarplant.web.models;
 
 import com.bozhilov.mysolarplant.data.models.other.ConnectionType;
 import com.bozhilov.mysolarplant.data.models.other.Terminals;
 import com.bozhilov.mysolarplant.utils.Constants;
 
-import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name="batteries")
-public class Battery extends BaseParams {
+public class BatteryCreateModel extends BaseParamsViewModel {
     private Double capacity;
     private Double voltage;
     private Terminals terminals;
     private ConnectionType connectionType;
 
     @DecimalMin(value="0.01", message = Constants.BATTERY_CAPACITY_INVALID_VALUE)
-    @Basic
     public Double getCapacity() {
         return capacity;
     }
@@ -28,7 +24,6 @@ public class Battery extends BaseParams {
     }
 
     @DecimalMin(value="0.01", message = Constants.BATTERY_VOLTAGE_INVALID_VALUE)
-    @Basic
     public Double getVoltage() {
         return voltage;
     }
@@ -38,8 +33,6 @@ public class Battery extends BaseParams {
     }
 
     @NotNull(message=Constants.BATTERY_TERMINALS_TYPE_NOT_EMPTY)
-    @Column(name="terminals", nullable = false)
-    @Enumerated(EnumType.STRING)
     public Terminals getTerminals() {
         return terminals;
     }
@@ -47,11 +40,7 @@ public class Battery extends BaseParams {
     public void setTerminals(Terminals terminals) {
         this.terminals = terminals;
     }
-
-
     @NotNull(message=Constants.BATTERY_CONNECTION_TYPE_NOT_EMPTY)
-    @Column(name="connection_type", nullable = false)
-    @Enumerated(EnumType.STRING)
     public ConnectionType getConnectionType() {
         return connectionType;
     }
