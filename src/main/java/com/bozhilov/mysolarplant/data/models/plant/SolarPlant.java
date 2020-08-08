@@ -1,24 +1,20 @@
 package com.bozhilov.mysolarplant.data.models.plant;
 
-import com.bozhilov.mysolarplant.data.models.BaseEntity;
 import com.bozhilov.mysolarplant.data.models.other.Location;
+import com.bozhilov.mysolarplant.utils.Constants;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Entity
-@Table(name="solar_plants")
-public class SolarPlant extends BaseEntity {
+public class SolarPlant {
     private Location location;
-    private List<PVPanelsInstalled> panels;
-    private List<Inverter> inverters;
-    private List<ChargeController> chargeControllers;
-    private BatteryInstalled installedBattery;
-    private Integer orientation;
-    private Integer inclination;
+    private List<SolarUnit> solarUnits;
 
     @ManyToOne
-    @JoinColumn(name="location_id", referencedColumnName = "id")
+    @JoinColumn(name="location_id", referencedColumnName = "id", nullable = false)
+    @NotNull(message= Constants.SOLAR_PLANT_LOCATION_ERROR)
     public Location getLocation() {
         return location;
     }
@@ -27,68 +23,16 @@ public class SolarPlant extends BaseEntity {
         this.location = location;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="plants_panels_installed",
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name="solar_plants_units",
             joinColumns = @JoinColumn(name="plant_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name="panels_installed_id", referencedColumnName = "id"))
-    public List<PVPanelsInstalled> getPanels() {
-        return panels;
+            inverseJoinColumns = @JoinColumn(name="unit_id", referencedColumnName = "id"))
+    @NotEmpty(message =Constants.SOLAR_PLANT_UNIT_ERROR)
+    public List<SolarUnit> getSolarUnits() {
+        return solarUnits;
     }
 
-    public void setPanels(List<PVPanelsInstalled> panels) {
-        this.panels = panels;
+    public void setSolarUnits(List<SolarUnit> solarUnits) {
+        this.solarUnits = solarUnits;
     }
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="plants_inverters",
-            joinColumns = @JoinColumn(name="plant_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name="inverter_id", referencedColumnName = "id"))
-    public List<Inverter> getInverters() {
-        return inverters;
-    }
-
-    public void setInverters(List<Inverter> inverters) {
-        this.inverters = inverters;
-    }
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="plants_controllers",
-            joinColumns = @JoinColumn(name="plant_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name="controller_id", referencedColumnName = "id"))
-    public List<ChargeController> getChargeControllers() {
-        return chargeControllers;
-    }
-
-    public void setChargeControllers(List<ChargeController> chargeControllers) {
-        this.chargeControllers = chargeControllers;
-    }
-
-    @ManyToOne
-    @JoinColumn(name="battery_installed_id", referencedColumnName = "id")
-    public BatteryInstalled getInstalledBattery() {
-        return installedBattery;
-    }
-
-    public void setInstalledBattery(BatteryInstalled installedBattery) {
-        this.installedBattery = installedBattery;
-    }
-
-    public Integer getOrientation() {
-        return orientation;
-    }
-
-    public void setOrientation(Integer orientation) {
-        this.orientation = orientation;
-    }
-
-    public Integer getInclination() {
-        return inclination;
-    }
-
-    public void setInclination(Integer inclination) {
-        this.inclination = inclination;
-    }
-
-
-
 }

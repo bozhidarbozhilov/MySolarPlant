@@ -2,18 +2,17 @@ package com.bozhilov.mysolarplant.web.controllers;
 
 import com.bozhilov.mysolarplant.services.models.ChargeControllerServiceModel;
 import com.bozhilov.mysolarplant.services.services.ChargeControllerService;
+import com.bozhilov.mysolarplant.web.models.AllControllersViewModel;
 import com.bozhilov.mysolarplant.web.models.ChargeControllerCreateModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.InvalidObjectException;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/controllers")
@@ -49,4 +48,15 @@ public class ChargeControllerController extends BaseController{
         }
         return modelAndView;
     }
+
+    @GetMapping(value = "/all", produces = "application/json")
+    @ResponseBody
+    public Object allContollers(){
+        return controllerService
+                .allControllers()
+                .stream()
+                .map(controller->mapper.map(controller, AllControllersViewModel.class))
+                .collect(Collectors.toUnmodifiableList());
+    }
+
 }

@@ -38,4 +38,9 @@ public class Constants {
     public static final String INVALID_BATTERY_CELLS_COUNT = "Battery cells can not be lower than 1.";
     public static final String INVALID_BATTERY_PROPERTIES = "Battery invalid properties";
 
+    public static final String SOLAR_PLANT_LOCATION_ERROR = "Solar plant must have location.";
+    public static final String SOLAR_UNIT_PANEL_ERROR = "Solar unit must have solar panel";
+    public static final String SOLAR_UNIT_PANEL_COUNT_ERROR = "Solar unit must have at least one solar panel";
+    public static final String SOLAR_UNIT_INVERTER_ERROR = "Solar unit must have inverter";
+    public static final String SOLAR_PLANT_UNIT_ERROR = "Solar plant must have at least one unit";
 }

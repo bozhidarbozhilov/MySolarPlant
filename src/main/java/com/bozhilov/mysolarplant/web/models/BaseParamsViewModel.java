@@ -4,7 +4,7 @@ import com.bozhilov.mysolarplant.utils.Constants;
 
 import javax.validation.constraints.NotEmpty;
 
-public class BaseParamsViewModel {
+public class BaseParamsViewModel extends BaseViewModel{
     private String manufacturer;
     private String model;
 
@@ -25,4 +25,5 @@ public class BaseParamsViewModel {
     public void setModel(String model) {
         this.model = model;
     }
+
 }

@@ -3,17 +3,16 @@ package com.bozhilov.mysolarplant.web.controllers;
 import com.bozhilov.mysolarplant.services.models.BatteryServiceModel;
 import com.bozhilov.mysolarplant.services.models.PVPanelServiceModel;
 import com.bozhilov.mysolarplant.services.services.BatteryService;
+import com.bozhilov.mysolarplant.web.models.AllBatteriesViewModel;
 import com.bozhilov.mysolarplant.web.models.BatteryCreateModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.InvalidObjectException;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/batteries")
@@ -46,5 +45,16 @@ public class BatteryController extends BaseController{
             modelAndView.setViewName(super.redirect("home"));
         }
         return modelAndView;
+    }
+
+    @GetMapping(value="/all", produces="application/json")
+    @ResponseBody
+    public Object getAllBatteries(){
+        return batteryService
+                .allBatteries()
+                .stream()
+                .map(batteryServiceModel -> mapper.map(batteryServiceModel, AllBatteriesViewModel.class))
+                .collect(Collectors.toUnmodifiableList());
+
     }
 }

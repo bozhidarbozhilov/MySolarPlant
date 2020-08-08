@@ -2,18 +2,18 @@ package com.bozhilov.mysolarplant.web.controllers;
 
 import com.bozhilov.mysolarplant.services.models.PVPanelServiceModel;
 import com.bozhilov.mysolarplant.services.services.PVPanelService;
+import com.bozhilov.mysolarplant.web.models.AllPanelsViewModel;
 import com.bozhilov.mysolarplant.web.models.PVPanelCreateModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.InvalidObjectException;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/pvpanels")
@@ -45,5 +45,15 @@ public class PVPanelController extends BaseController{
             modelAndView.setViewName(super.redirect("home"));
         }
         return modelAndView;
+    }
+
+    @GetMapping(value = "/all", produces = "application/json")
+    @ResponseBody
+    public Object getAllPanels(){
+        return pvPanelService
+                .allPanels()
+                .stream()
+                .map(panel -> mapper.map(panel, AllPanelsViewModel.class))
+                .collect(Collectors.toUnmodifiableList());
     }
 }

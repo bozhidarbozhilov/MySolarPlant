@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.Validator;
 import java.io.InvalidObjectException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BatteryServiceImpl implements BatteryService {
@@ -36,4 +38,15 @@ public class BatteryServiceImpl implements BatteryService {
         Battery savedBattery = batteryRepository.save(battery);
         return mapper.map(savedBattery, BatteryServiceModel.class);
     }
+
+    @Override
+    public List<BatteryServiceModel> allBatteries() {
+        return batteryRepository
+                .findAll()
+                .stream()
+                .map(battery -> mapper.map(battery, BatteryServiceModel.class))
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+
 }

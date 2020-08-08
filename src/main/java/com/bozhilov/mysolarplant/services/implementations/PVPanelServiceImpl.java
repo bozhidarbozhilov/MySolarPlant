@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.Validator;
 import java.io.InvalidObjectException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PVPanelServiceImpl implements PVPanelService {
@@ -33,5 +35,16 @@ public class PVPanelServiceImpl implements PVPanelService {
         PVPanel pvPanel = mapper.map(pvPanelServiceModel, PVPanel.class);
         PVPanel savedPanel = this.pvPanelRepository.save(pvPanel);
         return mapper.map(savedPanel, PVPanelServiceModel.class);
+    }
+
+    @Override
+    public List<PVPanelServiceModel> allPanels() {
+        List<PVPanelServiceModel> allPVPanels = pvPanelRepository
+                .findAll()
+                .stream()
+                .map(pvPanel -> mapper.map(pvPanel, PVPanelServiceModel.class))
+                .collect(Collectors.toUnmodifiableList());
+
+        return allPVPanels;
     }
 }

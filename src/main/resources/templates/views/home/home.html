@@ -8,7 +8,15 @@
     <header th:replace="~{fragments/header}">
     </header>
     <main class="jumbotron">
-
+        <h1 class="text-center">Home Page</h1>
+        <hr/>
+        <div>
+            <button type="button" class="btn btn-info" id="solarPlantCreate">Create Solar Plant</button>
+            <button type="button" class="btn btn-info" id="clearCustomerData">Clear</button>
+        </div>
+        <div id="userData">
+        </div>
+        <script th:src="@{/js/fetch-user-data.js}"></script>
     </main>
     <footer th:replace="~{fragments/footer}">
     </footer>

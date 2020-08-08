@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.Validator;
 import java.io.InvalidObjectException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ChargeControllerServiceImpl implements ChargeControllerService {
@@ -35,5 +37,14 @@ public class ChargeControllerServiceImpl implements ChargeControllerService {
         ChargeController chargeController = mapper.map(chargeControllerServiceModel, ChargeController.class);
         ChargeController savedChargeController = controllerRepository.save(chargeController);
         return mapper.map(savedChargeController, ChargeControllerServiceModel.class);
+    }
+
+    @Override
+    public List<ChargeControllerServiceModel> allControllers() {
+        return controllerRepository
+                .findAll()
+                .stream()
+                .map(controller-> mapper.map(controller, ChargeControllerServiceModel.class))
+                .collect(Collectors.toUnmodifiableList());
     }
 }

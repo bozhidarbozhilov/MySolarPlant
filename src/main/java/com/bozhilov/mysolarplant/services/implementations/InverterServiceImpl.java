@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.Validator;
 import java.io.InvalidObjectException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class InverterServiceImpl implements InverterService {
@@ -32,5 +34,14 @@ public class InverterServiceImpl implements InverterService {
         Inverter inverter = mapper.map(inverterServiceModel, Inverter.class);
         Inverter savedInverter = inverterRepository.save(inverter);
         return mapper.map(savedInverter, InverterServiceModel.class);
+    }
+
+    @Override
+    public List<InverterServiceModel> allInverters() {
+        return inverterRepository
+                .findAll()
+                .stream()
+                .map(inverter -> mapper.map(inverter, InverterServiceModel.class))
+                .collect(Collectors.toUnmodifiableList());
     }
 }
