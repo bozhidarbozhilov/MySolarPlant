@@ -4,6 +4,7 @@ import com.bozhilov.mysolarplant.services.models.ChargeControllerServiceModel;
 import com.bozhilov.mysolarplant.services.services.ChargeControllerService;
 import com.bozhilov.mysolarplant.web.models.AllControllersViewModel;
 import com.bozhilov.mysolarplant.web.models.ChargeControllerCreateModel;
+import com.bozhilov.mysolarplant.web.models.ChargeControllerViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,6 +57,16 @@ public class ChargeControllerController extends BaseController{
                 .allControllers()
                 .stream()
                 .map(controller->mapper.map(controller, AllControllersViewModel.class))
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    @GetMapping(value = "/all_solar_unit", produces = "application/json")
+    @ResponseBody
+    public Object allContollersForSolarUnit(){
+        return controllerService
+                .allControllers()
+                .stream()
+                .map(controller->mapper.map(controller, ChargeControllerViewModel.class))
                 .collect(Collectors.toUnmodifiableList());
     }
 

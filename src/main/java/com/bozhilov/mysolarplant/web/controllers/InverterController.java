@@ -4,6 +4,7 @@ import com.bozhilov.mysolarplant.services.models.InverterServiceModel;
 import com.bozhilov.mysolarplant.services.services.InverterService;
 import com.bozhilov.mysolarplant.web.models.AllInvertersViewModel;
 import com.bozhilov.mysolarplant.web.models.InverterCreateModel;
+import com.bozhilov.mysolarplant.web.models.InverterViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -53,6 +54,16 @@ public class InverterController extends BaseController{
                 .allInverters()
                 .stream()
                 .map(inverterServiceModel -> mapper.map(inverterServiceModel, AllInvertersViewModel.class))
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    @GetMapping(value = "/all_solar_unit", produces = "application/json")
+    @ResponseBody
+    public Object getAllInvertersForSolarUnit(){
+        return inverterService
+                .allInverters()
+                .stream()
+                .map(inverterServiceModel -> mapper.map(inverterServiceModel, InverterViewModel.class))
                 .collect(Collectors.toUnmodifiableList());
     }
 }

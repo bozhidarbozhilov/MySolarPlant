@@ -26,7 +26,7 @@ public class SolarUnitServiceImpl implements SolarUnitService {
     }
 
     @Override
-    public SolarUnitServiceModel createSolarUnit(SolarPlantServiceModel solarPlantServiceModel) {
+    public SolarUnitServiceModel createSolarUnit(SolarUnitServiceModel solarUnitServiceModel) {
         return null;
     }
 }

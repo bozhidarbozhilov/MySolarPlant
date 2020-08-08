@@ -8,4 +8,5 @@ import java.util.List;
 public interface PVPanelService {
     PVPanelServiceModel save(PVPanelServiceModel pvPanelServiceModel) throws InvalidObjectException;
     List<PVPanelServiceModel> allPanels();
+    PVPanelServiceModel findPanelById(String id);
 }

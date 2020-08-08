@@ -47,4 +47,12 @@ public class ChargeControllerServiceImpl implements ChargeControllerService {
                 .map(controller-> mapper.map(controller, ChargeControllerServiceModel.class))
                 .collect(Collectors.toUnmodifiableList());
     }
+
+    @Override
+    public ChargeControllerServiceModel findControllerById(String id) {
+        ChargeController foundController = controllerRepository
+                .findById(id)
+                .orElseThrow(()->new IllegalArgumentException(Constants.CONTROLLER_NOT_FOUND));
+        return mapper.map(foundController, ChargeControllerServiceModel.class);
+    }
 }

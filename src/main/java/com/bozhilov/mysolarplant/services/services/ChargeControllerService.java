@@ -8,4 +8,5 @@ import java.util.List;
 public interface ChargeControllerService {
     ChargeControllerServiceModel saveController(ChargeControllerServiceModel chargeControllerServiceModel) throws InvalidObjectException;
     List<ChargeControllerServiceModel> allControllers();
+    ChargeControllerServiceModel findControllerById(String id);
 }

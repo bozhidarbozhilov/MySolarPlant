@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head}">
+</head>
+<body>
+<div class="container-fluid">
+    <header th:replace="~{fragments/header}">
+    </header>
+    <main class="jumbotron">
+        <h1 class="text-center">Create Solar Unit</h1>
+
+        <form th:action="@{/solar_units/create}" th:method="post" th:object="${solarUnitCreate}">
+            <div class="form-group text-center">
+                <h4 for="panelsTableContainer">Choose PV Panel</h4>
+                <div class="form-group text-center">
+                    <label for="panelsData">Show/hide PV Panels Catalogue</label>
+                    <input type="checkbox" data-toggle="collapse" data-target="#panelsTable" id="panelsData"/>
+                </div>
+                <div id="panelsTableContainer" class="unit-data">
+
+                </div>
+                <div class="row mx-auto text-center w-25">
+                    <div class="col col-md-6">
+                        <label for="panelsCount">Insert PV Panels count</label>
+                    </div>
+                    <div class="col col-md-6">
+                        <input type="number" id="panelsCount" th:field="*{panelsCount}">
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <h4 for="panelsTableContainer">Choose Battery</h4>
+                <div class="form-group text-center">
+                    <label for="batteriesData">Show/hide Batteries Catalogue</label>
+                    <input type="checkbox" data-toggle="collapse" data-target="#batteryTable" id="batteriesData"/>
+                </div>
+                <div id="batteriesTableContainer" class="unit-data">
+
+                </div>
+                <div class="row mx-auto text-center w-25">
+                    <div class="col col-md-6">
+                        <label for="batteriesCount">Insert Batteries count</label>
+                    </div>
+                    <div class="col col-md-6">
+                        <input type="number" id="batteriesCount" th:field="*{batteryCellsCount}">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group text-center">
+                <h4 for="controllersTableContainer">Choose Controller</h4>
+                <div class="form-group text-center">
+                    <label for="controllersData">Show/hide Controllers Catalogue</label>
+                    <input type="checkbox" data-toggle="collapse" data-target="#controllersTable" id="controllersData"/>
+                </div>
+                <div id="controllersTableContainer" class="unit-data">
+
+                </div>
+            </div>
+
+            <div class="form-group text-center">
+                <h4 for="invertersTableContainer">Choose Inverter</h4>
+                <div class="form-group text-center">
+                    <label for="invertersData">Show/hide Inverters Catalogue</label>
+                    <input type="checkbox" data-toggle="collapse" data-target="#invertersTable" id="invertersData"/>
+                </div>
+                <div id="invertersTableContainer" class="unit-data">
+
+                </div>
+            </div>
+            <div class="form-group col-md-6 mx-auto text-center">
+                <div class="form-row mx-auto text-center">
+                    <div class="form-group col-md-6 text-center" th:classappend="${#fields.hasErrors('orientation')}?'text-danger'">
+                        <label for="orientation">Orientation</label>
+                        <input class="form-control" type="number" id="orientation" th:field="*{orientation}"/>
+                        <small th:each="error:${#fields.errors('orientation')}" th:text="${error}">
+                        </small>
+                    </div>
+                    <div class="form-group col-md-6 text-center" th:classappend="${#fields.hasErrors('inclination')}?'text-danger'">
+                        <label for="inclination">Inclination</label>
+                        <input class="form-control" type="number" id="inclination" th:field="*{inclination}"/>
+                        <small th:each="error:${#fields.errors('inclination')}" th:text="${error}">
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mx-auto w-50 text-center mt-5">
+                <button class="btn bc-background btn-primary w-25">
+                    Create Solar Unit
+                </button>
+            </div>
+
+        </form>
+        <script th:src="@{/js/fetch-data-for-solar-unit.js}"></script>
+    </main>
+    <footer th:replace="~{fragments/footer}">
+    </footer>
+</div>
+</body>
+</html>

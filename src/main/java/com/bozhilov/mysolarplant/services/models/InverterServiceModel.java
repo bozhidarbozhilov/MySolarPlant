@@ -3,7 +3,6 @@ package com.bozhilov.mysolarplant.services.models;
 import com.bozhilov.mysolarplant.utils.Constants;
 
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotEmpty;
 
 public class InverterServiceModel extends BaseParamsServiceModel{
     private Double ACPower;

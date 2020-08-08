@@ -6,22 +6,22 @@ import com.bozhilov.mysolarplant.data.models.plant.Inverter;
 import com.bozhilov.mysolarplant.data.models.plant.PVPanel;
 
 public class SolarUnitCreateModel {
-    private PVPanelViewModel panels;
+    private String panelId;
     private Integer panelsCount;
-    private InverterViewModel inverter;
-    private ChargeControllerViewModel chargeController;
-    private BatteryViewModel batteryType;
+    private String inverterId;
+    private String chargeControllerId;
+    private String batteryId;
     private Integer batteryCellsCount;
     private Integer orientation;
     private Integer inclination;
 
 
-    public PVPanelViewModel getPanels() {
-        return panels;
+    public String getPanelId() {
+        return panelId;
     }
 
-    public void setPanels(PVPanelViewModel panels) {
-        this.panels = panels;
+    public void setPanelId(String panelId) {
+        this.panelId = panelId;
     }
 
     public Integer getPanelsCount() {
@@ -32,29 +32,30 @@ public class SolarUnitCreateModel {
         this.panelsCount = panelsCount;
     }
 
-    public InverterViewModel getInverter() {
-        return inverter;
+    public String getInverterId() {
+        return inverterId;
     }
 
-    public void setInverter(InverterViewModel inverter) {
-        this.inverter = inverter;
+    public void setInverterId(String inverterId) {
+        this.inverterId = inverterId;
     }
 
-    public ChargeControllerViewModel getChargeController() {
-        return chargeController;
+    public String getChargeControllerId() {
+        return chargeControllerId;
     }
 
-    public void setChargeController(ChargeControllerViewModel chargeController) {
-        this.chargeController = chargeController;
+    public void setChargeControllerId(String chargeControllerId) {
+        this.chargeControllerId = chargeControllerId;
     }
 
-    public BatteryViewModel getBatteryType() {
-        return batteryType;
+    public String getBatteryId() {
+        return batteryId;
     }
 
-    public void setBatteryType(BatteryViewModel batteryType) {
-        this.batteryType = batteryType;
+    public void setBatteryId(String batteryId) {
+        this.batteryId = batteryId;
     }
+
 
     public Integer getBatteryCellsCount() {
         return batteryCellsCount;
@@ -79,4 +80,6 @@ public class SolarUnitCreateModel {
     public void setInclination(Integer inclination) {
         this.inclination = inclination;
     }
+
+
 }

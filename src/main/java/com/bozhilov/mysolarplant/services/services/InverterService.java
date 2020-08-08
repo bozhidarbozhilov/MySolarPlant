@@ -8,4 +8,5 @@ import java.util.List;
 public interface InverterService {
     InverterServiceModel saveInverter(InverterServiceModel inverterServiceModel) throws InvalidObjectException;
     List<InverterServiceModel> allInverters();
+    InverterServiceModel findInverterById(String id);
 }

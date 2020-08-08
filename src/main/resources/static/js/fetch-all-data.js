@@ -1,8 +1,8 @@
 $(document).ready(function () {
-        $('#allPanelsAdmin').on('click', fetchAllForAdmin('panels'));
-        $('#allControllersAdmin').on('click', fetchAllForAdmin('controllers'));
-        $('#allBatteriesAdmin').on('click', fetchAllForAdmin('batteries'));
-        $('#allInvertersAdmin').on('click', fetchAllForAdmin('inverters'));
+        $('#allPanelsAdmin').on('click', ()=>fetchAllForAdmin('panels'));
+        $('#allControllersAdmin').on('click', ()=>fetchAllForAdmin('controllers'));
+        $('#allBatteriesAdmin').on('click', ()=>fetchAllForAdmin('batteries'));
+        $('#allInvertersAdmin').on('click', ()=>fetchAllForAdmin('inverters'));
 
     }
 );

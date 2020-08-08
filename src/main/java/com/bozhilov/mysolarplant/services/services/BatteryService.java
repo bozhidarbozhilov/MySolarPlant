@@ -8,4 +8,5 @@ import java.util.List;
 public interface BatteryService {
     BatteryServiceModel saveBattery(BatteryServiceModel batteryServiceModel) throws InvalidObjectException;
     List<BatteryServiceModel> allBatteries();
+    BatteryServiceModel findBatteryById(String id);
 }

@@ -44,4 +44,12 @@ public class InverterServiceImpl implements InverterService {
                 .map(inverter -> mapper.map(inverter, InverterServiceModel.class))
                 .collect(Collectors.toUnmodifiableList());
     }
+
+    @Override
+    public InverterServiceModel findInverterById(String id) {
+        Inverter foundInverter = inverterRepository
+                .findById(id)
+                .orElseThrow(()-> new IllegalArgumentException(Constants.INVERTER_NOT_FOUND));
+        return mapper.map(foundInverter, InverterServiceModel.class);
+    }
 }

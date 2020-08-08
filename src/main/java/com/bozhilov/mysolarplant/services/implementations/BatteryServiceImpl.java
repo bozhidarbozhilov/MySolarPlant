@@ -48,5 +48,13 @@ public class BatteryServiceImpl implements BatteryService {
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    @Override
+    public BatteryServiceModel findBatteryById(String id) {
+        Battery foundBattery = batteryRepository
+                .findById(id)
+                .orElseThrow(()-> new IllegalArgumentException(Constants.BATTERY_NOT_FOUND));
+        return mapper.map(foundBattery, BatteryServiceModel.class);
+    }
+
 
 }

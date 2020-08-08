@@ -4,9 +4,9 @@ import com.bozhilov.mysolarplant.services.models.PVPanelServiceModel;
 import com.bozhilov.mysolarplant.services.services.PVPanelService;
 import com.bozhilov.mysolarplant.web.models.AllPanelsViewModel;
 import com.bozhilov.mysolarplant.web.models.PVPanelCreateModel;
+import com.bozhilov.mysolarplant.web.models.PVPanelViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -54,6 +54,16 @@ public class PVPanelController extends BaseController{
                 .allPanels()
                 .stream()
                 .map(panel -> mapper.map(panel, AllPanelsViewModel.class))
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    @GetMapping(value = "/all_solar_unit", produces = "application/json")
+    @ResponseBody
+    public Object getAllPanelsForSolarUnit(){
+        return pvPanelService
+                .allPanels()
+                .stream()
+                .map(panel -> mapper.map(panel, PVPanelViewModel.class))
                 .collect(Collectors.toUnmodifiableList());
     }
 }

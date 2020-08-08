@@ -27,6 +27,11 @@ body:after {
     color: black;
 }
 
+.unit-data{
+    max-height: 250px;
+    overflow:auto;
+}
+
 #navbarImage {
     color: white;
     width: 40px;

@@ -5,6 +5,7 @@ import com.bozhilov.mysolarplant.data.repositories.PVPanelRepository;
 import com.bozhilov.mysolarplant.services.models.PVPanelServiceModel;
 import com.bozhilov.mysolarplant.services.services.PVPanelService;
 import com.bozhilov.mysolarplant.utils.Constants;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,13 @@ public class PVPanelServiceImpl implements PVPanelService {
                 .collect(Collectors.toUnmodifiableList());
 
         return allPVPanels;
+    }
+
+    @Override
+    public PVPanelServiceModel findPanelById(String id) {
+        PVPanel foundPanel = pvPanelRepository
+                .findById(id)
+                .orElseThrow(()-> new IllegalArgumentException(Constants.PV_PANEL_NOT_FOUND));
+        return mapper.map(foundPanel, PVPanelServiceModel.class);
     }
 }

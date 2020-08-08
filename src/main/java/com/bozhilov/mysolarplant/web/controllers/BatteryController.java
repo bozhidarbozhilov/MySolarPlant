@@ -5,6 +5,7 @@ import com.bozhilov.mysolarplant.services.models.PVPanelServiceModel;
 import com.bozhilov.mysolarplant.services.services.BatteryService;
 import com.bozhilov.mysolarplant.web.models.AllBatteriesViewModel;
 import com.bozhilov.mysolarplant.web.models.BatteryCreateModel;
+import com.bozhilov.mysolarplant.web.models.BatteryViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -54,6 +55,16 @@ public class BatteryController extends BaseController{
                 .allBatteries()
                 .stream()
                 .map(batteryServiceModel -> mapper.map(batteryServiceModel, AllBatteriesViewModel.class))
+                .collect(Collectors.toUnmodifiableList());
+
+    }
+    @GetMapping(value="/all_solar_unit", produces="application/json")
+    @ResponseBody
+    public Object getAllBatteriesForSolarUnit(){
+        return batteryService
+                .allBatteries()
+                .stream()
+                .map(batteryServiceModel -> mapper.map(batteryServiceModel, BatteryViewModel.class))
                 .collect(Collectors.toUnmodifiableList());
 
     }
