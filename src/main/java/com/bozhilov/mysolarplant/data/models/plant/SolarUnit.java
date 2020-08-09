@@ -2,6 +2,8 @@ package com.bozhilov.mysolarplant.data.models.plant;
 
 import com.bozhilov.mysolarplant.data.models.BaseEntity;
 import com.bozhilov.mysolarplant.data.models.other.Location;
+import com.bozhilov.mysolarplant.data.models.users.User;
+import com.bozhilov.mysolarplant.data.models.users.UserProfile;
 import com.bozhilov.mysolarplant.utils.Constants;
 
 import javax.persistence.*;
@@ -20,6 +22,7 @@ public class SolarUnit extends BaseEntity {
     private Integer batteryCellsCount;
     private Integer orientation;
     private Integer inclination;
+    private UserProfile userProfile;
 
     @ManyToOne
     @JoinColumn(name="panel_id", referencedColumnName = "id", nullable = false)
@@ -71,11 +74,12 @@ public class SolarUnit extends BaseEntity {
         this.batteryType = batteryType;
     }
 
-    public Integer getBatteryCellCount() {
+    @Column(name="battery_cells_count")
+    public Integer getBatteryCellsCount() {
         return batteryCellsCount;
     }
 
-    public void setBatteryCellCount(Integer batteryCellsCount) {
+    public void setBatteryCellsCount(Integer batteryCellsCount) {
         this.batteryCellsCount = batteryCellsCount;
     }
 
@@ -93,5 +97,13 @@ public class SolarUnit extends BaseEntity {
 
     public void setInclination(Integer inclination) {
         this.inclination = inclination;
+    }
+
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 }

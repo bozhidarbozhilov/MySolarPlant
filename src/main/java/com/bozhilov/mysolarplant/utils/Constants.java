@@ -48,4 +48,5 @@ public class Constants {
     public static final String SOLAR_UNIT_INVERTER_ERROR = "Solar unit must have inverter";
     public static final String SOLAR_PLANT_UNIT_ERROR = "Solar plant must have at least one unit";
 
+    public static final String INVALID_SOLAR_UNIT_PROPERTIES = "Invalid solar unit properties.";
 }

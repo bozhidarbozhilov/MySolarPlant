@@ -2,10 +2,13 @@ package com.bozhilov.mysolarplant.data.models.users;
 
 
 import com.bozhilov.mysolarplant.data.models.BaseEntity;
+import com.bozhilov.mysolarplant.data.models.plant.SolarPlant;
+import com.bozhilov.mysolarplant.data.models.plant.SolarUnit;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "users_profiles")
@@ -16,6 +19,8 @@ public class UserProfile extends BaseEntity {
     private String email;
     private String address;
     private String information;
+    private List<SolarUnit> solarUnits;
+    private List<SolarPlant> solarPlants;
 
     @OneToOne(optional = false)
     @JoinColumn(name="user_id", referencedColumnName = "id")
@@ -73,5 +78,21 @@ public class UserProfile extends BaseEntity {
 
     public void setInformation(String information) {
         this.information = information;
+    }
+
+    public List<SolarUnit> getSolarUnits() {
+        return solarUnits;
+    }
+
+    public void setSolarUnits(List<SolarUnit> solarUnits) {
+        this.solarUnits = solarUnits;
+    }
+
+    public List<SolarPlant> getSolarPlants() {
+        return solarPlants;
+    }
+
+    public void setSolarPlants(List<SolarPlant> solarPlants) {
+        this.solarPlants = solarPlants;
     }
 }

@@ -1,7 +1,7 @@
 package com.bozhilov.mysolarplant.web.controllers;
 
-import com.bozhilov.mysolarplant.data.models.plant.SolarUnit;
 import com.bozhilov.mysolarplant.services.models.SolarUnitServiceModel;
+import com.bozhilov.mysolarplant.services.services.MappingService;
 import com.bozhilov.mysolarplant.services.services.SolarUnitService;
 import com.bozhilov.mysolarplant.web.models.SolarUnitCreateModel;
 import org.modelmapper.ModelMapper;
@@ -20,11 +20,14 @@ import java.io.InvalidObjectException;
 @RequestMapping("/solar_units")
 public class SolarUnitController extends BaseController{
     private final SolarUnitService solarUnitService;
+    private final MappingService mappingService;
     private final ModelMapper mapper;
 
     @Autowired
-    public SolarUnitController(SolarUnitService solarUnitService, ModelMapper mapper) {
+    public SolarUnitController(SolarUnitService solarUnitService,
+                               MappingService mappingService, ModelMapper mapper) {
         this.solarUnitService = solarUnitService;
+        this.mappingService = mappingService;
         this.mapper = mapper;
     }
 
@@ -38,12 +41,11 @@ public class SolarUnitController extends BaseController{
 
     @PostMapping("/create")
     public ModelAndView createInverter(@ModelAttribute(name="solarUnitCreate") SolarUnitCreateModel solarUnitCreateModel,
-                                       BindingResult bindingResult, ModelAndView modelAndView)  {
+                                       BindingResult bindingResult, ModelAndView modelAndView) throws InvalidObjectException {
         if(bindingResult.hasErrors()){
             modelAndView.setViewName(super.view("solar-plants/solar-unit-create"));
         }else {
-            int b=5;
-            SolarUnitServiceModel solarUnitServiceModel = mapper.map(solarUnitCreateModel, SolarUnitServiceModel.class);
+            SolarUnitServiceModel solarUnitServiceModel = mappingService.solarUnitViewToService(solarUnitCreateModel);
             solarUnitService.createSolarUnit(solarUnitServiceModel);
             modelAndView.setViewName(super.redirect("home"));
         }
