@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head}">
+</head>
+<body>
+<div class="container-fluid">
+    <header th:replace="~{fragments/header}">
+    </header>
+    <main class="jumbotron">
+        <h1 class="text-center">Delete PV Panel</h1>
+        <form th:action="@{/pvpanels/delete/{id}(id=${panelViewModel.id})}" th:method="post" th:object="${panelViewModel}">
+            <div class="mx-auto w-25 text-center">
+                <h3 class="form-control" id="manufacturer" th:text="|Manufacturer: *{manufacturer}|"></h3>
+            </div>
+
+            <div class="w-25 text-center mx-auto">
+                <h3 class="form-control" id="model" th:text="|Model: *{model}|"></h3>
+
+            </div>
+
+            <div class="mx-auto w-25 text-center">
+                <h3 class="form-control" id="connector" th:text="|Connector: *{connector}|"></h3>
+
+            </div>
+            <div class="w-25 mx-auto text-center">
+                <h3 class="form-control" id="power" th:text="|Power: *{power}|"></h3>
+
+            </div>
+            <div class="w-25 text-center mx-auto">
+                <h3 class="form-control" id="voltageAtMaxPower"
+                    th:text="|Voltage At Max Power: *{voltageAtMaxPower}|"></h3>
+
+            </div>
+            <div class="w-25x mx-auto text-center">
+                <h3 class="form-control" id="currentAtMaxPower"
+                    th:text="|Current At Max Power: *{currentAtMaxPower}|"></h3>
+
+            </div>
+
+            <div class="mx-auto w-50 text-center mt-5">
+                <button class="btn bc-background btn-primary w-25">
+                    Delete PV Panel
+                </button>
+            </div>
+
+        </form>
+    </main>
+    <footer th:replace="~{fragments/footer}">
+    </footer>
+</div>
+</body>
+</html>

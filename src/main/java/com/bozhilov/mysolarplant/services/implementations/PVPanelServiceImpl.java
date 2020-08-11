@@ -56,4 +56,18 @@ public class PVPanelServiceImpl implements PVPanelService {
                 .orElseThrow(()-> new IllegalArgumentException(Constants.PV_PANEL_NOT_FOUND));
         return mapper.map(foundPanel, PVPanelServiceModel.class);
     }
+
+    @Override
+    public PVPanelServiceModel editPanel(PVPanelServiceModel pvPanelForEdit) {
+        PVPanel panelForEdit = mapper.map(pvPanelForEdit, PVPanel.class);
+        PVPanel editedPanel = pvPanelRepository.saveAndFlush(panelForEdit);
+        return mapper.map(editedPanel, PVPanelServiceModel.class);
+    }
+
+    @Override
+    public void deletePanel(String id) {
+        PVPanel panelForDelete = pvPanelRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException(Constants.PV_PANEL_NOT_FOUND));
+        pvPanelRepository.delete(panelForDelete);
+    }
 }

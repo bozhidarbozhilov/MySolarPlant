@@ -1,8 +1,10 @@
 package com.bozhilov.mysolarplant.web.models;
 
 public class AllInvertersViewModel extends BaseParamsViewModel {
+    private Double ACPower;
     private Double maxACPower;
     private Double maxPVPower;
+
 
     public Double getMaxACPower() {
         return maxACPower;
@@ -18,5 +20,13 @@ public class AllInvertersViewModel extends BaseParamsViewModel {
 
     public void setMaxPVPower(Double maxPVPower) {
         this.maxPVPower = maxPVPower;
+    }
+
+    public Double getACPower() {
+        return ACPower;
+    }
+
+    public void setACPower(Double ACPower) {
+        this.ACPower = ACPower;
     }
 }

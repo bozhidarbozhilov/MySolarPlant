@@ -19,8 +19,7 @@ public class UserProfile extends BaseEntity {
     private String email;
     private String address;
     private String information;
-    private List<SolarUnit> solarUnits;
-    private List<SolarPlant> solarPlants;
+
 
     @OneToOne(optional = false)
     @JoinColumn(name="user_id", referencedColumnName = "id")
@@ -80,19 +79,5 @@ public class UserProfile extends BaseEntity {
         this.information = information;
     }
 
-    public List<SolarUnit> getSolarUnits() {
-        return solarUnits;
-    }
 
-    public void setSolarUnits(List<SolarUnit> solarUnits) {
-        this.solarUnits = solarUnits;
-    }
-
-    public List<SolarPlant> getSolarPlants() {
-        return solarPlants;
-    }
-
-    public void setSolarPlants(List<SolarPlant> solarPlants) {
-        this.solarPlants = solarPlants;
-    }
 }

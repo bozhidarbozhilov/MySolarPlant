@@ -9,4 +9,6 @@ public interface PVPanelService {
     PVPanelServiceModel save(PVPanelServiceModel pvPanelServiceModel) throws InvalidObjectException;
     List<PVPanelServiceModel> allPanels();
     PVPanelServiceModel findPanelById(String id);
+    PVPanelServiceModel editPanel(PVPanelServiceModel pvPanelForEdit);
+    void deletePanel(String id);
 }

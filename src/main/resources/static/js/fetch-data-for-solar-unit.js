@@ -142,7 +142,7 @@ function createInvertersTable(json){
                 '<td>' + (y + 1) + '</td>' +
                 '<td>' + x.manufacturer + '</td>' +
                 '<td>' + x.model + '</td>' +
-                '<td>' + x.ACPower + '</td>' +
+                '<td>' + x.acpower + '</td>' +
                 '<td>' + x.maxACPower + '</td>' +
                 '<td>' + x.maxPVPower + '</td>' +
                 '<td> <input type="checkbox" id="inverter" name="inverterId" value="'+x.id+'"/></td>'+

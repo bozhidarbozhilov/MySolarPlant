@@ -56,5 +56,19 @@ public class BatteryServiceImpl implements BatteryService {
         return mapper.map(foundBattery, BatteryServiceModel.class);
     }
 
+    @Override
+    public BatteryServiceModel editBattery(BatteryServiceModel batteryForEdit) {
+        Battery battery = mapper.map(batteryForEdit, Battery.class);
+        Battery editedBattery = batteryRepository.saveAndFlush(battery);
+        return mapper.map(editedBattery, BatteryServiceModel.class);
+    }
+
+    @Override
+    public void deleteBattery(String id) {
+        Battery batteryForDelete = batteryRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException(Constants.BATTERY_NOT_FOUND));
+        batteryRepository.delete(batteryForDelete);
+    }
+
 
 }

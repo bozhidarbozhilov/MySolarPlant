@@ -2,10 +2,14 @@ package com.bozhilov.mysolarplant.data.models.users;
 
 
 import com.bozhilov.mysolarplant.data.models.BaseEntity;
+import com.bozhilov.mysolarplant.data.models.plant.SolarPlant;
+import com.bozhilov.mysolarplant.data.models.plant.SolarUnit;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import java.util.List;
 
 import static com.bozhilov.mysolarplant.utils.Constants.*;
 
@@ -15,6 +19,8 @@ import static com.bozhilov.mysolarplant.utils.Constants.*;
 public class User extends BaseEntity {
     private String username;
     private String password;
+    private List<SolarUnit> solarUnits;
+    private List<SolarPlant> solarPlants;
 
     @NotNull
     @Size(min = USERNAME_MIN_LENGTH,
@@ -36,6 +42,25 @@ public class User extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @OneToMany(mappedBy = "user", targetEntity = SolarUnit.class)
+    public List<SolarUnit> getSolarUnits() {
+        return solarUnits;
+    }
+
+    public void setSolarUnits(List<SolarUnit> solarUnits) {
+        this.solarUnits = solarUnits;
+    }
+
+
+    @OneToMany(mappedBy = "user", targetEntity = SolarPlant.class)
+    public List<SolarPlant> getSolarPlants() {
+        return solarPlants;
+    }
+
+    public void setSolarPlants(List<SolarPlant> solarPlants) {
+        this.solarPlants = solarPlants;
     }
 
 //    private boolean isAccountNonExpired;

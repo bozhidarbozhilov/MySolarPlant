@@ -22,7 +22,7 @@ public class SolarUnit extends BaseEntity {
     private Integer batteryCellsCount;
     private Integer orientation;
     private Integer inclination;
-    private UserProfile userProfile;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name="panel_id", referencedColumnName = "id", nullable = false)
@@ -99,11 +99,16 @@ public class SolarUnit extends BaseEntity {
         this.inclination = inclination;
     }
 
-    public UserProfile getUserProfile() {
-        return userProfile;
+    @ManyToOne
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    public User getUser() {
+        return user;
     }
 
-    public void setUserProfile(UserProfile userProfile) {
-        this.userProfile = userProfile;
+    public void setUser(User user) {
+        this.user = user;
     }
+
+
+
 }

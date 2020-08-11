@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head}">
+</head>
+<body>
+<div class="container-fluid">
+    <header th:replace="~{fragments/header}">
+    </header>
+    <main class="jumbotron">
+        <h1 class="text-center">Delete Battery</h1>
+        <form th:action="@{/batteries/delete/{id}(id=${batteryDeleteModel.id})}" th:method="post"
+              th:object="${batteryDeleteModel}">
+            <div class="mx-auto w-25 text-center">
+                <h3 class="form-control" id="manufacturer" th:text="|Manufacturer: *{manufacturer}|"></h3>
+            </div>
+
+            <div class="w-25 text-center mx-auto">
+                <h3 class="form-control" id="model" th:text="|Model: *{model}|"></h3>
+            </div>
+            <div class="col-md-2 text-center mx-auto">
+                <h3 class="form-control" id="voltage" th:text="|Voltage: *{voltage}|"></h3>
+            </div>
+            <div class="col-md-2 mx-auto text-center">
+                <h3 class="form-control" id="capacity" th:text="|Capacity: *{capacity}|"></h3>
+            </div>
+            <div class="col-md-6 mx-auto text-center">
+                <div class="form-row mx-auto text-center">
+                    <div class="col-md-6 text-center" th:classappend="${#fields.hasErrors('terminals')}?'text-danger'">
+                        <h3 class="form-control" th:text="|Terminals: *{terminals}|"></h3>
+                    </div>
+                    <div class="col-md-6 text-center"
+                         th:classappend="${#fields.hasErrors('connectionType')}?'text-danger'">
+                        <h3 class="form-control" th:text="|Connetion Type: *{connectionType}|"></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mx-auto w-50 text-center mt-5">
+                <button class="btn bc-background btn-primary w-25">
+                    Delete Battery
+                </button>
+            </div>
+
+        </form>
+    </main>
+    <footer th:replace="~{fragments/footer}">
+    </footer>
+</div>
+</body>
+</html>

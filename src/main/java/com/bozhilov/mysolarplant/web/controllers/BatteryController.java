@@ -1,10 +1,9 @@
 package com.bozhilov.mysolarplant.web.controllers;
 
 import com.bozhilov.mysolarplant.services.models.BatteryServiceModel;
-import com.bozhilov.mysolarplant.services.models.PVPanelServiceModel;
 import com.bozhilov.mysolarplant.services.services.BatteryService;
-import com.bozhilov.mysolarplant.web.models.AllBatteriesViewModel;
 import com.bozhilov.mysolarplant.web.models.BatteryCreateModel;
+import com.bozhilov.mysolarplant.web.models.BatteryEditModel;
 import com.bozhilov.mysolarplant.web.models.BatteryViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -54,7 +53,7 @@ public class BatteryController extends BaseController{
         return batteryService
                 .allBatteries()
                 .stream()
-                .map(batteryServiceModel -> mapper.map(batteryServiceModel, AllBatteriesViewModel.class))
+                .map(batteryServiceModel -> mapper.map(batteryServiceModel, BatteryViewModel.class))
                 .collect(Collectors.toUnmodifiableList());
 
     }
@@ -67,5 +66,51 @@ public class BatteryController extends BaseController{
                 .map(batteryServiceModel -> mapper.map(batteryServiceModel, BatteryViewModel.class))
                 .collect(Collectors.toUnmodifiableList());
 
+    }
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView getBatteryEditPage(@PathVariable("id") String id,
+                              ModelAndView modelAndView){
+        BatteryServiceModel  foundBattery = batteryService.findBatteryById(id);
+        BatteryEditModel batteryForEdit = mapper.map(foundBattery, BatteryEditModel.class);
+        modelAndView.addObject("batteryEditModel", batteryForEdit);
+        modelAndView.setViewName(super.view("batteries/battery-edit"));
+        return modelAndView;
+    }
+
+    @PostMapping("/edit/{id}")
+    public ModelAndView editBattery(@ModelAttribute("batteryEditModel") BatteryEditModel batteryEditModel,
+                                    BindingResult bindingResult, ModelAndView modelAndView){
+
+        if(bindingResult.hasErrors()){
+            modelAndView.setViewName("batteries/battery-edit");
+        }else {
+            BatteryServiceModel batteryServiceModel = mapper.map(batteryEditModel, BatteryServiceModel.class);
+            BatteryServiceModel editedBattery = batteryService.editBattery(batteryServiceModel);
+            modelAndView.addObject("batteryEditModel" ,
+                    mapper.map(editedBattery, BatteryEditModel.class));
+            modelAndView.setViewName(super.redirect("home"));
+        }
+        return modelAndView;
+    }
+
+    @GetMapping("/delete/{id}")
+    //@PreAuthorize("hasRole('ROLE_USER')")
+    public ModelAndView getCaDeletePage(@PathVariable("id") String id,
+                                        ModelAndView modelAndView){
+        BatteryServiceModel batteryForEdit = batteryService.findBatteryById(id);
+        BatteryViewModel batteryViewModel = mapper.map(batteryForEdit, BatteryViewModel.class);
+        modelAndView.addObject("batteryDeleteModel", batteryViewModel);
+        modelAndView.setViewName(super.view("batteries/battery-delete"));
+        return modelAndView;
+    }
+
+    @PostMapping("/delete/{id}")
+    //@PreAuthorize("hasRole('ROLE_USER')")
+    public ModelAndView deleteCar(@PathVariable("id") String id,
+                                  ModelAndView modelAndView){
+        batteryService.deleteBattery(id);
+        modelAndView.setViewName(super.redirect("home"));
+        return modelAndView;
     }
 }

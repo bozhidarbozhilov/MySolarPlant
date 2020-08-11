@@ -1,6 +1,8 @@
 package com.bozhilov.mysolarplant.data.models.plant;
 
+import com.bozhilov.mysolarplant.data.models.BaseEntity;
 import com.bozhilov.mysolarplant.data.models.other.Location;
+import com.bozhilov.mysolarplant.data.models.users.User;
 import com.bozhilov.mysolarplant.utils.Constants;
 
 import javax.persistence.*;
@@ -8,9 +10,12 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-public class SolarPlant {
+@Entity
+@Table(name="solar_plants")
+public class SolarPlant extends BaseEntity {
     private Location location;
     private List<SolarUnit> solarUnits;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name="location_id", referencedColumnName = "id", nullable = false)
@@ -34,5 +39,15 @@ public class SolarPlant {
 
     public void setSolarUnits(List<SolarUnit> solarUnits) {
         this.solarUnits = solarUnits;
+    }
+
+    @ManyToOne
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

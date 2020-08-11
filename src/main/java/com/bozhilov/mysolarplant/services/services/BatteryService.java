@@ -9,4 +9,6 @@ public interface BatteryService {
     BatteryServiceModel saveBattery(BatteryServiceModel batteryServiceModel) throws InvalidObjectException;
     List<BatteryServiceModel> allBatteries();
     BatteryServiceModel findBatteryById(String id);
+    BatteryServiceModel editBattery(BatteryServiceModel batteryForEdit);
+    void deleteBattery(String id);
 }

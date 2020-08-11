@@ -30,7 +30,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="pvPanelDropdown">
                         <a class="nav-link" th:href="@{/pvpanels/create}">Add PV Panel</a>
-                        <a class="nav-link" id="allPanels" th:href="@{/pvpanels/all}" th:text="|All PV Panels|"></a>
+                        <a class="nav-link" id="allPanelsNav" th:href="@{/pvpanels/all}" th:text="|All PV Panels|"></a>
                     </div>
                 </li>
 
@@ -41,7 +41,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="chargeControllerDropdown">
                         <a class="nav-link" th:href="@{/controllers/create}">Add Charge Controller</a>
-                        <!--<a class="nav-link" th:href="@{/pvpanels/all}" th:text="|All Charge Controllers|"></a>-->
+                        <a class="nav-link" id="allControllersNav" th:href="@{/controllers/all}" th:text="|All Charge Controllers|"></a>
                     </div>
                 </li>
 
@@ -52,7 +52,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="invertersDropdown">
                         <a class="nav-link" th:href="@{/inverters/create}">Add Inverter</a>
-                        <!--<a class="nav-link" th:href="@{/pvpanels/all}" th:text="|All Inverter|"></a>-->
+                        <a class="nav-link" id="allInvertersNav" th:href="@{/inverters/all}" th:text="|All Inverter|"></a>
                     </div>
                 </li>
 
@@ -63,7 +63,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="batteriesDropdown">
                         <a class="nav-link" th:href="@{/batteries/create}">Add Battery</a>
-                        <!--<a class="nav-link" th:href="@{/pvpanels/all}" th:text="|All Battery|"></a>-->
+                        <a class="nav-link" id="allBatteriesNav" th:href="@{/batteries/all}" th:text="|All Battery|"></a>
                     </div>
                 </li>
             </ul>
