@@ -9,4 +9,6 @@ public interface ChargeControllerService {
     ChargeControllerServiceModel saveController(ChargeControllerServiceModel chargeControllerServiceModel) throws InvalidObjectException;
     List<ChargeControllerServiceModel> allControllers();
     ChargeControllerServiceModel findControllerById(String id);
+    ChargeControllerServiceModel editController(ChargeControllerServiceModel chargeControllerServiceModel) throws InvalidObjectException;
+    void deleteController(String id);
 }

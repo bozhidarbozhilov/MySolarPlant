@@ -58,7 +58,10 @@ public class PVPanelServiceImpl implements PVPanelService {
     }
 
     @Override
-    public PVPanelServiceModel editPanel(PVPanelServiceModel pvPanelForEdit) {
+    public PVPanelServiceModel editPanel(PVPanelServiceModel pvPanelForEdit) throws InvalidObjectException {
+        if(validator.validate(pvPanelForEdit).size()>0){
+            throw new InvalidObjectException(Constants.INVALID_PV_PANEL_PROPERTIES);
+        }
         PVPanel panelForEdit = mapper.map(pvPanelForEdit, PVPanel.class);
         PVPanel editedPanel = pvPanelRepository.saveAndFlush(panelForEdit);
         return mapper.map(editedPanel, PVPanelServiceModel.class);

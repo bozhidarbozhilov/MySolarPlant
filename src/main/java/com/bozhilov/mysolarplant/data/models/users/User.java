@@ -4,23 +4,31 @@ package com.bozhilov.mysolarplant.data.models.users;
 import com.bozhilov.mysolarplant.data.models.BaseEntity;
 import com.bozhilov.mysolarplant.data.models.plant.SolarPlant;
 import com.bozhilov.mysolarplant.data.models.plant.SolarUnit;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import java.util.List;
+import java.util.Set;
 
 import static com.bozhilov.mysolarplant.utils.Constants.*;
 
 
 @Entity
 @Table(name="users")
-public class User extends BaseEntity {
+public class User extends BaseEntity implements UserDetails {
     private String username;
     private String password;
+    private UserProfile profile;
     private List<SolarUnit> solarUnits;
     private List<SolarPlant> solarPlants;
+    private boolean isAccountNonExpired;
+    private boolean isAccountNonLocked;
+    private boolean isCredentialsNonExpired;
+    private boolean isEnabled;
+    private Set<Role> authorities;
 
     @NotNull
     @Size(min = USERNAME_MIN_LENGTH,
@@ -63,58 +71,62 @@ public class User extends BaseEntity {
         this.solarPlants = solarPlants;
     }
 
-//    private boolean isAccountNonExpired;
-//    private boolean isAccountNonLocked;
-//    private boolean isCredentialsNonExpired;
-//    private boolean isEnabled;
-//    private Set<Role> authorities;
+    @OneToOne(mappedBy = "user", targetEntity = UserProfile.class)
+    public UserProfile getProfile() {
+        return profile;
+    }
 
-//    @Override
-//    public boolean isAccountNonExpired() {
-//        return true;
-//    }
-//
-//    public void setAccountNonExpired(boolean accountNonExpired) {
-//        isAccountNonExpired = accountNonExpired;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonLocked() {
-//        return true;
-//    }
-//
-//    public void setAccountNonLocked(boolean accountNonLocked) {
-//        isAccountNonLocked = accountNonLocked;
-//    }
-//
-//    @Override
-//    public boolean isCredentialsNonExpired() {
-//        return true;
-//    }
-//
-//    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-//        isCredentialsNonExpired = credentialsNonExpired;
-//    }
-//
-//    @Override
-//    public boolean isEnabled() {
-//        return true;
-//    }
-//
-//    public void setEnabled(boolean enabled) {
-//        isEnabled = enabled;
-//    }
-//
-//    @Override
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinTable(name="users_roles",
-//                joinColumns = @JoinColumn(name="user_id", referencedColumnName = "id"),
-//                inverseJoinColumns = @JoinColumn(name="role_id", referencedColumnName = "id"))
-//    public Set<Role> getAuthorities() {
-//        return authorities;
-//    }
-//
-//    public void setAuthorities(Set<Role> authorities) {
-//        this.authorities = authorities;
-//    }
+    public void setProfile(UserProfile profile) {
+        this.profile = profile;
+    }
+
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        isCredentialsNonExpired = credentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
+    }
+
+    @Override
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name="users_roles",
+                joinColumns = @JoinColumn(name="user_id", referencedColumnName = "id"),
+                inverseJoinColumns = @JoinColumn(name="role_id", referencedColumnName = "id"))
+    public Set<Role> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Role> authorities) {
+        this.authorities = authorities;
+    }
 }

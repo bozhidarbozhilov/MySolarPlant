@@ -55,4 +55,22 @@ public class ChargeControllerServiceImpl implements ChargeControllerService {
                 .orElseThrow(()->new IllegalArgumentException(Constants.CONTROLLER_NOT_FOUND));
         return mapper.map(foundController, ChargeControllerServiceModel.class);
     }
+
+    @Override
+    public ChargeControllerServiceModel editController(ChargeControllerServiceModel chargeControllerServiceModel) throws InvalidObjectException {
+        if(validator.validate(chargeControllerServiceModel).size()>0){
+            throw new InvalidObjectException(Constants.INVALID_CONTROLLER_PROPERTIES);
+        }
+        ChargeController controllerForEdit = mapper.map(chargeControllerServiceModel, ChargeController.class);
+        ChargeController editedController = controllerRepository.saveAndFlush(controllerForEdit);
+        return mapper.map(editedController, ChargeControllerServiceModel.class);
+    }
+
+    @Override
+    public void deleteController(String id) {
+        ChargeController chargeController = controllerRepository
+                .findById(id)
+                .orElseThrow(()-> new IllegalArgumentException(Constants.CONTROLLER_NOT_FOUND));
+        controllerRepository.delete(chargeController);
+    }
 }

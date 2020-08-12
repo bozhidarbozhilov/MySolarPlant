@@ -1,6 +1,7 @@
 package com.bozhilov.mysolarplant.web.controllers;
 
 import com.bozhilov.mysolarplant.services.models.BatteryServiceModel;
+import com.bozhilov.mysolarplant.services.models.ChargeControllerServiceModel;
 import com.bozhilov.mysolarplant.services.services.BatteryService;
 import com.bozhilov.mysolarplant.web.models.BatteryCreateModel;
 import com.bozhilov.mysolarplant.web.models.BatteryEditModel;
@@ -80,7 +81,8 @@ public class BatteryController extends BaseController{
 
     @PostMapping("/edit/{id}")
     public ModelAndView editBattery(@ModelAttribute("batteryEditModel") BatteryEditModel batteryEditModel,
-                                    BindingResult bindingResult, ModelAndView modelAndView){
+                                    BindingResult bindingResult, @PathVariable("id") String id,
+                                    ModelAndView modelAndView) throws InvalidObjectException {
 
         if(bindingResult.hasErrors()){
             modelAndView.setViewName("batteries/battery-edit");
@@ -89,16 +91,16 @@ public class BatteryController extends BaseController{
             BatteryServiceModel editedBattery = batteryService.editBattery(batteryServiceModel);
             modelAndView.addObject("batteryEditModel" ,
                     mapper.map(editedBattery, BatteryEditModel.class));
-            modelAndView.setViewName(super.redirect("home"));
+            modelAndView.setViewName(view("batteries/battery-edit"));
         }
         return modelAndView;
     }
 
     @GetMapping("/delete/{id}")
     //@PreAuthorize("hasRole('ROLE_USER')")
-    public ModelAndView getCaDeletePage(@PathVariable("id") String id,
+    public ModelAndView getBatteryDeletePage(@PathVariable("id") String id,
                                         ModelAndView modelAndView){
-        BatteryServiceModel batteryForEdit = batteryService.findBatteryById(id);
+       BatteryServiceModel batteryForEdit = batteryService.findBatteryById(id);
         BatteryViewModel batteryViewModel = mapper.map(batteryForEdit, BatteryViewModel.class);
         modelAndView.addObject("batteryDeleteModel", batteryViewModel);
         modelAndView.setViewName(super.view("batteries/battery-delete"));
@@ -107,7 +109,7 @@ public class BatteryController extends BaseController{
 
     @PostMapping("/delete/{id}")
     //@PreAuthorize("hasRole('ROLE_USER')")
-    public ModelAndView deleteCar(@PathVariable("id") String id,
+    public ModelAndView deleteBattery(@PathVariable("id") String id,
                                   ModelAndView modelAndView){
         batteryService.deleteBattery(id);
         modelAndView.setViewName(super.redirect("home"));

@@ -49,4 +49,11 @@ public class Constants {
     public static final String SOLAR_PLANT_UNIT_ERROR = "Solar plant must have at least one unit";
 
     public static final String INVALID_SOLAR_UNIT_PROPERTIES = "Invalid solar unit properties.";
+    public static final String INVALID_USER_PROFILE_PROPERTIES = "Invalid user profile properties.";
+    public static final String USER_PROFILE_NOT_FOUND = "User profile not found";
+
+    public static final String ROLE_ENGINEER_NAME = "ROLE_ENGINEER";
+    public static final String ROLE_USER_NAME = "ROLE_USER";
+    public static final String ROLE_ADMIN_NAME = "ROLE_ADMIN";
+    public static final String USER_NOT_FOUND = "User Not Found.";
 }

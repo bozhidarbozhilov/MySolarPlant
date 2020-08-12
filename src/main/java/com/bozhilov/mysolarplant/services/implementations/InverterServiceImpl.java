@@ -52,4 +52,22 @@ public class InverterServiceImpl implements InverterService {
                 .orElseThrow(()-> new IllegalArgumentException(Constants.INVERTER_NOT_FOUND));
         return mapper.map(foundInverter, InverterServiceModel.class);
     }
+
+    @Override
+    public InverterServiceModel editInverter(InverterServiceModel inverterServiceModel) throws InvalidObjectException {
+        if(validator.validate(inverterServiceModel).size()>0){
+            throw new InvalidObjectException(Constants.INVALID_INVERTER_PROPERTIES);
+        }
+        Inverter inverterForEdit = mapper.map(inverterServiceModel, Inverter.class);
+        Inverter editedInverter = inverterRepository.saveAndFlush(inverterForEdit);
+        return mapper.map(editedInverter, InverterServiceModel.class);
+    }
+
+    @Override
+    public void deleteInverter(String id) {
+        Inverter inverter = inverterRepository
+                .findById(id)
+                .orElseThrow(()-> new IllegalArgumentException(Constants.INVERTER_NOT_FOUND));
+        inverterRepository.delete(inverter);
+    }
 }

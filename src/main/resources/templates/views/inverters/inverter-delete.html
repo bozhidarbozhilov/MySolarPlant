@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head}">
+</head>
+<body>
+<div class="container-fluid">
+    <header th:replace="~{fragments/header}">
+    </header>
+    <main class="jumbotron">
+        <h1 class="text-center">Delete Inverter</h1>
+        <form th:action="@{/edit/delete/{id}(id=${inverterViewModel.id})}}" th:method="post" th:object="${inverterViewModel}">
+            <div class="form-group mx-auto w-25 text-center">
+                <h3 id="manufacturer" th:text="|Manufacturer: *{manufacturer}|"></h3>
+            </div>
+
+            <div class="form-group w-25 text-center mx-auto">
+                <h3 id="model" th:text="|Model: *{model}|"></h3>
+            </div>
+
+            <div class="form-group col-md-2 mx-auto text-center">
+                <h3 id="ac-power" th:text="|AC Power: *{ACPower}|"></h3>
+
+            </div>
+
+            <div class="form-group col-md-2 mx-auto text-center">
+                <h3 id="max-ac-power" th:text="|Max AC Power: *{maxACPower}|"></h3>
+
+            </div>
+            <div class="form-group col-md-2 mx-auto text-center">
+                <h3 id="max-pv-power" th:text="|Max PV Power: *{maxPVPower}|"></h3>
+
+            </div>
+
+            <div class="form-group mx-auto w-50 text-center mt-5">
+                <button class="btn bc-background btn-primary w-25">
+                    Delete Inverter
+                </button>
+                <a th:href="@{/home}" class="btn bc-background btn-primary w-25">Go Back To Home</a>
+            </div>
+
+        </form>
+    </main>
+    <footer th:replace="~{fragments/footer}">
+    </footer>
+</div>
+</body>
+</html>

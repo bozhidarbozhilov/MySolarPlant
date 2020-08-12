@@ -1,26 +1,13 @@
-package com.bozhilov.mysolarplant.services.models;
+package com.bozhilov.mysolarplant.web.models;
 
-import com.bozhilov.mysolarplant.services.services.SolarUnitService;
+import com.bozhilov.mysolarplant.services.models.UserServiceModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class UserProfileServiceModel extends BaseServiceModel{
-    private UserServiceModel user;
+public class UserProfileCreateModel extends BaseViewModel {
     private String firstName;
     private String lastName;
     private String email;
     private String address;
     private String information;
-
-
-    public UserServiceModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserServiceModel user) {
-        this.user = user;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -61,4 +48,5 @@ public class UserProfileServiceModel extends BaseServiceModel{
     public void setInformation(String information) {
         this.information = information;
     }
+
 }

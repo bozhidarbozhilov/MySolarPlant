@@ -1,10 +1,9 @@
 package com.bozhilov.mysolarplant.web.controllers;
 
+import com.bozhilov.mysolarplant.services.models.BatteryServiceModel;
 import com.bozhilov.mysolarplant.services.models.ChargeControllerServiceModel;
 import com.bozhilov.mysolarplant.services.services.ChargeControllerService;
-import com.bozhilov.mysolarplant.web.models.AllControllersViewModel;
-import com.bozhilov.mysolarplant.web.models.ChargeControllerCreateModel;
-import com.bozhilov.mysolarplant.web.models.ChargeControllerViewModel;
+import com.bozhilov.mysolarplant.web.models.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +35,7 @@ public class ChargeControllerController extends BaseController{
     }
 
     @PostMapping("/create")
-    public ModelAndView createBattery(@ModelAttribute(name="controllerCreate")
+    public ModelAndView createController(@ModelAttribute(name="controllerCreate")
                                                   ChargeControllerCreateModel controllerCreateModel,
                                       BindingResult bindingResult, ModelAndView modelAndView) throws InvalidObjectException {
         if(bindingResult.hasErrors()){
@@ -62,7 +61,7 @@ public class ChargeControllerController extends BaseController{
 
     @GetMapping(value = "/all_solar_unit", produces = "application/json")
     @ResponseBody
-    public Object allContollersForSolarUnit(){
+    public Object allControllersForSolarUnit(){
         return controllerService
                 .allControllers()
                 .stream()
@@ -70,4 +69,50 @@ public class ChargeControllerController extends BaseController{
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    @GetMapping("/edit/{id}")
+    public ModelAndView getControllerEditPage(@PathVariable("id") String id,
+                                           ModelAndView modelAndView){
+        ChargeControllerServiceModel  foundController = controllerService.findControllerById(id);
+        ChargeControllerEditModel controllerForEdit = mapper.map(foundController, ChargeControllerEditModel.class);
+        modelAndView.addObject("controllerEditModel", controllerForEdit);
+        modelAndView.setViewName(super.view("controllers/controller-edit"));
+        return modelAndView;
+    }
+
+    @PostMapping("/edit/{id}")
+    public ModelAndView editController(@ModelAttribute("controllerEditModel") ChargeControllerEditModel controllerEditModel,
+                                    BindingResult bindingResult, @PathVariable("id") String id,
+                                    ModelAndView modelAndView) throws InvalidObjectException {
+
+        if(bindingResult.hasErrors()){
+            modelAndView.setViewName(super.view("controllers/controller-edit"));
+        }else {
+            ChargeControllerServiceModel controllerServiceModel = mapper.map(controllerEditModel, ChargeControllerServiceModel.class);
+            ChargeControllerServiceModel editedController = controllerService.editController(controllerServiceModel);
+            modelAndView.addObject("controllerEditModel" ,
+                    mapper.map(editedController, ChargeControllerEditModel.class));
+            modelAndView.setViewName(super.view("controllers/controller-edit"));
+        }
+        return modelAndView;
+    }
+
+    @GetMapping("/delete/{id}")
+    //@PreAuthorize("hasRole('ROLE_USER')")
+    public ModelAndView getControllerDeletePage(@PathVariable("id") String id,
+                                        ModelAndView modelAndView){
+        ChargeControllerServiceModel controllerForDelete = controllerService.findControllerById(id);
+        ChargeControllerViewModel chargeControllerViewModel = mapper.map(controllerForDelete, ChargeControllerViewModel.class);
+        modelAndView.addObject("controllerDeleteModel", chargeControllerViewModel);
+        modelAndView.setViewName(super.view("controllers/controller-delete"));
+        return modelAndView;
+    }
+
+    @PostMapping("/delete/{id}")
+    //@PreAuthorize("hasRole('ROLE_USER')")
+    public ModelAndView deleteController(@PathVariable("id") String id,
+                                  ModelAndView modelAndView){
+        controllerService.deleteController(id);
+        modelAndView.setViewName(super.redirect("home"));
+        return modelAndView;
+    }
 }

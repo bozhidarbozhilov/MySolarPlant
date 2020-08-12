@@ -4,6 +4,7 @@ import com.bozhilov.mysolarplant.services.models.InverterServiceModel;
 import com.bozhilov.mysolarplant.services.services.InverterService;
 import com.bozhilov.mysolarplant.web.models.AllInvertersViewModel;
 import com.bozhilov.mysolarplant.web.models.InverterCreateModel;
+import com.bozhilov.mysolarplant.web.models.InverterEditModel;
 import com.bozhilov.mysolarplant.web.models.InverterViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -65,5 +66,52 @@ public class InverterController extends BaseController{
                 .stream()
                 .map(inverterServiceModel -> mapper.map(inverterServiceModel, InverterViewModel.class))
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView getInverterEditPage(@PathVariable("id") String id,
+                                           ModelAndView modelAndView){
+        InverterServiceModel  foundInverter = inverterService.findInverterById(id);
+        InverterEditModel inverterForEdit = mapper.map(foundInverter, InverterEditModel.class);
+        modelAndView.addObject("inverterEditModel", inverterForEdit);
+        modelAndView.setViewName(super.view("inverters/inverter-edit"));
+        return modelAndView;
+    }
+
+    @PostMapping("/edit/{id}")
+    public ModelAndView editInverter(@ModelAttribute("inverterEditModel") InverterEditModel inverterEditModel,
+                                    BindingResult bindingResult, @PathVariable("id") String id,
+                                    ModelAndView modelAndView) throws InvalidObjectException {
+
+        if(bindingResult.hasErrors()){
+            modelAndView.setViewName("inverters/inverter-edit");
+        }else {
+            InverterServiceModel inverterServiceModel = mapper.map(inverterEditModel, InverterServiceModel.class);
+            InverterServiceModel editedInverter = inverterService.editInverter(inverterServiceModel);
+            modelAndView.addObject("inverterEditModel" ,
+                    mapper.map(editedInverter, InverterEditModel.class));
+            modelAndView.setViewName(view("inverters/inverter-edit"));
+        }
+        return modelAndView;
+    }
+
+    @GetMapping("/delete/{id}")
+    //@PreAuthorize("hasRole('ROLE_USER')")
+    public ModelAndView getInverterDeletePage(@PathVariable("id") String id,
+                                             ModelAndView modelAndView){
+        InverterServiceModel inverterForEdit = inverterService.findInverterById(id);
+        InverterViewModel inverterViewModel = mapper.map(inverterForEdit, InverterViewModel.class);
+        modelAndView.addObject("inverterDeleteModel", inverterViewModel);
+        modelAndView.setViewName(super.view("inverters/inverter-delete"));
+        return modelAndView;
+    }
+
+    @PostMapping("/delete/{id}")
+    //@PreAuthorize("hasRole('ROLE_USER')")
+    public ModelAndView deleteInverter(@PathVariable("id") String id,
+                                      ModelAndView modelAndView){
+        inverterService.deleteInverter(id);
+        modelAndView.setViewName(super.redirect("home"));
+        return modelAndView;
     }
 }

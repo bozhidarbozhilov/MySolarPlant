@@ -81,7 +81,7 @@ public class PVPanelController extends BaseController{
     @PostMapping("/edit/{id}")
     public ModelAndView editPVPanel(@ModelAttribute("panelEditModel") PVPanelEditModel panelEditModel,
                                     BindingResult bindingResult, String id,
-                                    ModelAndView modelAndView){
+                                    ModelAndView modelAndView) throws InvalidObjectException {
 
         if(bindingResult.hasErrors()){
             modelAndView.setViewName(super.view("pvpanels/pvpanel-edit"));
@@ -90,7 +90,7 @@ public class PVPanelController extends BaseController{
             PVPanelServiceModel editedPVPanel = pvPanelService.editPanel(panelServiceModel);
             modelAndView.addObject("panelEditModel" ,
                     mapper.map(editedPVPanel, PVPanelEditModel.class));
-            modelAndView.setViewName(super.redirect("home"));
+            modelAndView.setViewName(super.view("pvpanels/pvpanel-edit"));
         }
         return modelAndView;
     }

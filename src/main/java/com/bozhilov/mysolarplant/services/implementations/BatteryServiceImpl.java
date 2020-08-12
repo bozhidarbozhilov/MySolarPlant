@@ -57,7 +57,10 @@ public class BatteryServiceImpl implements BatteryService {
     }
 
     @Override
-    public BatteryServiceModel editBattery(BatteryServiceModel batteryForEdit) {
+    public BatteryServiceModel editBattery(BatteryServiceModel batteryForEdit) throws InvalidObjectException {
+        if(validator.validate(batteryForEdit).size()>0){
+            throw new InvalidObjectException(Constants.INVALID_BATTERY_PROPERTIES);
+        }
         Battery battery = mapper.map(batteryForEdit, Battery.class);
         Battery editedBattery = batteryRepository.saveAndFlush(battery);
         return mapper.map(editedBattery, BatteryServiceModel.class);

@@ -8,8 +8,8 @@
     <header th:replace="~{fragments/header}">
     </header>
     <main class="jumbotron">
-        <h1 class="text-center">Edit PV Panel</h1>
-        <form th:action="@{/pvpanels/edit/{id}(id=${panelEditModel.id})}" th:method="post" th:object="${panelEditModel}">
+        <h1 class="text-center">Edit Charge Controller</h1>
+        <form th:action="@{/controllers/edit/{id}(id=${controllerEditModel.id})}" th:method="post" th:object="${controllerEditModel}">
             <div class="form-group mx-auto w-25 text-center"
                  th:classappend="${#fields.hasErrors('manufacturer')}?'text-danger'">
                 <label for="manufacturer">Manufacturer</label>
@@ -27,13 +27,20 @@
                 <small th:each="error:${#fields.errors('model')}" th:text="${error}">
                 </small>
             </div>
-
-            <div class="form-group mx-auto w-25 text-center"
-                 th:classappend="${#fields.hasErrors('connector')}?'text-danger'">
-                <label for="connector">Connector</label>
-                <input class="form-control" type="text" id="connector" th:field="*{connector}"
-                       placeholder="Connector..."/>
-                <small th:each="error:${#fields.errors('connector')}" th:text="${error}">
+            <div class="form-group col-md-2 text-center mx-auto"
+                 th:classappend="${#fields.hasErrors('voltage')}?'text-danger'">
+                <label for="voltage">Voltage</label>
+                <input class="form-control" type="number" id="voltage" th:field="*{voltage}"
+                       placeholder="Voltage..."/>
+                <small th:each="error:${#fields.errors('voltage')}" th:text="${error}">
+                </small>
+            </div>
+            <div class="form-group col-md-2 mx-auto text-center"
+                 th:classappend="${#fields.hasErrors('current')}?'text-danger'">
+                <label for="current">Current</label>
+                <input class="form-control" type="number" id="current" th:field="*{current}"
+                       placeholder="Current..."/>
+                <small th:each="error:${#fields.errors('current')}" th:text="${error}">
                 </small>
             </div>
             <div class="form-group col-md-2 mx-auto text-center"
@@ -44,26 +51,11 @@
                 <small th:each="error:${#fields.errors('power')}" th:text="${error}">
                 </small>
             </div>
-            <div class="form-group col-md-2 text-center mx-auto"
-                 th:classappend="${#fields.hasErrors('voltageAtMaxPower')}?'text-danger'">
-                <label for="voltageAtMaxPower">Voltage At Max Power</label>
-                <input class="form-control" type="number" step="0.01" id="voltageAtMaxPower" th:field="*{voltageAtMaxPower}"
-                       placeholder="Voltage At Max Power..."/>
-                <small th:each="error:${#fields.errors('voltageAtMaxPower')}" th:text="${error}">
-                </small>
-            </div>
-            <div class="form-group col-md-2 mx-auto text-center"
-                 th:classappend="${#fields.hasErrors('currentAtMaxPower')}?'text-danger'">
-                <label for="currentAtMaxPower">Current At Max Power</label>
-                <input class="form-control" type="number" step="0.01" id="currentAtMaxPower" th:field="*{currentAtMaxPower}"
-                       placeholder="Current At Max Power..."/>
-                <small th:each="error:${#fields.errors('currentAtMaxPower')}" th:text="${error}">
-                </small>
-            </div>
+
 
             <div class="form-group mx-auto w-50 text-center mt-5">
                 <button class="btn bc-background btn-primary w-25">
-                    Edit PV Panel
+                    Edit Charge Controller
                 </button>
                 <a th:href="@{/home}" class="btn bc-background btn-primary w-25">Go Back To Home</a>
             </div>
