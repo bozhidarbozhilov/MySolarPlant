@@ -8,6 +8,7 @@ import com.bozhilov.mysolarplant.web.models.PVPanelEditModel;
 import com.bozhilov.mysolarplant.web.models.PVPanelViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,7 @@ public class PVPanelController extends BaseController{
     }
 
     @GetMapping("/create")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getPVPanelCreatePage(@ModelAttribute(name="createPVPanel") PVPanelCreateModel pvPanelCreateModel,
                                              ModelAndView modelAndView){
         modelAndView.setViewName(super.view("pvpanels/pvpanel-create"));
@@ -36,6 +38,7 @@ public class PVPanelController extends BaseController{
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView createPVPanel(@ModelAttribute(name="createPVPanel") PVPanelCreateModel pvPanelCreateModel,
                                       BindingResult bindingResult, ModelAndView modelAndView) throws InvalidObjectException {
         if(bindingResult.hasErrors()){
@@ -50,6 +53,7 @@ public class PVPanelController extends BaseController{
 
     @GetMapping(value = "/all", produces = "application/json")
     @ResponseBody
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public Object getAllPanels(){
         return pvPanelService
                 .allPanels()
@@ -60,6 +64,7 @@ public class PVPanelController extends BaseController{
 
     @GetMapping(value = "/all_solar_unit", produces = "application/json")
     @ResponseBody
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Object getAllPanelsForSolarUnit(){
         return pvPanelService
                 .allPanels()
@@ -69,6 +74,7 @@ public class PVPanelController extends BaseController{
     }
 
     @GetMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getPVPanelEditPage(@PathVariable("id") String id,
                                            ModelAndView modelAndView){
         PVPanelServiceModel  foundPVPanel = pvPanelService.findPanelById(id);
@@ -79,6 +85,7 @@ public class PVPanelController extends BaseController{
     }
 
     @PostMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView editPVPanel(@ModelAttribute("panelEditModel") PVPanelEditModel panelEditModel,
                                     BindingResult bindingResult, String id,
                                     ModelAndView modelAndView) throws InvalidObjectException {
@@ -96,7 +103,7 @@ public class PVPanelController extends BaseController{
     }
 
     @GetMapping("/delete/{id}")
-    //@PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getCaDeletePage(@PathVariable("id") String id,
                                         ModelAndView modelAndView){
         PVPanelServiceModel panelForEdit = pvPanelService.findPanelById(id);
@@ -107,7 +114,7 @@ public class PVPanelController extends BaseController{
     }
 
     @PostMapping("/delete/{id}")
-    //@PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView deleteCar(@PathVariable("id") String id,
                                   ModelAndView modelAndView){
         pvPanelService.deletePanel(id);

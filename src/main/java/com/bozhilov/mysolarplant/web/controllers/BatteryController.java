@@ -7,6 +7,7 @@ import com.bozhilov.mysolarplant.web.models.BatteryCreateModel;
 import com.bozhilov.mysolarplant.web.models.BatteryEditModel;
 import com.bozhilov.mysolarplant.web.models.BatteryViewModel;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ public class BatteryController extends BaseController{
     }
 
     @GetMapping("/create")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getBatteryCreatePage(@ModelAttribute(name="batteryCreate")
                                                      BatteryCreateModel batteryCreateModel,
                                              ModelAndView modelAndView){
@@ -36,6 +38,7 @@ public class BatteryController extends BaseController{
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView createBattery(@ModelAttribute(name="batteryCreate") BatteryCreateModel batteryCreateModel,
                                       BindingResult bindingResult, ModelAndView modelAndView) throws InvalidObjectException {
         if(bindingResult.hasErrors()){
@@ -50,6 +53,7 @@ public class BatteryController extends BaseController{
 
     @GetMapping(value="/all", produces="application/json")
     @ResponseBody
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public Object getAllBatteries(){
         return batteryService
                 .allBatteries()
@@ -60,6 +64,7 @@ public class BatteryController extends BaseController{
     }
     @GetMapping(value="/all_solar_unit", produces="application/json")
     @ResponseBody
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Object getAllBatteriesForSolarUnit(){
         return batteryService
                 .allBatteries()
@@ -70,6 +75,7 @@ public class BatteryController extends BaseController{
     }
 
     @GetMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getBatteryEditPage(@PathVariable("id") String id,
                               ModelAndView modelAndView){
         BatteryServiceModel  foundBattery = batteryService.findBatteryById(id);
@@ -80,6 +86,7 @@ public class BatteryController extends BaseController{
     }
 
     @PostMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView editBattery(@ModelAttribute("batteryEditModel") BatteryEditModel batteryEditModel,
                                     BindingResult bindingResult, @PathVariable("id") String id,
                                     ModelAndView modelAndView) throws InvalidObjectException {
@@ -97,7 +104,7 @@ public class BatteryController extends BaseController{
     }
 
     @GetMapping("/delete/{id}")
-    //@PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getBatteryDeletePage(@PathVariable("id") String id,
                                         ModelAndView modelAndView){
        BatteryServiceModel batteryForEdit = batteryService.findBatteryById(id);
@@ -108,7 +115,7 @@ public class BatteryController extends BaseController{
     }
 
     @PostMapping("/delete/{id}")
-    //@PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView deleteBattery(@PathVariable("id") String id,
                                   ModelAndView modelAndView){
         batteryService.deleteBattery(id);

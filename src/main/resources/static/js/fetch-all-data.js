@@ -41,7 +41,7 @@ function fetchAllPanelsForEdit(unit) {
 }
 
 function createPanelsTable(json){
-    const container = $("#userData");
+    const container = $("#engineerData");
     console.log(container);
     json.forEach((x, y) => {
         if (y === 0) {
@@ -59,7 +59,7 @@ function createPanelsTable(json){
                     '<th scope="col">Actions</th></tr>' +
                     '</thead><tbody>');
         }
-        $('#userData table')
+        $('#engineerData table')
             .append('<tr>' +
                 '<td>' + (y + 1) + '</td>' +
                 '<td>' + x.manufacturer + '</td>' +
@@ -76,7 +76,7 @@ function createPanelsTable(json){
 }
 
 function createBatteriesTable(json){
-    const container = $("#userData");
+    const container = $("#engineerData");
     json.forEach((x, y) => {
         if (y === 0) {
             container.empty();
@@ -93,7 +93,7 @@ function createBatteriesTable(json){
                     '<th scope="col">Actions</th></tr>' +
                     '</thead><tbody>');
         }
-        $('#userData table')
+        $('#engineerData table')
             .append('<tr>' +
                 '<td>' + (y + 1) + '</td>' +
                 '<td>' + x.manufacturer + '</td>' +
@@ -110,7 +110,7 @@ function createBatteriesTable(json){
 }
 
 function createControllersTable(json){
-    const container = $("#userData");
+    const container = $("#engineerData");
     json.forEach((x, y) => {
         if (y === 0) {
             container.empty();
@@ -126,7 +126,7 @@ function createControllersTable(json){
                     '<th scope="col">Actions</th></tr>' +
                     '</thead><tbody>');
         }
-        $('#userData table')
+        $('#engineerData table')
             .append('<tr>' +
                 '<td>' + (y + 1) + '</td>' +
                 '<td>' + x.manufacturer + '</td>' +
@@ -141,7 +141,7 @@ function createControllersTable(json){
 }
 
 function createInvertersTable(json){
-    const container = $("#userData");
+    const container = $("#engineerData");
     json.forEach((x, y) => {
         if (y === 0) {
             container.empty();
@@ -157,7 +157,7 @@ function createInvertersTable(json){
                     '<th scope="col">Actions</th></tr>' +
                     '</thead><tbody>');
         }
-        $('#userData table')
+        $('#engineerData table')
             .append('<tr>' +
                 '<td>' + (y + 1) + '</td>' +
                 '<td>' + x.manufacturer + '</td>' +
@@ -177,3 +177,7 @@ function responseHandler(response) {
     }
     return response.json();
 }
+
+$('#clearEngineerData').on('click', ()=>{
+    $('#engineerData').empty();
+});

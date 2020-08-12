@@ -1,11 +1,12 @@
 package com.bozhilov.mysolarplant.services.models;
 
 import com.bozhilov.mysolarplant.utils.Constants;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-public class SolarUnitServiceModel {
+public class SolarUnitServiceModel extends BaseServiceModel{
     private PVPanelServiceModel panels;
     private Integer panelsCount;
     private InverterServiceModel inverter;
@@ -14,6 +15,7 @@ public class SolarUnitServiceModel {
     private Integer batteryCellsCount;
     private Integer orientation;
     private Integer inclination;
+    private UserServiceModel user;
 
     @NotNull(message = Constants.SOLAR_UNIT_PANEL_ERROR)
     public PVPanelServiceModel getPanels() {
@@ -79,5 +81,14 @@ public class SolarUnitServiceModel {
 
     public void setInclination(Integer inclination) {
         this.inclination = inclination;
+    }
+
+    @JsonBackReference
+    public UserServiceModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserServiceModel user) {
+        this.user = user;
     }
 }

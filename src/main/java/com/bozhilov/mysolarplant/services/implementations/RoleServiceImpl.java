@@ -25,11 +25,11 @@ public class RoleServiceImpl implements RoleService {
     public void init() {
         if(this.roleRepository.count()==0){
             Role admin = new Role(Constants.ROLE_ADMIN_NAME);
-            Role employee=new Role(Constants.ROLE_ENGINEER_NAME);
+            Role engineer=new Role(Constants.ROLE_ENGINEER_NAME);
             Role user = new Role(Constants.ROLE_USER_NAME);
 
             this.roleRepository.save(admin);
-            this.roleRepository.save(employee);
+            this.roleRepository.save(engineer);
             this.roleRepository.save(user);
         }
     }

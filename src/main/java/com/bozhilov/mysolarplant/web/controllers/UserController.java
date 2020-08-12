@@ -6,6 +6,7 @@ import com.bozhilov.mysolarplant.web.models.RegisterUserModel;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,7 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/register")
+    @PreAuthorize("isAnonymous()")
     public ModelAndView getRegisterPage(@ModelAttribute(name="registerUser")RegisterUserModel registerUserModel,
                                         ModelAndView modelAndView){
         modelAndView.setViewName(super.view("users/user-register"));
@@ -38,6 +40,7 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/register")
+    @PreAuthorize("isAnonymous()")
     public ModelAndView registerUser(@Valid @ModelAttribute(name="registerUser")RegisterUserModel registerUserModel,
                                      BindingResult bindingResult, ModelAndView modelAndView) throws InvalidObjectException {
         if(bindingResult.hasErrors()){

@@ -8,5 +8,6 @@ import java.io.InvalidObjectException;
 
 public interface UserService {
     UserServiceModel registerUser(UserServiceModel userServiceModel) throws InvalidObjectException;
+    UserServiceModel findByUsername(String username);
 
 }

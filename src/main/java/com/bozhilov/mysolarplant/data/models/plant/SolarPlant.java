@@ -17,7 +17,7 @@ public class SolarPlant extends BaseEntity {
     private List<SolarUnit> solarUnits;
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="location_id", referencedColumnName = "id", nullable = false)
     @NotNull(message= Constants.SOLAR_PLANT_LOCATION_ERROR)
     public Location getLocation() {
@@ -28,7 +28,7 @@ public class SolarPlant extends BaseEntity {
         this.location = location;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="solar_plants_units",
             joinColumns = @JoinColumn(name="plant_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name="unit_id", referencedColumnName = "id"))

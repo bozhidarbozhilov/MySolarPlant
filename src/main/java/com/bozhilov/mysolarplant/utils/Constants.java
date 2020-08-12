@@ -56,4 +56,6 @@ public class Constants {
     public static final String ROLE_USER_NAME = "ROLE_USER";
     public static final String ROLE_ADMIN_NAME = "ROLE_ADMIN";
     public static final String USER_NOT_FOUND = "User Not Found.";
+    public static final String INVALID_LOCATION_PARAMS = "Invalid location parameters. ";
+    public static final String SOLAR_UNIT_NOT_FOUND = "Solar unit not found.";
 }

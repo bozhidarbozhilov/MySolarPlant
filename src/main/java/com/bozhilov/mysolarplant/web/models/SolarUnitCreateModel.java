@@ -14,6 +14,7 @@ public class SolarUnitCreateModel {
     private Integer batteryCellsCount;
     private Integer orientation;
     private Integer inclination;
+    private String username;
 
 
     public String getPanelId() {
@@ -82,4 +83,11 @@ public class SolarUnitCreateModel {
     }
 
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

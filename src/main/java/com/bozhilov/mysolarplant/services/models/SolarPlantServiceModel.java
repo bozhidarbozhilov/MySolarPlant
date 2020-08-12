@@ -2,6 +2,7 @@ package com.bozhilov.mysolarplant.services.models;
 
 import com.bozhilov.mysolarplant.data.models.other.Location;
 import com.bozhilov.mysolarplant.data.models.plant.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 public class SolarPlantServiceModel extends BaseServiceModel{
     private Location location;
     private List<SolarUnitServiceModel> solarUnits;
-    private UserServiceModel userServiceModel;
+    private UserServiceModel user;
 
     public Location getLocation() {
         return location;
@@ -27,11 +28,12 @@ public class SolarPlantServiceModel extends BaseServiceModel{
         this.solarUnits = solarUnits;
     }
 
-    public UserServiceModel getUserServiceModel() {
-        return userServiceModel;
+    @JsonBackReference
+    public UserServiceModel getUse() {
+        return user;
     }
 
-    public void setUserServiceModel(UserServiceModel userServiceModel) {
-        this.userServiceModel = userServiceModel;
+    public void setUser(UserServiceModel userServiceModel) {
+        this.user = userServiceModel;
     }
 }

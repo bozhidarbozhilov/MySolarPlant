@@ -5,6 +5,7 @@ import com.bozhilov.mysolarplant.data.models.other.Location;
 import com.bozhilov.mysolarplant.data.models.users.User;
 import com.bozhilov.mysolarplant.data.models.users.UserProfile;
 import com.bozhilov.mysolarplant.utils.Constants;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -23,6 +24,7 @@ public class SolarUnit extends BaseEntity {
     private Integer orientation;
     private Integer inclination;
     private User user;
+    private List<SolarPlant> solarPlants;
 
     @ManyToOne
     @JoinColumn(name="panel_id", referencedColumnName = "id", nullable = false)
@@ -110,5 +112,12 @@ public class SolarUnit extends BaseEntity {
     }
 
 
+    @ManyToMany(mappedBy = "solarUnits", targetEntity = SolarPlant.class)
+    public List<SolarPlant> getSolarPlants() {
+        return solarPlants;
+    }
 
+    public void setSolarPlants(List<SolarPlant> solarPlants) {
+        this.solarPlants = solarPlants;
+    }
 }

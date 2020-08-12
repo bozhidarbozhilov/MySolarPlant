@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.Validator;
 import java.io.InvalidObjectException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SolarUnitServiceImpl implements SolarUnitService {
@@ -42,5 +44,24 @@ public class SolarUnitServiceImpl implements SolarUnitService {
 
         return modelMapper.map(savedUnit, SolarUnitServiceModel.class);
     }
+
+    @Override
+    public List<SolarUnitServiceModel> findAllByUsername(String username) {
+        List<SolarUnit> solarUnits = solarUnitRepository.findAllByUsername(username);
+
+        return solarUnits
+                .stream()
+                .map(solarUnit -> modelMapper.map(solarUnit, SolarUnitServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public SolarUnitServiceModel findById(String id) {
+        SolarUnit solarUnit = solarUnitRepository
+                .findById(id).orElseThrow(()->new IllegalArgumentException(Constants.SOLAR_UNIT_NOT_FOUND));
+
+        return modelMapper.map(solarUnit, SolarUnitServiceModel.class);
+    }
+
 
 }

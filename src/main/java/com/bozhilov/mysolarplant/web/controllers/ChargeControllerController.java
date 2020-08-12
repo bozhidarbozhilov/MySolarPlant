@@ -6,6 +6,7 @@ import com.bozhilov.mysolarplant.services.services.ChargeControllerService;
 import com.bozhilov.mysolarplant.web.models.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ public class ChargeControllerController extends BaseController{
     }
 
     @GetMapping("/create")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getCreatePage(@ModelAttribute(name="controllerCreate")
                                               ChargeControllerCreateModel chargeControllerCreateModel,
                                       ModelAndView modelAndView){
@@ -35,6 +37,7 @@ public class ChargeControllerController extends BaseController{
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView createController(@ModelAttribute(name="controllerCreate")
                                                   ChargeControllerCreateModel controllerCreateModel,
                                       BindingResult bindingResult, ModelAndView modelAndView) throws InvalidObjectException {
@@ -51,6 +54,7 @@ public class ChargeControllerController extends BaseController{
 
     @GetMapping(value = "/all", produces = "application/json")
     @ResponseBody
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public Object allContollers(){
         return controllerService
                 .allControllers()
@@ -61,6 +65,7 @@ public class ChargeControllerController extends BaseController{
 
     @GetMapping(value = "/all_solar_unit", produces = "application/json")
     @ResponseBody
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Object allControllersForSolarUnit(){
         return controllerService
                 .allControllers()
@@ -70,6 +75,7 @@ public class ChargeControllerController extends BaseController{
     }
 
     @GetMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getControllerEditPage(@PathVariable("id") String id,
                                            ModelAndView modelAndView){
         ChargeControllerServiceModel  foundController = controllerService.findControllerById(id);
@@ -80,6 +86,7 @@ public class ChargeControllerController extends BaseController{
     }
 
     @PostMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView editController(@ModelAttribute("controllerEditModel") ChargeControllerEditModel controllerEditModel,
                                     BindingResult bindingResult, @PathVariable("id") String id,
                                     ModelAndView modelAndView) throws InvalidObjectException {
@@ -97,7 +104,7 @@ public class ChargeControllerController extends BaseController{
     }
 
     @GetMapping("/delete/{id}")
-    //@PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getControllerDeletePage(@PathVariable("id") String id,
                                         ModelAndView modelAndView){
         ChargeControllerServiceModel controllerForDelete = controllerService.findControllerById(id);
@@ -108,7 +115,7 @@ public class ChargeControllerController extends BaseController{
     }
 
     @PostMapping("/delete/{id}")
-    //@PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView deleteController(@PathVariable("id") String id,
                                   ModelAndView modelAndView){
         controllerService.deleteController(id);

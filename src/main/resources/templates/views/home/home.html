@@ -8,15 +8,53 @@
     <header th:replace="~{fragments/header}">
     </header>
     <main class="jumbotron">
-        <h1 class="text-center">Home Page</h1>
+
+        <th:block th:if="${#authorization.expression('hasRole(''ROLE_USER'')')} and
+    ${#authorization.expression('!hasRole(''ROLE_ADMIN'')')}">
+            <h1 class="text-center">Home Page</h1>
+            <hr/>
+            <div>
+                <div>
+                    <button type="button" class="btn btn-info" id="mySolarUnits">My Solar Units</button>
+                    <button type="button" class="btn btn-info" id="mySolarPlants">My Solar Plants</button>
+                    <button type="button" class="btn btn-info" id="clearCustomerData">Clear</button>
+                </div>
+            </div>
+            <div id="userData">
+            </div>
+            <script th:src="@{/js/fetch-data-for-solar-unit.js}"></script>
+        </th:block>
+
+        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+        <h1 class="text-center">Admin Page</h1>
         <hr/>
         <div>
-            <button type="button" class="btn btn-info" id="solarPlantCreate">Create Solar Plant</button>
-            <button type="button" class="btn btn-info" id="clearCustomerData">Clear</button>
+            <button type="button" class="btn btn-info" id="allUsers">All Users</button>
+            <button type="button" class="btn btn-info" id="clearAdminData" >Clear</button>
         </div>
-        <div id="userData">
+        <hr/>
+        <div id="adminData">
         </div>
-        <script th:src="@{/js/fetch-all-data.js}"></script>
+        <script th:src="@{/js/fetch-admin-data.js}"></script>
+    </th:block>
+        <th:block sec:authorize="hasRole('ROLE_ENGINEER')">
+            <h1 class="text-center">Engineer Page</h1>
+            <hr/>
+            <div>
+                <button type="button" class="btn btn-info" id="allPanelsNav">All PV Panels</button>
+                <button type="button" class="btn btn-info" id="allBatteriesNav">All Batteries</button>
+                <button type="button" class="btn btn-info" id="allControllersNav">All Charge Controllers</button>
+                <button type="button" class="btn btn-info" id="allInvertersNav">All Inverter</button>
+                <button type="button" class="btn btn-info" id="allSolarUnits">All Solar Units</button>
+                <button type="button" class="btn btn-info" id="allSolarPlants">All Solar Plants</button>
+                <button type="button" class="btn btn-info" id="clearEngineerData" >Clear</button>
+            </div>
+            <hr/>
+            <div id="engineerData">
+            </div>
+            <script th:src="@{/js/fetch-all-data.js}"></script>
+        </th:block>
+
     </main>
     <footer th:replace="~{fragments/footer}">
     </footer>

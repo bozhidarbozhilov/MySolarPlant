@@ -1,5 +1,6 @@
 package com.bozhilov.mysolarplant.config;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,6 +11,7 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
+@ComponentScan("com.bozhilov.mysolarplant.config")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
@@ -29,8 +31,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/login?logout").permitAll()
                 .and()
-                .csrf().disable()
-        //.csrfTokenRepository(csrfTokenRepository())
+                .csrf()
+                .csrfTokenRepository(csrfTokenRepository())
         ;
 
     }

@@ -3,6 +3,8 @@ $(document).ready(function () {
     fetchAllForSolarUnit('batteries');
     fetchAllForSolarUnit('controllers');
     fetchAllForSolarUnit('inverters');
+    $("#mySolarUnits").on('click', fetchMySolarUnits);
+    fetchAllForSolarPlant();
 });
 
 
@@ -157,9 +159,92 @@ function disableCheckbox(forClass) {
     });
 }
 
+function fetchMySolarUnits(){
+    const container=$("#userData")
+    fetch(`http://localhost:8080/solar_units/all-for-user`)
+        .then(responseHandler)
+        .then(json=> {
+            json.forEach((x, y)=>{
+                if (y === 0) {
+                    container.empty();
+                    container
+                        .append('<table id="mySolarUnits" class="table table-striped">' +
+                            '<thead><tr scope="row">' +
+                            '<th scope="col">#</th>' +
+                            '<th scope="col">Panels Model</th>' +
+                            '<th scope="col">Panels Count</th>' +
+                            '<th scope="col">Inverter Model</th>' +
+                            '<th scope="col">Controller Model</th>' +
+                            '<th scope="col">Batteries Model</th>' +
+                            '<th scope="col">Batteries Count</th>' +
+                            '<th scope="col">Orientation</th>' +
+                            '<th scope="col">Inclination</th>' +
+                            '</tr>' +
+                            '</thead><tbody>');
+                }
+                $('#userData table')
+                    .append('<tr>' +
+                        '<td>' + (y + 1) + '</td>' +
+                        '<td>' + x.panelsModel + '</td>' +
+                        '<td>' + x.panelsCount + '</td>' +
+                        '<td>' + x.inverterModel + '</td>' +
+                        '<td>' + x.chargeControllerModel + '</td>' +
+                        '<td>' + x.batteryTypeModel + '</td>' +
+                        '<td>' + x.batteryCellsCount + '</td>' +
+                        '<td>' + x.orientation + '</td>' +
+                        '<td>' + x.inclination+ '</td>' +
+                        '</tr>');
+            })
+        });
+}
+
+function fetchAllForSolarPlant(){
+    const container=$("#solarUnitsTableContainer")
+    fetch(`http://localhost:8080/solar_units/all-for-user`)
+        .then(responseHandler)
+        .then(json=> {
+            json.forEach((x, y)=>{
+                if (y === 0) {
+                    container.empty();
+                    container
+                        .append('<table id="mySolarUnits" class="table table-striped">' +
+                            '<thead><tr scope="row">' +
+                            '<th scope="col">#</th>' +
+                            '<th scope="col">Panels Model</th>' +
+                            '<th scope="col">Panels Count</th>' +
+                            '<th scope="col">Inverter Model</th>' +
+                            '<th scope="col">Controller Model</th>' +
+                            '<th scope="col">Batteries Model</th>' +
+                            '<th scope="col">Batteries Count</th>' +
+                            '<th scope="col">Orientation</th>' +
+                            '<th scope="col">Inclination</th>' +
+                            '</tr>' +
+                            '</thead><tbody>');
+                }
+                $('#solarUnitsTableContainer table')
+                    .append('<tr>' +
+                        '<td>' + (y + 1) + '</td>' +
+                        '<td>' + x.panelsModel + '</td>' +
+                        '<td>' + x.panelsCount + '</td>' +
+                        '<td>' + x.inverterModel + '</td>' +
+                        '<td>' + x.chargeControllerModel + '</td>' +
+                        '<td>' + x.batteryTypeModel + '</td>' +
+                        '<td>' + x.batteryCellsCount + '</td>' +
+                        '<td>' + x.orientation + '</td>' +
+                        '<td>' + x.inclination+ '</td>' +
+                        '<td> <input type="checkbox" name="solarUnitsIds" value="'+x.id+'"/></td>'+
+                        '</tr>');
+            })
+        });
+}
+
 function responseHandler(response) {
     if(response.status >= 400){
         throw new Error(response.statusText)
     }
     return response.json();
 }
+
+$('#clearCustomerData').on('click', ()=>{
+    $('#userData').empty();
+});

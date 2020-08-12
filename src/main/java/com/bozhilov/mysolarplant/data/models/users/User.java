@@ -4,6 +4,7 @@ package com.bozhilov.mysolarplant.data.models.users;
 import com.bozhilov.mysolarplant.data.models.BaseEntity;
 import com.bozhilov.mysolarplant.data.models.plant.SolarPlant;
 import com.bozhilov.mysolarplant.data.models.plant.SolarUnit;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;

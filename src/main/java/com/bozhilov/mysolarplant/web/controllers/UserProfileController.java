@@ -5,6 +5,7 @@ import com.bozhilov.mysolarplant.services.services.UserProfileService;
 import com.bozhilov.mysolarplant.web.models.UserProfileCreateModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class UserProfileController extends BaseController{
     }
 
     @GetMapping("/create")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public ModelAndView getProfileCreatePage(@ModelAttribute(name="createProfileModel")
                                                          UserProfileCreateModel userProfileCreateModel,
                                                          ModelAndView modelAndView){
@@ -36,6 +38,7 @@ public class UserProfileController extends BaseController{
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public ModelAndView createUserProfile(@ModelAttribute(name="createProfileModel")
                                                       UserProfileCreateModel userProfileCreateModel,
                                           BindingResult bindingResult,

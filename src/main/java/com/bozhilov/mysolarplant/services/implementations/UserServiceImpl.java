@@ -56,6 +56,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return modelMapper.map(savedUser, UserServiceModel.class);
     }
 
+    @Override
+    public UserServiceModel findByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        return modelMapper.map(user, UserServiceModel.class);
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

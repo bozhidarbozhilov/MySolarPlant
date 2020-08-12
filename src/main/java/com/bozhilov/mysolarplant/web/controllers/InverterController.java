@@ -7,6 +7,7 @@ import com.bozhilov.mysolarplant.web.models.InverterCreateModel;
 import com.bozhilov.mysolarplant.web.models.InverterEditModel;
 import com.bozhilov.mysolarplant.web.models.InverterViewModel;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ public class InverterController extends BaseController{
     }
 
     @GetMapping("/create")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getInverterCreatePage(@ModelAttribute(name="inverterCreate")
                                               InverterCreateModel inverterCreateModel,
                                               ModelAndView modelAndView){
@@ -36,6 +38,7 @@ public class InverterController extends BaseController{
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView createInverter(@ModelAttribute(name="inverterCreate") InverterCreateModel inverterCreateModel,
                                       BindingResult bindingResult, ModelAndView modelAndView) throws InvalidObjectException {
         if(bindingResult.hasErrors()){
@@ -50,6 +53,7 @@ public class InverterController extends BaseController{
 
     @GetMapping(value = "/all", produces = "application/json")
     @ResponseBody
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public Object getAllInverters(){
         return inverterService
                 .allInverters()
@@ -60,6 +64,7 @@ public class InverterController extends BaseController{
 
     @GetMapping(value = "/all_solar_unit", produces = "application/json")
     @ResponseBody
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Object getAllInvertersForSolarUnit(){
         return inverterService
                 .allInverters()
@@ -69,6 +74,7 @@ public class InverterController extends BaseController{
     }
 
     @GetMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getInverterEditPage(@PathVariable("id") String id,
                                            ModelAndView modelAndView){
         InverterServiceModel  foundInverter = inverterService.findInverterById(id);
@@ -79,6 +85,7 @@ public class InverterController extends BaseController{
     }
 
     @PostMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView editInverter(@ModelAttribute("inverterEditModel") InverterEditModel inverterEditModel,
                                     BindingResult bindingResult, @PathVariable("id") String id,
                                     ModelAndView modelAndView) throws InvalidObjectException {
@@ -96,7 +103,7 @@ public class InverterController extends BaseController{
     }
 
     @GetMapping("/delete/{id}")
-    //@PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getInverterDeletePage(@PathVariable("id") String id,
                                              ModelAndView modelAndView){
         InverterServiceModel inverterForEdit = inverterService.findInverterById(id);
@@ -107,7 +114,7 @@ public class InverterController extends BaseController{
     }
 
     @PostMapping("/delete/{id}")
-    //@PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView deleteInverter(@PathVariable("id") String id,
                                       ModelAndView modelAndView){
         inverterService.deleteInverter(id);
