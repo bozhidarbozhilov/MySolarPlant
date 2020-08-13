@@ -1,36 +1,12 @@
-package com.bozhilov.mysolarplant.data.models.users;
+package com.bozhilov.mysolarplant.web.models;
 
-
-import com.bozhilov.mysolarplant.data.models.BaseEntity;
-import com.bozhilov.mysolarplant.data.models.plant.SolarPlant;
-import com.bozhilov.mysolarplant.data.models.plant.SolarUnit;
-
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import java.util.List;
-
-@Entity
-@Table(name = "users_profiles")
-public class UserProfile extends BaseEntity {
-    private User user;
+public class UserProfileDetailsModel extends BaseViewModel{
     private String firstName;
     private String lastName;
     private String email;
     private String address;
     private String information;
 
-    @OneToOne
-    @JoinColumn(name="user_id", referencedColumnName = "id")
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    @Column(name="first_name")
     public String getFirstName() {
         return firstName;
     }
@@ -39,8 +15,6 @@ public class UserProfile extends BaseEntity {
         this.firstName = firstName;
     }
 
-    @NotNull
-    @Column(name="last_name",nullable = false)
     public String getLastName() {
         return lastName;
     }
@@ -49,8 +23,6 @@ public class UserProfile extends BaseEntity {
         this.lastName = lastName;
     }
 
-    @NotNull
-    @Column(name="email", nullable=false)
     public String getEmail() {
         return email;
     }
@@ -59,7 +31,6 @@ public class UserProfile extends BaseEntity {
         this.email = email;
     }
 
-    @Column(name="address")
     public String getAddress() {
         return address;
     }
@@ -68,7 +39,6 @@ public class UserProfile extends BaseEntity {
         this.address = address;
     }
 
-    @Column(name="information")
     public String getInformation() {
         return information;
     }
@@ -76,6 +46,5 @@ public class UserProfile extends BaseEntity {
     public void setInformation(String information) {
         this.information = information;
     }
-
 
 }

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head}">
+</head>
+<body>
+<div class="container-fluid">
+    <header th:replace="~{fragments/header}">
+    </header>
+    <main class="jumbotron">
+        <h1 class="text-center">Solar Plant Details</h1>
+
+        <form th:action="@{/solar_plants/create}" th:method="post" th:object="${solarPlantDetails}">
+            <div class="form-group mx-auto w-25 text-center"
+                 th:classappend="${#fields.hasErrors('town')}?'text-danger'">
+                <label for="town">Town</label>
+                <input class="form-control" type="text" id="town" th:field="*{town}"
+                       placeholder="Town..."/>
+                <small th:each="error:${#fields.errors('town')}" th:text="${error}">
+                </small>
+            </div>
+            <div class="form-group mx-auto w-25 text-center"
+                 th:classappend="${#fields.hasErrors('municipality')}?'text-danger'">
+                <label for="municipality">Municipality</label>
+                <input class="form-control" type="text" id="municipality" th:field="*{municipality}"
+                       placeholder="Municipality..."/>
+                <small th:each="error:${#fields.errors('municipality')}" th:text="${error}">
+                </small>
+            </div>
+            <div class="form-group mx-auto w-25 text-center"
+                 th:classappend="${#fields.hasErrors('country')}?'text-danger'">
+                <label for="country">Country</label>
+                <input class="form-control" type="text" id="country" th:field="*{country}"
+                       placeholder="Country..."/>
+                <small th:each="error:${#fields.errors('country')}" th:text="${error}">
+                </small>
+            </div>
+            <div class="form-group text-center">
+                <h4 for="panelsTableContainer">Solar Units</h4>
+
+                <table class="table table-striped">
+                    <thead><tr scope="row">
+                        <th scope="col">Panels Model</th>
+                        <th scope="col">Panels Count</th>
+                        <th scope="col">Inverter Model</th>
+                        <th scope="col">Controller Model</th>
+                        <th scope="col">Batteries Model</th>
+                        <th scope="col">Batteries Count</th>
+                        <th scope="col">Orientation</th>
+                        <th scope="col">Inclination</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="unit : *{solarUnits}">
+                        <tr>
+                            <td th:text="${unit.panelsModel}"></td>
+                            <td th:text="${unit.panelsCount}"></td>
+                            <td th:text="${unit.inverterModel}"></td>
+                            <td th:text="${unit.chargeControllerModel}"></td>
+                            <td th:text="${unit.batteryTypeModel}"></td>
+                            <td th:text="${unit.batteryCellsCount}"></td>
+                            <td th:text="${unit.orientation}"></td>
+                            <td th:text="${unit.inclination}"></td>
+                        </tr>
+                    </th:block>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group mx-auto w-50 text-center mt-5">
+                <a th:href="@{/home}" class="btn bc-background btn-primary w-25">Go Back To Home</a>
+            </div>
+
+        </form>
+        <script th:src="@{/js/fetch-data-for-solar-unit.js}"></script>
+    </main>
+    <footer th:replace="~{fragments/footer}">
+    </footer>
+</div>
+</body>
+</html>

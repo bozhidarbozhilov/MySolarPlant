@@ -5,6 +5,7 @@ $(document).ready(function () {
     fetchAllForSolarUnit('inverters');
     $("#mySolarUnits").on('click', fetchMySolarUnits);
     fetchAllForSolarPlant();
+    $("#mySolarPlants").on('click', fetchMySolarPlants);
 });
 
 
@@ -233,6 +234,40 @@ function fetchAllForSolarPlant(){
                         '<td>' + x.orientation + '</td>' +
                         '<td>' + x.inclination+ '</td>' +
                         '<td> <input type="checkbox" name="solarUnitsIds" value="'+x.id+'"/></td>'+
+                        '</tr>');
+            })
+        });
+}
+
+function fetchMySolarPlants(){
+    const container=$("#userData")
+    fetch(`http://localhost:8080/solar_plants/all-for-user`)
+        .then(responseHandler)
+        .then(json=> {
+            json.forEach((x, y)=>{
+                if (y === 0) {
+                    container.empty();
+                    container
+                        .append('<table id="mySolarPlants" class="table table-striped">' +
+                            '<thead><tr scope="row">' +
+                            '<th scope="col">#</th>' +
+                            '<th scope="col">Town</th>' +
+                            '<th scope="col">Municipality</th>' +
+                            '<th scope="col">Country</th>' +
+                            '<th scope="col">Units count</th>' +
+                            '<th scope="col">Details</th>' +
+                            '</tr>' +
+                            '</thead><tbody>');
+                }
+                $('#userData table')
+                    .append('<tr>' +
+                        '<td>' + (y + 1) + '</td>' +
+                        '<td>' + x.town + '</td>' +
+                        '<td>' + x.municipality + '</td>' +
+                        '<td>' + x.country + '</td>' +
+                        '<td>' + x.solarUnitsCount + '</td>' +
+                        '<td>' + '<a href="/solar_plants/details/'+x.id+'">Details</a>'+
+                        '</td>' +
                         '</tr>');
             })
         });

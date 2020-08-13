@@ -6,6 +6,8 @@ import java.io.InvalidObjectException;
 
 public interface UserProfileService {
     UserProfileServiceModel createProfile(UserProfileServiceModel userProfileServiceModel) throws InvalidObjectException;
-    UserProfileServiceModel editProfile(UserProfileServiceModel userProfileServiceModel) throws InvalidObjectException;
+    UserProfileServiceModel editProfile(UserProfileServiceModel userProfileServiceModel, String username) throws InvalidObjectException;
     void deleteProfile(String id);
+    UserProfileServiceModel findUserProfileById(String id);
+    UserProfileServiceModel findUserProfileByUsername(String username);
 }

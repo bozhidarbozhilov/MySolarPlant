@@ -72,6 +72,8 @@ public class User extends BaseEntity implements UserDetails {
         this.solarPlants = solarPlants;
     }
 
+
+
     @OneToOne(mappedBy = "user", targetEntity = UserProfile.class)
     public UserProfile getProfile() {
         return profile;

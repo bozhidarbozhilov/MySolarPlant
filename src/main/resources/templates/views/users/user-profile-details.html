@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head}">
 </head>
 <body>
+<header th:replace="~{fragments/header}"></header>
+<main class="jumbotron">
+    <h1 class="text-center">My Profile</h1>
+    <hr/>
+    <form th:action="@{/users-profile/create}" th:method="post" th:object="${profileDetailsModel}">
 
+        <div class="form-group mx-auto w-50 text-center">
+            <h3 th:text="|First Name: *{firstName}|"></h3>
+        </div>
+        <div class="form-group mx-auto w-50 text-center">
+            <h3 th:text="|Last Name: *{lastName}|"></h3>
+
+        </div>
+        <div class="form-group mx-auto w-50 text-center">
+            <h3 th:text="|Email: *{email}|"></h3>
+
+        </div>
+
+
+        <div class="form-group mx-auto w-50 text-center">
+            <h3 th:text="|Address: *{address}|"></h3>
+        </div>
+        <div class="form-group mx-auto w-50 text-center">
+
+            <p th:text="|Additional Information: *{information}|"></p>
+
+        </div>
+        <hr/>
+        <div class="form-group mx-auto w-50 text-center">
+            <a th:href="@{/users-profile/edit}" class="btn bc-background btn-primary w-25">Edit Profile</a>
+            <a th:href="@{/users-profile/delete}" class="btn btn-danger w-25">Delete Profile</a>
+            <a th:href="@{/home}" class="btn bc-background btn-primary w-25">Go Back To Home</a>
+        </div>
+    </form>
+</main>
+<footer th:replace="~{fragments/footer}"></footer>
 </body>
 </html>

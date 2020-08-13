@@ -29,7 +29,7 @@ public class SolarPlantServiceModel extends BaseServiceModel{
     }
 
     @JsonBackReference
-    public UserServiceModel getUse() {
+    public UserServiceModel getUser() {
         return user;
     }
 

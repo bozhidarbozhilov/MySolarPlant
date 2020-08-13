@@ -1,6 +1,9 @@
 package com.bozhilov.mysolarplant.config;
 
+import com.bozhilov.mysolarplant.services.models.SolarPlantServiceModel;
 import com.bozhilov.mysolarplant.services.models.SolarUnitServiceModel;
+import com.bozhilov.mysolarplant.web.models.SolarPlantAllViewModel;
+import com.bozhilov.mysolarplant.web.models.SolarPlantDetailsModel;
 import com.bozhilov.mysolarplant.web.models.SolarUnitAllViewModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
@@ -19,10 +22,10 @@ public class ApplicationBeanConfiguration {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
-        TypeMap<SolarUnitServiceModel, SolarUnitAllViewModel> typeMap =
+        TypeMap<SolarUnitServiceModel, SolarUnitAllViewModel> solarUnitTypeMap =
                 modelMapper.createTypeMap(SolarUnitServiceModel.class, SolarUnitAllViewModel.class);
 
-        typeMap
+        solarUnitTypeMap
                 .addMapping(src->src.getBatteryType().getModel(), SolarUnitAllViewModel::setBatteryTypeModel)
                 .addMapping(SolarUnitServiceModel::getBatteryCellsCount, SolarUnitAllViewModel::setBatteryCellsCount)
                 .addMapping(src->src.getChargeController().getModel(), SolarUnitAllViewModel::setChargeControllerModel)
@@ -32,6 +35,25 @@ public class ApplicationBeanConfiguration {
                 .addMapping(SolarUnitServiceModel::getInclination, SolarUnitAllViewModel::setInclination)
                 .addMapping(SolarUnitServiceModel::getOrientation, SolarUnitAllViewModel::setOrientation)
                 .addMapping(SolarUnitServiceModel::getId, SolarUnitAllViewModel::setId);
+
+        TypeMap<SolarPlantServiceModel, SolarPlantAllViewModel> plantServiceToAllViewTypeMap =
+                modelMapper.createTypeMap(SolarPlantServiceModel.class, SolarPlantAllViewModel.class);
+
+        plantServiceToAllViewTypeMap
+                .addMapping(src->src.getLocation().getTown(), SolarPlantAllViewModel::setTown)
+                .addMapping(src->src.getLocation().getMunicipality(),SolarPlantAllViewModel::setMunicipality)
+                .addMapping(src->src.getLocation().getCountry(), SolarPlantAllViewModel::setCountry)
+                .addMapping(SolarPlantServiceModel::getId, SolarPlantAllViewModel::setId)
+                .addMapping(src->src.getSolarUnits().size(), SolarPlantAllViewModel::setSolarUnitsCount);
+
+        TypeMap<SolarPlantServiceModel, SolarPlantDetailsModel> plantServiceToDetailsTypeMap =
+                modelMapper.createTypeMap(SolarPlantServiceModel.class, SolarPlantDetailsModel.class);
+        plantServiceToDetailsTypeMap
+                .addMapping(src->src.getLocation().getTown(), SolarPlantDetailsModel::setTown)
+                .addMapping(src->src.getLocation().getMunicipality(),SolarPlantDetailsModel::setMunicipality)
+                .addMapping(src->src.getLocation().getCountry(), SolarPlantDetailsModel::setCountry)
+                .addMapping(SolarPlantServiceModel::getId, SolarPlantDetailsModel::setId)
+                .addMapping(SolarPlantServiceModel::getSolarUnits, SolarPlantDetailsModel::setSolarUnits);
         return modelMapper;
     }
 

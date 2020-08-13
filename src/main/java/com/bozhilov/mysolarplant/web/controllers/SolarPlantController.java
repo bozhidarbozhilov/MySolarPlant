@@ -3,19 +3,19 @@ package com.bozhilov.mysolarplant.web.controllers;
 import com.bozhilov.mysolarplant.services.models.SolarPlantServiceModel;
 import com.bozhilov.mysolarplant.services.services.MappingService;
 import com.bozhilov.mysolarplant.services.services.SolarPlantService;
+import com.bozhilov.mysolarplant.web.models.SolarPlantAllViewModel;
 import com.bozhilov.mysolarplant.web.models.SolarPlantCreateModel;
+import com.bozhilov.mysolarplant.web.models.SolarPlantDetailsModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.InvalidObjectException;
 import java.security.Principal;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/solar_plants")
@@ -53,6 +53,28 @@ public class SolarPlantController extends BaseController{
             solarPlantService.createSolarPlant(solarPlantServiceModel);
             modelAndView.setViewName(super.redirect("home"));
         }
+        return modelAndView;
+    }
+
+    @GetMapping(value="/all-for-user", produces = "application/json")
+    @ResponseBody
+    @PreAuthorize("isAuthenticated()")
+    public Object allSolarPlantsByUsername(Principal principal,
+                                          ModelAndView modelAndView){
+        return solarPlantService.findAllByUsername(principal.getName())
+                .stream()
+                .map(solarPlant-> mapper.map(solarPlant, SolarPlantAllViewModel.class))
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    @GetMapping("/details/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public ModelAndView plantDetailsPage(@PathVariable(name="id") String id,ModelAndView modelAndView){
+        SolarPlantServiceModel solarPlantServiceModel = solarPlantService.findById(id);
+        SolarPlantDetailsModel solarPlantDetailsModel = mapper.map(solarPlantServiceModel, SolarPlantDetailsModel.class);
+        modelAndView.addObject("solarPlantDetails", solarPlantDetailsModel);
+        modelAndView.setViewName(super.view("solar-plants/solar-plant-details"));
+
         return modelAndView;
     }
 

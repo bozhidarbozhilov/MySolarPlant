@@ -24,7 +24,6 @@ $(document).ready(function () {
 );
 
 function fetchAllPanelsForEdit(unit) {
-    console.log("text");
     fetch(`http://localhost:8080/${unit}/all`)
         .then(responseHandler)
         .then((json)=> {
