@@ -2,6 +2,7 @@ package com.bozhilov.mysolarplant.web.controllers;
 
 import com.bozhilov.mysolarplant.services.models.UserServiceModel;
 import com.bozhilov.mysolarplant.services.services.UserService;
+import com.bozhilov.mysolarplant.web.annotations.PageTitle;
 import com.bozhilov.mysolarplant.web.models.RegisterUserModel;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import org.modelmapper.ModelMapper;
@@ -31,6 +32,7 @@ public class UserController extends BaseController {
         this.modelMapper = modelMapper;
     }
 
+    @PageTitle("Register")
     @GetMapping("/register")
     @PreAuthorize("isAnonymous()")
     public ModelAndView getRegisterPage(@ModelAttribute(name="registerUser")RegisterUserModel registerUserModel,

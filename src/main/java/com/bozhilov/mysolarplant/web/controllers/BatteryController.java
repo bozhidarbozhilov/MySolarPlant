@@ -3,6 +3,7 @@ package com.bozhilov.mysolarplant.web.controllers;
 import com.bozhilov.mysolarplant.services.models.BatteryServiceModel;
 import com.bozhilov.mysolarplant.services.models.ChargeControllerServiceModel;
 import com.bozhilov.mysolarplant.services.services.BatteryService;
+import com.bozhilov.mysolarplant.web.annotations.PageTitle;
 import com.bozhilov.mysolarplant.web.models.BatteryCreateModel;
 import com.bozhilov.mysolarplant.web.models.BatteryEditModel;
 import com.bozhilov.mysolarplant.web.models.BatteryViewModel;
@@ -28,6 +29,7 @@ public class BatteryController extends BaseController{
         this.mapper = mapper;
     }
 
+    @PageTitle("Battery Create")
     @GetMapping("/create")
     @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getBatteryCreatePage(@ModelAttribute(name="batteryCreate")
@@ -74,6 +76,7 @@ public class BatteryController extends BaseController{
 
     }
 
+    @PageTitle("Battery Edit")
     @GetMapping("/edit/{id}")
     @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getBatteryEditPage(@PathVariable("id") String id,
@@ -103,6 +106,7 @@ public class BatteryController extends BaseController{
         return modelAndView;
     }
 
+    @PageTitle("Battery Delete")
     @GetMapping("/delete/{id}")
     @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getBatteryDeletePage(@PathVariable("id") String id,

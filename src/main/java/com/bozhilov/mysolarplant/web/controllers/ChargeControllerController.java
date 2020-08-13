@@ -3,6 +3,7 @@ package com.bozhilov.mysolarplant.web.controllers;
 import com.bozhilov.mysolarplant.services.models.BatteryServiceModel;
 import com.bozhilov.mysolarplant.services.models.ChargeControllerServiceModel;
 import com.bozhilov.mysolarplant.services.services.ChargeControllerService;
+import com.bozhilov.mysolarplant.web.annotations.PageTitle;
 import com.bozhilov.mysolarplant.web.models.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class ChargeControllerController extends BaseController{
         this.mapper = mapper;
     }
 
+    @PageTitle("Controller Create")
     @GetMapping("/create")
     @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getCreatePage(@ModelAttribute(name="controllerCreate")
@@ -74,6 +76,7 @@ public class ChargeControllerController extends BaseController{
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    @PageTitle("Controller Edit")
     @GetMapping("/edit/{id}")
     @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getControllerEditPage(@PathVariable("id") String id,
@@ -103,6 +106,7 @@ public class ChargeControllerController extends BaseController{
         return modelAndView;
     }
 
+    @PageTitle("Controller Delete")
     @GetMapping("/delete/{id}")
     @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getControllerDeletePage(@PathVariable("id") String id,

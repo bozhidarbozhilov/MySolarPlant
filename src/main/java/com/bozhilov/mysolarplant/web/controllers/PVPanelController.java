@@ -2,6 +2,7 @@ package com.bozhilov.mysolarplant.web.controllers;
 
 import com.bozhilov.mysolarplant.services.models.PVPanelServiceModel;
 import com.bozhilov.mysolarplant.services.services.PVPanelService;
+import com.bozhilov.mysolarplant.web.annotations.PageTitle;
 import com.bozhilov.mysolarplant.web.models.AllPanelsViewModel;
 import com.bozhilov.mysolarplant.web.models.PVPanelCreateModel;
 import com.bozhilov.mysolarplant.web.models.PVPanelEditModel;
@@ -29,6 +30,7 @@ public class PVPanelController extends BaseController{
         this.mapper = mapper;
     }
 
+    @PageTitle("Panel Create")
     @GetMapping("/create")
     @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getPVPanelCreatePage(@ModelAttribute(name="createPVPanel") PVPanelCreateModel pvPanelCreateModel,
@@ -50,6 +52,7 @@ public class PVPanelController extends BaseController{
         }
         return modelAndView;
     }
+
 
     @GetMapping(value = "/all", produces = "application/json")
     @ResponseBody
@@ -73,6 +76,7 @@ public class PVPanelController extends BaseController{
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    @PageTitle("Panel Edit")
     @GetMapping("/edit/{id}")
     @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getPVPanelEditPage(@PathVariable("id") String id,
@@ -102,6 +106,7 @@ public class PVPanelController extends BaseController{
         return modelAndView;
     }
 
+    @PageTitle("Panel Delete")
     @GetMapping("/delete/{id}")
     @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getCaDeletePage(@PathVariable("id") String id,

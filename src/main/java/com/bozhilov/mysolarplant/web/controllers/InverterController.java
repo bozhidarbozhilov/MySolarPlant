@@ -2,6 +2,7 @@ package com.bozhilov.mysolarplant.web.controllers;
 
 import com.bozhilov.mysolarplant.services.models.InverterServiceModel;
 import com.bozhilov.mysolarplant.services.services.InverterService;
+import com.bozhilov.mysolarplant.web.annotations.PageTitle;
 import com.bozhilov.mysolarplant.web.models.AllInvertersViewModel;
 import com.bozhilov.mysolarplant.web.models.InverterCreateModel;
 import com.bozhilov.mysolarplant.web.models.InverterEditModel;
@@ -28,6 +29,7 @@ public class InverterController extends BaseController{
         this.mapper = mapper;
     }
 
+    @PageTitle("Inverter create")
     @GetMapping("/create")
     @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getInverterCreatePage(@ModelAttribute(name="inverterCreate")
@@ -36,6 +38,7 @@ public class InverterController extends BaseController{
         modelAndView.setViewName(super.view("inverters/inverter-create"));
         return modelAndView;
     }
+
 
     @PostMapping("/create")
     @PreAuthorize("hasRole('ROLE_ENGINEER')")
@@ -73,6 +76,7 @@ public class InverterController extends BaseController{
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    @PageTitle("Inverter edit")
     @GetMapping("/edit/{id}")
     @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getInverterEditPage(@PathVariable("id") String id,
@@ -102,6 +106,7 @@ public class InverterController extends BaseController{
         return modelAndView;
     }
 
+    @PageTitle("Inverter delete")
     @GetMapping("/delete/{id}")
     @PreAuthorize("hasRole('ROLE_ENGINEER')")
     public ModelAndView getInverterDeletePage(@PathVariable("id") String id,

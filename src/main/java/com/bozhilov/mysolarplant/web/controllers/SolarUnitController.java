@@ -3,6 +3,7 @@ package com.bozhilov.mysolarplant.web.controllers;
 import com.bozhilov.mysolarplant.services.models.SolarUnitServiceModel;
 import com.bozhilov.mysolarplant.services.services.MappingService;
 import com.bozhilov.mysolarplant.services.services.SolarUnitService;
+import com.bozhilov.mysolarplant.web.annotations.PageTitle;
 import com.bozhilov.mysolarplant.web.models.SolarUnitAllViewModel;
 import com.bozhilov.mysolarplant.web.models.SolarUnitCreateModel;
 import org.modelmapper.ModelMapper;
@@ -32,6 +33,7 @@ public class SolarUnitController extends BaseController{
         this.mapper = mapper;
     }
 
+    @PageTitle("Solar Unit Create")
     @GetMapping("/create")
     @PreAuthorize("isAuthenticated()")
     public ModelAndView getSolarUnitCreatePage(@ModelAttribute(name="solarUnitCreate")

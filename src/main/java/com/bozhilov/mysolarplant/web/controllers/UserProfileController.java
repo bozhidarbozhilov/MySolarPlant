@@ -4,6 +4,7 @@ import com.bozhilov.mysolarplant.services.models.UserProfileServiceModel;
 import com.bozhilov.mysolarplant.services.models.UserServiceModel;
 import com.bozhilov.mysolarplant.services.services.UserProfileService;
 import com.bozhilov.mysolarplant.services.services.UserService;
+import com.bozhilov.mysolarplant.web.annotations.PageTitle;
 import com.bozhilov.mysolarplant.web.models.UserProfileCreateModel;
 import com.bozhilov.mysolarplant.web.models.UserProfileDetailsModel;
 import com.bozhilov.mysolarplant.web.models.UserProfileEditModel;
@@ -30,6 +31,7 @@ public class UserProfileController extends BaseController{
         this.mapper = mapper;
     }
 
+    @PageTitle("User Create")
     @GetMapping("/create")
     @PreAuthorize("hasRole('ROLE_USER')")
     public ModelAndView getProfileCreatePage(@ModelAttribute(name="createProfileModel")
@@ -59,6 +61,7 @@ public class UserProfileController extends BaseController{
         return modelAndView;
     }
 
+    @PageTitle("User Edit")
     @GetMapping("/edit")
     @PreAuthorize("isAuthenticated()")
     public ModelAndView getBatteryEditPage(Principal principal,
@@ -90,6 +93,7 @@ public class UserProfileController extends BaseController{
         return modelAndView;
     }
 
+    @PageTitle("User Details")
     @GetMapping("/details")
     @PreAuthorize("isAuthenticated()")
     public ModelAndView profileDetailsPage(Principal principal,

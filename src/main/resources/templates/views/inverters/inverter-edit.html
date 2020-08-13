@@ -9,7 +9,7 @@
     </header>
     <main class="jumbotron">
         <h1 class="text-center">Edit Inverter</h1>
-        <form th:action="@{/edit/edit/{id}(id=${inverterEditModel.id})}}" th:method="post" th:object="${inverterEditModel}">
+        <form th:action="@{/edit/edit/{id}(id=${inverterEditModel.id})}" th:method="post" th:object="${inverterEditModel}">
             <div class="form-group mx-auto w-25 text-center"
                  th:classappend="${#fields.hasErrors('manufacturer')}?'text-danger'">
                 <label for="manufacturer">Manufacturer</label>
