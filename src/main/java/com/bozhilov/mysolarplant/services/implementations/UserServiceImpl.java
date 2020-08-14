@@ -146,6 +146,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.saveAndFlush(user);
     }
 
+    @Override
+    public boolean isUsernameTaken(String username) {
+        return this.userRepository.findAll()
+                .stream()
+                .map(User::getUsername)
+                .anyMatch(s->s.equals(username));
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -2,9 +2,9 @@ package com.bozhilov.mysolarplant.utils;
 
 public class Constants {
     //TODO Repair min values
-    public static final int USERNAME_MIN_LENGTH = 1;
+    public static final int USERNAME_MIN_LENGTH = 5;
     public static final int USERNAME_MAX_LENGTH = 30;
-    public static final int PASSWORD_MIN_LENGTH = 1;
+    public static final int PASSWORD_MIN_LENGTH = 5;
     public static final int PASSWORD_MAX_LENGTH = 25;
     public static final String EMAIL_ALREADY_EXIST_MESSAGE = "Email already exist.";
     public static final String INVALID_USERS_PROPERTIES = "Invalid users properties.";
@@ -58,4 +58,5 @@ public class Constants {
     public static final String USER_NOT_FOUND = "User Not Found.";
     public static final String INVALID_LOCATION_PARAMS = "Invalid location parameters. ";
     public static final String SOLAR_UNIT_NOT_FOUND = "Solar unit not found.";
+    public static final String USERNAME_ALREADY_EXIST_MESSAGE = "This username is already taken.";
 }

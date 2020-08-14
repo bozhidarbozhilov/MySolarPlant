@@ -14,4 +14,5 @@ public interface UserService {
     void addRole(String id) throws InvalidObjectException;
     void changeRole(String id) throws InvalidObjectException;
     void removeRole(String id, String roleName) throws InvalidObjectException;
+    boolean isUsernameTaken(String username);
 }
