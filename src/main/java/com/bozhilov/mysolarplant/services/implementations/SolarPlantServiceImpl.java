@@ -58,4 +58,13 @@ public class SolarPlantServiceImpl implements SolarPlantService {
 
         return mapper.map(solarPlant, SolarPlantServiceModel.class);
     }
+
+    @Override
+    public List<SolarPlantServiceModel> findAll() {
+        return solarPlantRepository
+                .findAll()
+                .stream()
+                .map(solarPlant -> mapper.map(solarPlant, SolarPlantServiceModel.class))
+                .collect(Collectors.toList());
+    }
 }

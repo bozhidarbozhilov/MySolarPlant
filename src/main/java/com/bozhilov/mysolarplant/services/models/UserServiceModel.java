@@ -1,11 +1,15 @@
 package com.bozhilov.mysolarplant.services.models;
 
 
+import com.bozhilov.mysolarplant.data.models.users.Role;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.bozhilov.mysolarplant.utils.Constants.USERNAME_MAX_LENGTH;
 import static com.bozhilov.mysolarplant.utils.Constants.USERNAME_MIN_LENGTH;
@@ -16,10 +20,12 @@ public class UserServiceModel extends BaseServiceModel{
     private UserProfileServiceModel profile;
     private List<SolarUnitServiceModel> solarUnits;
     private List<SolarPlantServiceModel> solarPlants;
+    private Set<RoleServiceModel> authorities;
 
     public UserServiceModel(){
         solarUnits = new ArrayList<>();
         solarPlants = new ArrayList<>();
+        authorities = new HashSet<>();
     }
 
     @NotNull
@@ -63,5 +69,13 @@ public class UserServiceModel extends BaseServiceModel{
 
     public void setSolarPlants(List<SolarPlantServiceModel> solarPlants) {
         this.solarPlants = solarPlants;
+    }
+
+    public Set<RoleServiceModel> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<RoleServiceModel> authorities) {
+        this.authorities = authorities;
     }
 }

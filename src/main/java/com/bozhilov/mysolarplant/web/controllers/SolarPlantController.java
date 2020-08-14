@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.InvalidObjectException;
 import java.security.Principal;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -77,6 +78,20 @@ public class SolarPlantController extends BaseController{
         modelAndView.addObject("solarPlantDetails", solarPlantDetailsModel);
         modelAndView.setViewName(super.view("solar-plants/solar-plant-details"));
 
+        return modelAndView;
+    }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView getAllPlants(ModelAndView modelAndView){
+        List<SolarPlantAllViewModel> allPlants =
+                solarPlantService.findAll()
+                    .stream()
+                    .map(solarPlantServiceModel -> mapper
+                            .map(solarPlantServiceModel, SolarPlantAllViewModel.class))
+                    .collect(Collectors.toUnmodifiableList());
+        modelAndView.addObject("plants", allPlants);
+        modelAndView.setViewName(super.view("solar-plants/all-solar-plants"));
         return modelAndView;
     }
 

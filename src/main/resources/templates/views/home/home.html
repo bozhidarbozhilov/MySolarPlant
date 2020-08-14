@@ -29,11 +29,33 @@
         <h1 class="text-center">Admin Page</h1>
         <hr/>
         <div>
-            <button type="button" class="btn btn-info" id="allUsers">All Users</button>
-            <button type="button" class="btn btn-info" id="clearAdminData" >Clear</button>
+            <div class="form-group text-center">
+                <a th:href="@{/users/all}" class="btn btn-primary" id="allUsers">All Users</a>
+                <a th:href="@{/solar_plants/all}" class="btn btn-primary" id="allPlants">All Solar Plants</a>
+            </div>
+
         </div>
         <hr/>
         <div id="adminData">
+            <table class="table table-striped collapse all-users-table">
+                <thead><tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Roles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="user, index :${users}">
+                    <tr>
+                        <td th:text="${index.index + 1}"></td>
+                        <td th:text="${user.username}"></td>
+                        <th:block th:each="auth:${user.authorities}">
+                            <td th:text="${auth.authority}"></td>
+                        </th:block>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
         </div>
         <script th:src="@{/js/fetch-admin-data.js}"></script>
     </th:block>

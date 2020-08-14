@@ -1,6 +1,5 @@
 package com.bozhilov.mysolarplant.web.models;
 
-import java.util.List;
 
 public class SolarPlantAllViewModel extends BaseViewModel{
     private String town;

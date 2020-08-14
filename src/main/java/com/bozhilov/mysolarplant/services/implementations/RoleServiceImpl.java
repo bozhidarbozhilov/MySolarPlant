@@ -2,8 +2,10 @@ package com.bozhilov.mysolarplant.services.implementations;
 
 import com.bozhilov.mysolarplant.data.models.users.Role;
 import com.bozhilov.mysolarplant.data.repositories.RoleRepository;
+import com.bozhilov.mysolarplant.services.models.RoleServiceModel;
 import com.bozhilov.mysolarplant.services.services.RoleService;
 import com.bozhilov.mysolarplant.utils.Constants;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +17,12 @@ import java.util.stream.Collectors;
 @Service
 public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
+    private final ModelMapper mapper;
 
     @Autowired
-    public RoleServiceImpl(RoleRepository roleRepository) {
+    public RoleServiceImpl(RoleRepository roleRepository, ModelMapper mapper) {
         this.roleRepository = roleRepository;
+        this.mapper = mapper;
     }
 
     @PostConstruct
@@ -35,16 +39,16 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Set<Role> findAll() {
-        return new HashSet<>(this.roleRepository.findAll());
+    public Set<RoleServiceModel> findAll() {
+
+        return this.roleRepository.findAll()
+                .stream()
+                .map(role ->mapper.map(role, RoleServiceModel.class))
+                .collect(Collectors.toSet());
     }
 
     @Override
-    public Set<Role> findRoleByName(String authorityName) {
-        return this.roleRepository
-                .findAll()
-                .stream()
-                .filter(role -> role.getAuthority().equals(authorityName))
-                .collect(Collectors.toSet());
+    public RoleServiceModel findRoleByName(String authorityName) {
+        return mapper.map(roleRepository.findRoleByAuthority(authorityName), RoleServiceModel.class);
     }
 }

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head}">
+</head>
+<body>
+<div class="container-fluid">
+    <header th:replace="~{fragments/header}">
+    </header>
+    <main class="jumbotron">
+        <h1 class="text-center">All Users</h1>
+        <hr/>
+
+        <div id="adminData">
+            <table class="table table-striped all-users-table">
+                <thead>
+                <tr>
+                    <th scope="col" class="text-center">#</th>
+                    <th scope="col" class="text-center">Username</th>
+                    <th scope="col" class="text-center">Roles</th>
+                    <th scope="col" class="text-center">Change Role</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="user, index :${users}">
+                    <tr>
+                        <td th:text="${index.index + 1}"></td>
+                        <td th:text="${user.username}"></td>
+                        <td>
+                            <select >
+                                <option th:text="|View User Roles|"></option>
+                                <option th:each="auth:${user.authorities}" th:text="${auth.authority}"></option>
+                            </select>
+                        </td>
+                        <td>
+                            <a th:href="@{/users/add-role/{id}(id=${user.id})}" class="btn bc-background btn-primary w-20">Add Role</a>
+                            <a th:href="@{/users/change-role/{id}(id=${user.id})}" class="btn bc-background btn-primary w-20">Change Role</a>
+                            <a th:href="@{/users/remove-user/{id}(id=${user.id})}" class="btn bc-background btn-primary w-20">Remove User Role</a>
+                            <a th:href="@{/users/remove-engineer/{id}(id=${user.id})}" class="btn bc-background btn-primary w-20">Remove Engineer Role</a>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+            <div class="form-group mx-auto w-50 text-center mt-5">
+                <a th:href="@{/home}" class="btn bc-background btn-primary w-50">Go Back To Home</a>
+            </div>
+        </div>
+    </main>
+    <footer th:replace="~{fragments/footer}">
+    </footer>
+</div>
+</body>
+</html>
