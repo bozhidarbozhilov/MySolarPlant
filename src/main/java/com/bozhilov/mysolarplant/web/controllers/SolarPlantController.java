@@ -70,6 +70,7 @@ public class SolarPlantController extends BaseController{
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    @PageTitle("Solar Plant Details")
     @GetMapping("/details/{id}")
     @PreAuthorize("isAuthenticated()")
     public ModelAndView plantDetailsPage(@PathVariable(name="id") String id,ModelAndView modelAndView){
@@ -81,6 +82,7 @@ public class SolarPlantController extends BaseController{
         return modelAndView;
     }
 
+    @PageTitle("All Solar Plant")
     @GetMapping("/all")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView getAllPlants(ModelAndView modelAndView){

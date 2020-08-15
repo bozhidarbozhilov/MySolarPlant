@@ -57,6 +57,7 @@ public class UserController extends BaseController {
         return modelAndView;
     }
 
+    @PageTitle("All Users")
     @GetMapping(value="/all")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView getAllUsers(ModelAndView modelAndView){

@@ -3,6 +3,8 @@ package com.bozhilov.mysolarplant.web.models;
 public class AllControllersViewModel extends BaseParamsViewModel {
     private Double voltage;
     private Double power;
+    private Double current;
+
 
     public Double getVoltage() {
         return voltage;
@@ -18,5 +20,13 @@ public class AllControllersViewModel extends BaseParamsViewModel {
 
     public void setPower(Double power) {
         this.power = power;
+    }
+
+    public Double getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Double current) {
+        this.current = current;
     }
 }

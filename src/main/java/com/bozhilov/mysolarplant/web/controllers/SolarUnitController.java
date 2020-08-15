@@ -59,6 +59,7 @@ public class SolarUnitController extends BaseController{
         return modelAndView;
     }
 
+    @PageTitle("All Solar Units")
     @GetMapping(value="/all-for-user", produces = "application/json")
     @ResponseBody
     @PreAuthorize("isAuthenticated()")
