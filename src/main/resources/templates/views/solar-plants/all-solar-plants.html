@@ -24,7 +24,7 @@
             </thead>
             <tbody>
                 <tr th:each="plant, index : ${plants}">
-                    <td th:text="${index.index+1}"></td>
+                    <td th:text="${index.count}"></td>
                     <td th:text="${plant.town}"></td>
                     <td th:text="${plant.municipality}"></td>
                     <td th:text="${plant.country}"></td>

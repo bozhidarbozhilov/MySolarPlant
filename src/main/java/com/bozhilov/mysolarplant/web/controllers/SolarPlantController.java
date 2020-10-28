@@ -49,8 +49,9 @@ public class SolarPlantController extends BaseController{
             modelAndView.setViewName(super.view("solar-plants/solar-plant-create"));
         }else {
             solarPlantCreateModel.setUsername(principal.getName());
-            //SolarPlantServiceModel solarPlantServiceModel = mappingUtils.solarPlantCreateToService(solarPlantCreateModel);
-            //solarPlantService.createSolarPlant(solarPlantServiceModel);
+            SolarPlantServiceModel solarPlantServiceModel =
+                    solarPlantService.convertCreateToServiceModel(solarPlantCreateModel);
+            solarPlantService.createSolarPlant(solarPlantServiceModel);
             modelAndView.setViewName(super.redirect("home"));
         }
         return modelAndView;
