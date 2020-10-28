@@ -84,7 +84,7 @@ public class SolarUnitController extends BaseController{
         if(bindingResult.hasErrors()){
             modelAndView.setViewName(super.view("solar-plants/solar-unit-create"));
         }else {
-            SolarUnitServiceModel solarUnitServiceModel = convertCreateToServiceModel(solarUnitCreateModel, principal.getName());
+            SolarUnitServiceModel solarUnitServiceModel = solarUnitService.convertCreateToServiceModel(solarUnitCreateModel, principal.getName());
             solarUnitService.createSolarUnit(solarUnitServiceModel);
             modelAndView.setViewName(super.redirect("home"));
         }
@@ -104,44 +104,5 @@ public class SolarUnitController extends BaseController{
         return obj;
     }
 
-    private SolarUnitServiceModel convertCreateToServiceModel(SolarUnitCreateModel solarUnitCreateModel, String username){
-        UserServiceModel user = userService.findByUsername(username);
-        SolarUnitServiceModel solarUnitServiceModel = mapper.map(solarUnitCreateModel, SolarUnitServiceModel.class);
-        solarUnitServiceModel.setUser(user);
-        if(solarUnitCreateModel.getPanelId()!=null && !solarUnitCreateModel.getPanelId().isEmpty()){
-            PVPanelServiceModel panelServiceModel = allComponents
-                    .getAllPanels()
-                    .stream()
-                    .filter(panel->panel.getId().equals(solarUnitCreateModel.getPanelId()))
-                    .findFirst().get();
-            solarUnitServiceModel.setPanels(panelServiceModel);
-        }
-        if(solarUnitCreateModel.getBatteryId()!=null && !solarUnitCreateModel.getBatteryId().isEmpty()){
-            BatteryServiceModel batteryServiceModel = allComponents
-                    .getAllBatteries()
-                    .stream()
-                    .filter(battery->battery.getId().equals(solarUnitCreateModel.getBatteryId()))
-                    .findFirst().get();
-            solarUnitServiceModel.setBatteryType(batteryServiceModel);
-        }
-        if(solarUnitCreateModel.getChargeControllerId()!=null && !solarUnitCreateModel.getChargeControllerId().isEmpty()){
-            ChargeControllerServiceModel controllerServiceModel = allComponents
-                    .getAllControllers()
-                    .stream()
-                    .filter(controller->controller.getId().equals(solarUnitCreateModel.getChargeControllerId()))
-                    .findFirst().get();
-            solarUnitServiceModel.setChargeController(controllerServiceModel);
-        }
-        if(solarUnitCreateModel.getInverterId()!=null && !solarUnitCreateModel.getInverterId().isEmpty()){
-            InverterServiceModel inverterServiceModel = allComponents
-                    .getAllInverters()
-                    .stream()
-                    .filter(inverter->inverter.getId().equals(solarUnitCreateModel.getInverterId()))
-                    .findFirst().get();
-            solarUnitServiceModel.setInverter(inverterServiceModel);
-        }
-
-        return solarUnitServiceModel;
-    }
 
 }

@@ -30,8 +30,8 @@
                             <th scope="col">Choose</th></tr>
                         </thead>
                         <tbody>
-                        <tr th:each="panel, index: ${allPanels}">
-                            <td th:value="${index}"></td>
+                        <tr th:each="panel,status: ${allPanels}">
+                            <td th:text="${status.count}"></td>
                             <td th:text="${panel.manufacturer}"></td>
                             <td th:text="${panel.model}"></td>
                             <td th:text="${panel.power}"></td>
@@ -74,8 +74,8 @@
                             <th scope="col">Choose</th></tr>
                         </thead>
                         <tbody>
-                        <tr th:each="battery,index:${allBatteries}">
-                            <td th:text="${index}"></td>
+                        <tr th:each="battery,status:${allBatteries}">
+                            <td th:text="${status.count}"></td>
                             <td th:text="${battery.manufacturer}"></td>
                             <td th:text="${battery.model}"></td>
                             <td th:text="${battery.capacity}"></td>
@@ -118,8 +118,8 @@
                             <th scope="col">Choose</th></tr>
                         </thead>
                         <tbody>
-                        <tr th:each="controller, index:${allContollers}">
-                            <td th:text="${index}"></td>
+                        <tr th:each="controller,status : ${allControllers}">
+                            <td th:text="${status.count}"></td>
                             <td th:text="${controller.manufacturer}"></td>
                             <td th:text="${controller.model}"></td>
                             <td th:text="${controller.power}"></td>
@@ -154,8 +154,8 @@
                     </tr>
                     </thead>
                         <tbody>
-                        <tr th:each="inverter,index : ${allInverters}">
-                            <td th:text="${index}"></td>
+                        <tr th:each="inverter,status : ${allInverters}">
+                            <td th:text="${status.count}"></td>
                             <td th:text="${inverter.manufacturer}"></td>
                             <td th:text="${inverter.model}"></td>
                             <td th:text="${inverter.ACPower}"></td>
