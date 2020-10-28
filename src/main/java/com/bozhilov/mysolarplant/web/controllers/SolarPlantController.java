@@ -1,7 +1,6 @@
 package com.bozhilov.mysolarplant.web.controllers;
 
 import com.bozhilov.mysolarplant.services.models.SolarPlantServiceModel;
-import com.bozhilov.mysolarplant.services.services.MappingService;
 import com.bozhilov.mysolarplant.services.services.SolarPlantService;
 import com.bozhilov.mysolarplant.web.annotations.PageTitle;
 import com.bozhilov.mysolarplant.web.models.SolarPlantAllViewModel;
@@ -23,12 +22,10 @@ import java.util.stream.Collectors;
 @RequestMapping("/solar_plants")
 public class SolarPlantController extends BaseController{
     private final SolarPlantService solarPlantService;
-    private final MappingService mappingService;
     private final ModelMapper mapper;
 
-    public SolarPlantController(SolarPlantService solarPlantService, MappingService mappingService, ModelMapper mapper) {
+    public SolarPlantController(SolarPlantService solarPlantService, ModelMapper mapper) {
         this.solarPlantService = solarPlantService;
-        this.mappingService = mappingService;
         this.mapper = mapper;
     }
 
@@ -52,8 +49,8 @@ public class SolarPlantController extends BaseController{
             modelAndView.setViewName(super.view("solar-plants/solar-plant-create"));
         }else {
             solarPlantCreateModel.setUsername(principal.getName());
-            SolarPlantServiceModel solarPlantServiceModel = mappingService.solarPlantCreateToService(solarPlantCreateModel);
-            solarPlantService.createSolarPlant(solarPlantServiceModel);
+            //SolarPlantServiceModel solarPlantServiceModel = mappingUtils.solarPlantCreateToService(solarPlantCreateModel);
+            //solarPlantService.createSolarPlant(solarPlantServiceModel);
             modelAndView.setViewName(super.redirect("home"));
         }
         return modelAndView;

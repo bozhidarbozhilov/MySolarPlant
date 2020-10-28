@@ -1,6 +1,6 @@
 package com.bozhilov.mysolarplant.web.models;
 
-public class BaseViewModel {
+public abstract class BaseViewModel {
     private String id;
 
     public String getId() {

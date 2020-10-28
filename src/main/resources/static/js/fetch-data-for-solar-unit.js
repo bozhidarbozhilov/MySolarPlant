@@ -1,29 +1,26 @@
 $(document).ready(function () {
-    fetchAllForSolarUnit('pvpanels');
-    fetchAllForSolarUnit('batteries');
-    fetchAllForSolarUnit('controllers');
-    fetchAllForSolarUnit('inverters');
+
     $("#mySolarUnits").on('click', fetchMySolarUnits);
     fetchAllForSolarPlant();
     $("#mySolarPlants").on('click', fetchMySolarPlants);
 });
 
 
-function fetchAllForSolarUnit(unit) {
-    fetch(`http://localhost:8080/${unit}/all_solar_unit`)
-        .then(responseHandler)
-        .then((json)=> {
-            if(unit==='pvpanels'){
-                createPanelsTable(json);
-            }else if(unit==='batteries'){
-                createBatteriesTable(json);
-            }else if(unit==='controllers'){
-                createControllersTable(json);
-            }else if(unit==='inverters'){
-                createInvertersTable(json);
-            }
-        });
-}
+// function fetchAllForSolarUnit(unit) {
+//     fetch(`http://localhost:8080/${unit}/all_solar_unit`)
+//         .then(responseHandler)
+//         .then((json)=> {
+//             if(unit==='pvpanels'){
+//                 createPanelsTable(json);
+//             }else if(unit==='batteries'){
+//                 createBatteriesTable(json);
+//             }else if(unit==='controllers'){
+//                 createControllersTable(json);
+//             }else if(unit==='inverters'){
+//                 createInvertersTable(json);
+//             }
+//         });
+// }
 
 function createPanelsTable(json){
     const container = $("#panelsTableContainer");
@@ -52,7 +49,7 @@ function createPanelsTable(json){
                 '<td>' + x.connector + '</td>' +
                 '<td>' + x.voltageAtMaxPower + '</td>' +
                 '<td>' + x.currentAtMaxPower + '</td>' +
-                '<td> <input type="checkbox" id="panel" name="panelId" value="'+x.id+'"/></td>'+
+                '<td> <input type="checkbox" id="panel" name="panel" value="'+x+'"/></td>'+
                 '</tr>');
     });
     disableCheckbox("pvpanels-solar-units");
@@ -129,16 +126,7 @@ function createInvertersTable(json){
         if (y === 0) {
             container.empty();
             container
-                .append('<table id="invertersTable" class="inverters-solar-units table table-striped collapse">' +
-                    '<thead><tr scope="row">' +
-                    '<th scope="col">#</th>' +
-                    '<th scope="col">Manufacturer</th>' +
-                    '<th scope="col">Model</th>' +
-                    '<th scope="col">AC Power</th>' +
-                    '<th scope="col">Max AC Power</th>' +
-                    '<th scope="col">Max PV Power</th>' +
-                    '<th scope="col">Choose</th></tr>' +
-                    '</thead><tbody>');
+                .append(a);
         }
         $('#invertersTableContainer table')
             .append('<tr>' +

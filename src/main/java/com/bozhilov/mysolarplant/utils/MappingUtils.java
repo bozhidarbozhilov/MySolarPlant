@@ -1,18 +1,20 @@
-package com.bozhilov.mysolarplant.services.implementations;
+/*
+package com.bozhilov.mysolarplant.utils;
 
 import com.bozhilov.mysolarplant.data.models.other.Location;
 import com.bozhilov.mysolarplant.services.models.*;
 import com.bozhilov.mysolarplant.services.services.*;
 import com.bozhilov.mysolarplant.web.models.SolarPlantCreateModel;
-import com.bozhilov.mysolarplant.web.models.SolarUnitCreateModel;
+import com.bozhilov.mysolarplant.web.models.SolarUnitBindingModel;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
-public class MappingServiceImpl implements MappingService {
+@Component
+public class MappingUtils {
     private final PVPanelService pvPanelService;
     private final ChargeControllerService controllerService;
     private final BatteryService batteryService;
@@ -21,13 +23,14 @@ public class MappingServiceImpl implements MappingService {
     private final SolarUnitService solarUnitService;
     private final ModelMapper modelMapper;
 
-    public MappingServiceImpl(PVPanelService pvPanelService,
-                              ChargeControllerService controllerService,
-                              BatteryService batteryService,
-                              InverterService inverterService,
-                              UserService userService,
-                              SolarUnitService solarUnitService,
-                              ModelMapper modelMapper) {
+    @Autowired
+    public MappingUtils(PVPanelService pvPanelService,
+                        ChargeControllerService controllerService,
+                        BatteryService batteryService,
+                        InverterService inverterService,
+                        UserService userService,
+                        SolarUnitService solarUnitService,
+                        ModelMapper modelMapper) {
         this.pvPanelService = pvPanelService;
         this.controllerService = controllerService;
         this.batteryService = batteryService;
@@ -37,9 +40,7 @@ public class MappingServiceImpl implements MappingService {
         this.modelMapper = modelMapper;
     }
 
-
-    @Override
-    public SolarUnitServiceModel solarUnitViewToService(SolarUnitCreateModel solarUnitCreateModel) {
+    public SolarUnitServiceModel solarUnitViewToService(SolarUnitBindingModel solarUnitCreateModel) {
         UserServiceModel user = userService.findByUsername(solarUnitCreateModel.getUsername());
         SolarUnitServiceModel solarUnitServiceModel = modelMapper.map(solarUnitCreateModel, SolarUnitServiceModel.class);
         solarUnitServiceModel.setUser(user);
@@ -63,7 +64,7 @@ public class MappingServiceImpl implements MappingService {
         return solarUnitServiceModel;
     }
 
-    @Override
+
     public SolarPlantServiceModel solarPlantCreateToService(SolarPlantCreateModel solarPlantCreateModel) {
         SolarPlantServiceModel solarPlantServiceModel = new SolarPlantServiceModel();
         Location location = new Location();
@@ -84,5 +85,5 @@ public class MappingServiceImpl implements MappingService {
 
         return solarPlantServiceModel;
     }
-
 }
+*/

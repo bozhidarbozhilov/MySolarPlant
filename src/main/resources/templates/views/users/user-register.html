@@ -6,7 +6,7 @@
 <body>
 <header th:replace="~{fragments/header}"></header>
 <main class="jumbotron">
-    <h1 class="text-center">Register Profile</h1>
+    <h1 class="text-center">Register User</h1>
     <form th:action="@{/users/register}" th:method="post" th:object="${registerUser}">
         <div class="form-group mx-auto w-50 text-center"
              th:classappend="${#fields.hasErrors('username')}?'text-danger'">

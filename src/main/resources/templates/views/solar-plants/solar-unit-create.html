@@ -18,6 +18,30 @@
                     <input type="checkbox" data-toggle="collapse" data-target="#panelsTable" id="panelsData"/>
                 </div>
                 <div id="panelsTableContainer" class="unit-data">
+                    <table id="panelsTable" class="pvpanels-solar-units disable-checkboxes table table-striped collapse">
+                        <thead><tr scope="row">
+                            <th scope="col">#</th>
+                            <th scope="col">Manufacturer</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">Power</th>
+                            <th scope="col">Connector Type</th>
+                            <th scope="col">Voltage Pmax</th>
+                            <th scope="col">Current Pmax</th>
+                            <th scope="col">Choose</th></tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="panel, index: ${allPanels}">
+                            <td th:value="${index}"></td>
+                            <td th:text="${panel.manufacturer}"></td>
+                            <td th:text="${panel.model}"></td>
+                            <td th:text="${panel.power}"></td>
+                            <td th:text="${panel.connector}"></td>
+                            <td th:text="${panel.voltageAtMaxPower}"></td>
+                            <td th:text="${panel.currentAtMaxPower}"></td>
+                            <td> <input type="checkbox" id="panel" name="panelId" th:value="${panel.id}"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
 
                 </div>
                 <div class="row mx-auto text-center w-25">
@@ -38,7 +62,32 @@
                     <input type="checkbox" data-toggle="collapse" data-target="#batteryTable" id="batteriesData"/>
                 </div>
                 <div id="batteriesTableContainer" class="unit-data">
-
+                    <table id="batteryTable" class="batteries-solar-units disable-checkboxes table table-striped collapse">
+                        <thead><tr scope="row">
+                            <th scope="col">#</th>
+                            <th scope="col">Manufacturer</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">Capacity</th>
+                            <th scope="col">Voltage</th>
+                            <th scope="col">Connectors Type</th>
+                            <th scope="col">Terminals</th>
+                            <th scope="col">Choose</th></tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="battery,index:${allBatteries}">
+                            <td th:text="${index}"></td>
+                            <td th:text="${battery.manufacturer}"></td>
+                            <td th:text="${battery.model}"></td>
+                            <td th:text="${battery.capacity}"></td>
+                            <td th:text="${battery.voltage}"></td>
+                            <td th:text="${battery.connectionType}"></td>
+                            <td th:text="${battery.terminals}"></td>
+                            <td>
+                                <input type="checkbox" id="battery" name="batteryId" th:value="${battery.id}"/>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="row mx-auto text-center w-25">
                     <div class="col col-md-6">
@@ -58,7 +107,30 @@
                     <input type="checkbox" data-toggle="collapse" data-target="#controllersTable" id="controllersData"/>
                 </div>
                 <div id="controllersTableContainer" class="unit-data">
-
+                    <table id="controllersTable" class="controllers-solar-units table table-striped collapse">
+                        <thead><tr scope="row">
+                            <th scope="col">#</th>
+                            <th scope="col">Manufacturer</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">Power</th>
+                            <th scope="col">Voltage</th>
+                            <th scope="col">Current</th>
+                            <th scope="col">Choose</th></tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="controller, index:${allContollers}">
+                            <td th:text="${index}"></td>
+                            <td th:text="${controller.manufacturer}"></td>
+                            <td th:text="${controller.model}"></td>
+                            <td th:text="${controller.power}"></td>
+                            <td th:text="${controller.voltage}"></td>
+                            <td th:text="${controller.current}"></td>
+                            <td>
+                                <input type="checkbox" id="controller" name="chargeControllerId" th:value="${controller.id}"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -69,6 +141,33 @@
                     <input type="checkbox" data-toggle="collapse" data-target="#invertersTable" id="invertersData"/>
                 </div>
                 <div id="invertersTableContainer" class="unit-data">
+                    <table id="invertersTable" class="inverters-solar-units table table-striped collapse">
+                    <thead>
+                    <tr scope="row">
+                        <th scope="col">#</th>
+                        <th scope="col">Manufacturer</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">AC Power</th>
+                        <th scope="col">Max AC Power</th>
+                        <th scope="col">Max PV Power</th>
+                        <th scope="col">Choose</th>
+                    </tr>
+                    </thead>
+                        <tbody>
+                        <tr th:each="inverter,index : ${allInverters}">
+                            <td th:text="${index}"></td>
+                            <td th:text="${inverter.manufacturer}"></td>
+                            <td th:text="${inverter.model}"></td>
+                            <td th:text="${inverter.ACPower}"></td>
+                            <td th:text="${inverter.maxACPower}"></td>
+                            <td th:text="${inverter.maxPVPower}"></td>
+                            <td>
+                                <input type="checkbox" id="inverter" name="inverterId" th:value="${inverter.id}"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
 
                 </div>
             </div>

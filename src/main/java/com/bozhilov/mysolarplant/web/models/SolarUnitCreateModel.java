@@ -1,10 +1,5 @@
 package com.bozhilov.mysolarplant.web.models;
 
-import com.bozhilov.mysolarplant.data.models.plant.Battery;
-import com.bozhilov.mysolarplant.data.models.plant.ChargeController;
-import com.bozhilov.mysolarplant.data.models.plant.Inverter;
-import com.bozhilov.mysolarplant.data.models.plant.PVPanel;
-
 public class SolarUnitCreateModel {
     private String panelId;
     private Integer panelsCount;
@@ -15,7 +10,6 @@ public class SolarUnitCreateModel {
     private Integer orientation;
     private Integer inclination;
     private String username;
-
 
     public String getPanelId() {
         return panelId;
@@ -57,7 +51,6 @@ public class SolarUnitCreateModel {
         this.batteryId = batteryId;
     }
 
-
     public Integer getBatteryCellsCount() {
         return batteryCellsCount;
     }
@@ -81,7 +74,6 @@ public class SolarUnitCreateModel {
     public void setInclination(Integer inclination) {
         this.inclination = inclination;
     }
-
 
     public String getUsername() {
         return username;
