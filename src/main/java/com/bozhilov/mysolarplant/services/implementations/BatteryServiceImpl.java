@@ -7,6 +7,7 @@ import com.bozhilov.mysolarplant.services.models.BatteryServiceModel;
 import com.bozhilov.mysolarplant.services.models.PVPanelServiceModel;
 import com.bozhilov.mysolarplant.services.services.BatteryService;
 import com.bozhilov.mysolarplant.utils.Constants;
+import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
