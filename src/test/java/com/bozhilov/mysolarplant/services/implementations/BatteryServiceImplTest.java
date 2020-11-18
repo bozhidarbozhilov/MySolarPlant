@@ -6,6 +6,8 @@ import com.bozhilov.mysolarplant.data.models.plant.Battery;
 import com.bozhilov.mysolarplant.data.repositories.BatteryRepository;
 import com.bozhilov.mysolarplant.services.models.BatteryServiceModel;
 import com.bozhilov.mysolarplant.services.services.BatteryService;
+import com.bozhilov.mysolarplant.utils.Constants;
+import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,9 +17,17 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
 import javax.validation.Validator;
+import javax.validation.groups.Default;
 import java.io.InvalidObjectException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,8 +45,9 @@ class BatteryServiceImplTest {
     private BatteryRepository mockBatteryRepository;
     @Spy
     private ModelMapper mockMapper;
+
     @Spy
-    private Validator validator;
+    private Validator mockValidator;
     @InjectMocks
     private BatteryServiceImpl batteryService;
     private Battery testBattery;
@@ -51,19 +62,46 @@ class BatteryServiceImplTest {
         this.testBattery.setConnectionType(TEST_BATTERY_CONNECTION_TYPE);
         this.testBattery.setTerminals(TEST_BATTERY_TERMINALS);
         this.testBattery.setVoltage(TEST_BATTERY_VOLTAGE);
-        this.batteryService=new BatteryServiceImpl(mockBatteryRepository, mockMapper,validator);
+
+        this.batteryService = new BatteryServiceImpl(this.mockBatteryRepository, mockMapper,mockValidator);
+
     }
 
     @Test
-    public void batteryService_saveBatteryWithValidParameters_returnSavedBattery() throws InvalidObjectException {
-        Mockito.when(this.mockBatteryRepository.save(Mockito.any(Battery.class)))
-                .thenReturn(this.testBattery);
+    public void saveBatteryWithValidParameters_returnSavedBattery() throws InvalidObjectException {
+        Mockito.when(this.mockBatteryRepository.save(Mockito.any(Battery.class))).
+                thenReturn(this.testBattery);
         BatteryServiceModel temp_battery= mockMapper.map(testBattery, BatteryServiceModel.class);
 
         BatteryServiceModel savedBattery = batteryService.saveBattery(temp_battery);
 
         assertSame(testBattery.getId(), savedBattery.getId());
 
+    }
+
+    @Test
+    public void saveBatteryWithNullParam_shouldNotBeValid(){
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        this.batteryService=new BatteryServiceImpl(mockBatteryRepository, mockMapper,validator);
+        BatteryServiceModel temp_battery = mockMapper.map(this.testBattery, BatteryServiceModel.class);
+        temp_battery.setTerminals(null);
+        assertThrows(InvalidObjectException.class, ()->this.batteryService.saveBattery(temp_battery));
+        Set<ConstraintViolation<BatteryServiceModel>> violations = validator.validate(temp_battery);
+
+        assertEquals(1,violations.size());
+
+    }
+
+    @Test
+    public void allBatteries_shouldReturnListOfBatteries(){
+        List<Battery> test=List.of(testBattery);
+        Mockito.when(this.mockBatteryRepository.findAll()).
+                thenReturn(test);
+
+        List<BatteryServiceModel>allBatteries=this.batteryService.allBatteries();
+
+        assertEquals(1,allBatteries.size());
+        assertEquals(testBattery.getId(), allBatteries.get(0).getId());
     }
 
 }

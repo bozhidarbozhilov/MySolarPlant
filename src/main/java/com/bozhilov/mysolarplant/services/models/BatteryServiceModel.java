@@ -5,7 +5,6 @@ import com.bozhilov.mysolarplant.data.models.other.Terminals;
 import com.bozhilov.mysolarplant.utils.Constants;
 
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class BatteryServiceModel extends BaseParamsServiceModel {
