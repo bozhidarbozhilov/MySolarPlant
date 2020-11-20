@@ -28,13 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 public class PVPanelServiceImplTests {
-    private static final String TEST_PANEL_ID = "00e1d99d-29af-4f74-8603-6b378514eebj";
-    private static final String TEST_PANEL_MANUFACTURER = "MITSUBISHI ELECTRIC";
-    private static final String TEST_PANEL_MODEL = "PV-MLU255HC";
-    private static final String TEST_PANEL_CONNECTOR = "MC";
-    private static final Double TEST_PANEL_POWER = 225d;
-    private static final Double TEST_PANEL_VOLTAGE_MAX_POWER = 31.2;
-    private static final Double TEST_PANEL_CURRENT_MAX_POWER = 8.18;
+
 
     @Mock
     private PVPanelRepository mockPanelRepository;
@@ -49,13 +43,13 @@ public class PVPanelServiceImplTests {
     @BeforeEach
     public void setUp(){
         this.testPanel = new PVPanel();
-        testPanel.setId(TEST_PANEL_ID);
-        testPanel.setManufacturer(TEST_PANEL_MANUFACTURER);
-        testPanel.setModel(TEST_PANEL_MODEL);
-        testPanel.setPower(TEST_PANEL_POWER);
-        testPanel.setCurrentAtMaxPower(TEST_PANEL_CURRENT_MAX_POWER);
-        testPanel.setVoltageAtMaxPower(TEST_PANEL_VOLTAGE_MAX_POWER);
-        testPanel.setConnector(TEST_PANEL_CONNECTOR);
+        testPanel.setId(Constants.TEST_PANEL_ID);
+        testPanel.setManufacturer(Constants.TEST_PANEL_MANUFACTURER);
+        testPanel.setModel(Constants.TEST_PANEL_MODEL);
+        testPanel.setPower(Constants.TEST_PANEL_POWER);
+        testPanel.setCurrentAtMaxPower(Constants.TEST_PANEL_CURRENT_MAX_POWER);
+        testPanel.setVoltageAtMaxPower(Constants.TEST_PANEL_VOLTAGE_MAX_POWER);
+        testPanel.setConnector(Constants.TEST_PANEL_CONNECTOR);
 
         this.panelService = new PVPanelServiceImpl(mockPanelRepository, mapper, validator);
     }

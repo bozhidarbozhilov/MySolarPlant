@@ -28,12 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 public class ChargeControllerServiceImplTests {
-    private static final String TEST_CONTROLLER_ID = "b65f7d51-39aa-4f90-8c63-5d599e9736d9";
-    private static final String TEST_CONTROLLER_MANUFACTURER = "Steca";
-    private static final String TEST_CONTROLLER_MODEL = "StecaGrid 3000";
-    private static final Double TEST_CONTROLLER_CURRENT= 10d;
-    private static final Double TEST_CONTROLLER_POWER = 720d;
-    private static final Double TEST_CONTROLLER_VOLTAGE = 12d;
+
 
     @Mock
     private ChargeControllerRepository mockControllerRepository;
@@ -48,12 +43,12 @@ public class ChargeControllerServiceImplTests {
     @BeforeEach
     public void setUp(){
         this.testController = new ChargeController();
-        testController.setId(TEST_CONTROLLER_ID);
-        testController.setManufacturer(TEST_CONTROLLER_MANUFACTURER);
-        testController.setModel(TEST_CONTROLLER_MODEL);
-        testController.setCurrent(TEST_CONTROLLER_CURRENT);
-        testController.setPower(TEST_CONTROLLER_POWER);
-        testController.setVoltage(TEST_CONTROLLER_VOLTAGE);
+        testController.setId(Constants.TEST_CONTROLLER_ID);
+        testController.setManufacturer(Constants.TEST_CONTROLLER_MANUFACTURER);
+        testController.setModel(Constants.TEST_CONTROLLER_MODEL);
+        testController.setCurrent(Constants.TEST_CONTROLLER_CURRENT);
+        testController.setPower(Constants.TEST_CONTROLLER_POWER);
+        testController.setVoltage(Constants.TEST_CONTROLLER_VOLTAGE);
 
         this.inverterService = new ChargeControllerServiceImpl(mockControllerRepository, mapper, validator);
     }

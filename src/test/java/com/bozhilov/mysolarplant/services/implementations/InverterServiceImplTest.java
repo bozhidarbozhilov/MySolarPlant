@@ -28,12 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 public class InverterServiceImplTest {
-    private static final String TEST_INVERTER_ID = "b65f7d51-39aa-4f90-8c63-5d599e9736d9";
-    private static final String TEST_INVERTER_MANUFACTURER = "Steca";
-    private static final String TEST_INVERTER_MODEL = "StecaGrid 3000";
-    private static final Double TEST_INVERTER_AC_POWER = 3000d;
-    private static final Double TEST_INVERTER_MAX_AC_POWER = 3000d;
-    private static final Double TEST_INVERTER_MAX_PV_POWER = 3800d;
+
 
     @Mock
     private InverterRepository mockInverterRepository;
@@ -48,12 +43,12 @@ public class InverterServiceImplTest {
     @BeforeEach
     public void setUp(){
         this.testInverter = new Inverter();
-        testInverter.setId(TEST_INVERTER_ID);
-        testInverter.setManufacturer(TEST_INVERTER_MANUFACTURER);
-        testInverter.setModel(TEST_INVERTER_MODEL);
-        testInverter.setACPower(TEST_INVERTER_AC_POWER);
-        testInverter.setMaxACPower(TEST_INVERTER_MAX_AC_POWER);
-        testInverter.setMaxPVPower(TEST_INVERTER_MAX_PV_POWER);
+        testInverter.setId(Constants.TEST_INVERTER_ID);
+        testInverter.setManufacturer(Constants.TEST_INVERTER_MANUFACTURER);
+        testInverter.setModel(Constants.TEST_INVERTER_MODEL);
+        testInverter.setACPower(Constants.TEST_INVERTER_AC_POWER);
+        testInverter.setMaxACPower(Constants.TEST_INVERTER_MAX_AC_POWER);
+        testInverter.setMaxPVPower(Constants.TEST_INVERTER_MAX_PV_POWER);
 
         this.inverterService = new InverterServiceImpl(mockInverterRepository, mapper, validator);
     }

@@ -1,5 +1,8 @@
 package com.bozhilov.mysolarplant.utils;
 
+import com.bozhilov.mysolarplant.data.models.other.ConnectionType;
+import com.bozhilov.mysolarplant.data.models.other.Terminals;
+
 public class Constants {
     //TODO Repair min values
     public static final int USERNAME_MIN_LENGTH = 5;
@@ -59,4 +62,39 @@ public class Constants {
     public static final String INVALID_LOCATION_PARAMS = "Invalid location parameters. ";
     public static final String SOLAR_UNIT_NOT_FOUND = "Solar unit not found.";
     public static final String USERNAME_ALREADY_EXIST_MESSAGE = "This username is already taken.";
+
+    //TEST CONSTANTS
+    public static final String TEST_BATTERY_ID = "a031a0c2-6847-4189-a72a-51ed76dcafb6";
+    public static final String TEST_BATTERY_MANUFACTURER = "MONBAT MVR";
+    public static final String TEST_BATTERY_MODEL = "12MVR65TA";
+    public static final Double TEST_BATTERY_CAPACITY = 70d;
+    public static final ConnectionType TEST_BATTERY_CONNECTION_TYPE = ConnectionType.valueOf("PARALLEL");
+    public static final Terminals TEST_BATTERY_TERMINALS = Terminals.valueOf("FRONT");
+    public static final Double TEST_BATTERY_VOLTAGE = 12d;
+
+    public static final String TEST_CONTROLLER_ID = "b65f7d51-39aa-4f90-8c63-5d599e9736d9";
+    public static final String TEST_CONTROLLER_MANUFACTURER = "Steca";
+    public static final String TEST_CONTROLLER_MODEL = "StecaGrid 3000";
+    public static final Double TEST_CONTROLLER_CURRENT= 10d;
+    public static final Double TEST_CONTROLLER_POWER = 720d;
+    public static final Double TEST_CONTROLLER_VOLTAGE = 12d;
+
+    public static final String TEST_INVERTER_ID = "b65f7d51-39aa-4f90-8c63-5d599e9736d9";
+    public static final String TEST_INVERTER_MANUFACTURER = "Steca";
+    public static final String TEST_INVERTER_MODEL = "StecaGrid 3000";
+    public static final Double TEST_INVERTER_AC_POWER = 3000d;
+    public static final Double TEST_INVERTER_MAX_AC_POWER = 3000d;
+    public static final Double TEST_INVERTER_MAX_PV_POWER = 3800d;
+
+    public static final String TEST_PANEL_ID = "00e1d99d-29af-4f74-8603-6b378514eebj";
+    public static final String TEST_PANEL_MANUFACTURER = "MITSUBISHI ELECTRIC";
+    public static final String TEST_PANEL_MODEL = "PV-MLU255HC";
+    public static final String TEST_PANEL_CONNECTOR = "MC";
+    public static final Double TEST_PANEL_POWER = 225d;
+    public static final Double TEST_PANEL_VOLTAGE_MAX_POWER = 31.2;
+    public static final Double TEST_PANEL_CURRENT_MAX_POWER = 8.18;
+
+    public static final String TEST_USER_USERNAME="test user";
+    public static final String TEST_USER_PASSWORD="TEST PASSWORD";
+
 }
